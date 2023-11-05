@@ -23,6 +23,6 @@ public class TextUpdates : MonoBehaviour
             Recoil = Controller.GetComponentInChildren<RecoilPerformance>();
         
         if (Recoil != null)
-            Text.text = $"{Controller.name}'s Vel: {Recoil.GetVelocity()}";
+            Text.text = $"{Controller.name}'s Vel:\n{Recoil.Velocity}\nMax Velo:\n{Recoil.MaxVelocity}";
     }
 }

@@ -99,7 +99,8 @@ MonoBehaviour:
   m_Name: 
   m_EditorClassIdentifier: 
   _bulletSplash: {fileID: 8178336339524865264, guid: 8c55fedfc36a3884b9595a19cac3dec5, type: 3}
-  _impactSound: {fileID: 8300000, guid: 94241b50992315f49a04e2599f9bb24a, type: 3}
+  rigidB: {fileID: -7134308962685838794}
+  _bulletSpeed: 100
 --- !u!54 &-7134308962685838794
 Rigidbody:
   m_ObjectHideFlags: 0

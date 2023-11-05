@@ -7,37 +7,43 @@ using UnityEngine.InputSystem;
 
 public class Weapon : MonoBehaviour
 {
-    [SerializeField] private Bullet _bulletPrefab;
-    [SerializeField] private float _bulletSpeed = 760f;
-    [SerializeField] private float _fireRate = 0.5f; 
+    //temp
+    public bool EndRecoilAtTriggerRelease = true;
+
+    [SerializeField] private float _fireRate = 0.3f; 
     [SerializeField] private Transform _bulletSpawn;
     [SerializeField] private ParticleSystem _muzzleFlashVFX;
     [SerializeField] private AudioClip _shootSound;
     private AudioSource audioSource;
+    public RecoilPerformance Recoil;
 
     [SerializeField] private InputActionReference _shootInputAction;
 
-    private Stopwatch recoilStopwatch;
 
     private float nextFireTime = 0;
 
+    private PoolSystem _bulletPool;
+
+
     private void Start()
     {
-        recoilStopwatch = new Stopwatch();
+        _bulletPool = PoolManager.PoolInst.Bullet;
+
         audioSource = GetComponent<AudioSource>();
+        Recoil = GetComponent<RecoilPerformance>();
     }
 
     private void OnEnable()
     {
         _shootInputAction.action.Enable();
         _shootInputAction.action.started += Shoot;
-        _shootInputAction.action.canceled += RecoilEnded ;
+        _shootInputAction.action.canceled += EndShooting ;
     }
 
     private void OnDisable()
     {
         _shootInputAction.action.started -= Shoot;
-        _shootInputAction.action.canceled -= RecoilEnded;
+        _shootInputAction.action.canceled -= EndShooting;
         _shootInputAction.action.Disable();
     }
 
@@ -46,26 +52,17 @@ public class Weapon : MonoBehaviour
         if (Time.time < nextFireTime) return;
         nextFireTime = Time.time + _fireRate;
 
-        var bulletGameObject = _bulletPrefab.gameObject;
-        var bullet = (GameObject)Instantiate(
-            bulletGameObject,
-            _bulletSpawn.position,
-            _bulletSpawn.rotation);
+        var bullet = _bulletPool.Get(_bulletSpawn.position, _bulletSpawn.rotation);
 
-        audioSource.PlayOneShot(_shootSound);
-
-        bullet.GetComponent<Rigidbody>().velocity = bullet.transform.forward * _bulletSpeed;
+        Recoil.StartRecoil();
         _muzzleFlashVFX.Play(true);
-        recoilStopwatch.Start();
-        Destroy(bullet, 5.0f);
+        audioSource.PlayOneShot(_shootSound);
+        StartCoroutine(_bulletPool.Return(bullet, 5.0f));
     }
 
-
-    private void RecoilEnded(InputAction.CallbackContext context)
+    private void EndShooting(InputAction.CallbackContext context)
     {
-        recoilStopwatch.Stop();
-        UnityEngine.Debug.Log($"Recoil duration: {recoilStopwatch.Elapsed.TotalSeconds} seconds ----");
-        recoilStopwatch.Reset();
+        if (EndRecoilAtTriggerRelease)
+            Recoil.EndRecoil();
     }
-
 }
