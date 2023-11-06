@@ -14,7 +14,7 @@ public class PoolSystem : MonoBehaviour
         pool = new Queue<GameObject>();
         for (int i = 0; i < normalSize; i++)
         {
-            GameObject instance = Instantiate(IPoolPrefab);
+            GameObject instance = Instantiate(IPoolPrefab, transform);
             instance.SetActive(false);
             pool.Enqueue(instance);
         }
@@ -37,7 +37,12 @@ public class PoolSystem : MonoBehaviour
         return instance;
     }
 
-    public IEnumerator Return(GameObject instance, float delay = 0f)
+    public void Return(GameObject instance, float delay = 0f)
+    {
+        StartCoroutine(DelayedReturn(instance, delay));
+    }
+    
+    public IEnumerator DelayedReturn(GameObject instance, float delay)
     {
         yield return new WaitForSeconds(delay);
         instance.SetActive(false);

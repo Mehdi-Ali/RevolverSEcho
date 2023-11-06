@@ -8,14 +8,12 @@ public class RecoilPerformance : MonoBehaviour
 {
     private XRBaseController controller;
     private Vector2 previousPosition;
-    private Stopwatch recoilStopwatch;
 
     public Vector2 Velocity {get; private set; }
     public Vector2 MaxVelocity { get; private set; }
 
     private void Start()
     {
-        recoilStopwatch = new Stopwatch();
         controller = GetComponentInParent<XRBaseController>();
         previousPosition = new(controller.transform.position.y, controller.transform.position.z);
         MaxVelocity = new();
@@ -32,15 +30,13 @@ public class RecoilPerformance : MonoBehaviour
 
     public void StartRecoil()
     {
-        recoilStopwatch.Start();
+
     }
 
     public void EndRecoil()
     {
         MaxVelocity = Vector2.zero;
-        recoilStopwatch.Stop();
-        UnityEngine.Debug.Log($"Recoil duration: {recoilStopwatch.Elapsed.TotalSeconds} seconds ----");
-        recoilStopwatch.Reset();
+
     }
 }
  

@@ -57,7 +57,7 @@ public class Weapon : MonoBehaviour
         Recoil.StartRecoil();
         _muzzleFlashVFX.Play(true);
         audioSource.PlayOneShot(_shootSound);
-        StartCoroutine(_bulletPool.Return(bullet, 5.0f));
+        _bulletPool.Return(bullet, 5.0f);
     }
 
     private void EndShooting(InputAction.CallbackContext context)

@@ -4,11 +4,11 @@ using UnityEngine;
 
 public class BulletSplash : MonoBehaviour, IPool
 {
-    [SerializeField] private ParticleSystem _muzzleFlashVFX;
+    [SerializeField] private ParticleSystem _bulletSplashVFX;
     [SerializeField] private AudioClip _splashSound;
     private AudioSource audioSource;
 
-    void Start()
+    void Awake()
     {
         audioSource = GetComponent<AudioSource>();
     }
@@ -20,7 +20,7 @@ public class BulletSplash : MonoBehaviour, IPool
         transform.rotation = rotation;
 
         audioSource.PlayOneShot(_splashSound);
-        _muzzleFlashVFX.Play(true);
+        _bulletSplashVFX.Play(true);
     }
 
     public void ResetInst() {}

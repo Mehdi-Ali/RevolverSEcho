@@ -477,7 +477,7 @@ MonoBehaviour:
   m_Name: 
   m_EditorClassIdentifier: 
   IPoolPrefab: {fileID: 3087421364440126006, guid: e11396658aa44c34d9e79c9b2e877def, type: 3}
-  normalSize: 100
+  normalSize: 5
 --- !u!1001 &737501619
 PrefabInstance:
   m_ObjectHideFlags: 0
@@ -944,7 +944,7 @@ MonoBehaviour:
   m_Name: 
   m_EditorClassIdentifier: 
   IPoolPrefab: {fileID: 8178336339524865264, guid: 8c55fedfc36a3884b9595a19cac3dec5, type: 3}
-  normalSize: 100
+  normalSize: 5
 --- !u!1001 &2010203941
 PrefabInstance:
   m_ObjectHideFlags: 0
