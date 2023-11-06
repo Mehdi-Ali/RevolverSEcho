@@ -614,12 +614,12 @@ MonoBehaviour:
   m_Script: {fileID: 11500000, guid: 871bc76157fe0194d942d18312a74e95, type: 3}
   m_Name: 
   m_EditorClassIdentifier: 
-  _bulletPrefab: {fileID: 8137863849165020061, guid: e11396658aa44c34d9e79c9b2e877def, type: 3}
-  _bulletSpeed: 100
+  EndRecoilAtTriggerRelease: 0
   _fireRate: 0.3
   _bulletSpawn: {fileID: 6677739618058480584}
   _muzzleFlashVFX: {fileID: 2242406854180794708}
   _shootSound: {fileID: 8300000, guid: 00a6e399a0ce09e448d4de99cbb05fb4, type: 3}
+  Recoil: {fileID: 0}
   _shootInputAction: {fileID: 0}
 --- !u!114 &398423426651598418
 MonoBehaviour:
@@ -633,7 +633,8 @@ MonoBehaviour:
   m_Script: {fileID: 11500000, guid: 7172e893c563ada4f8d41f55c5699523, type: 3}
   m_Name: 
   m_EditorClassIdentifier: 
-  controller: {fileID: 0}
+  InRecoil: 1
+  _minimalRecoilSecondes: 0.1
 --- !u!82 &6917299753527231469
 AudioSource:
   m_ObjectHideFlags: 0

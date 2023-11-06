@@ -52,6 +52,8 @@ public class Weapon : MonoBehaviour
         if (Time.time < nextFireTime) return;
         nextFireTime = Time.time + _fireRate;
 
+        EventSystem.Events.TriggerOnShoot();
+
         var bullet = _bulletPool.Get(_bulletSpawn.position, _bulletSpawn.rotation);
 
         Recoil.StartRecoil();
@@ -63,6 +65,6 @@ public class Weapon : MonoBehaviour
     private void EndShooting(InputAction.CallbackContext context)
     {
         if (EndRecoilAtTriggerRelease)
-            Recoil.EndRecoil();
+            EventSystem.Events.TriggerRecoilEnd();
     }
 }
