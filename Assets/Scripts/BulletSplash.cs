@@ -6,11 +6,11 @@ public class BulletSplash : MonoBehaviour, IPool
 {
     [SerializeField] private ParticleSystem _bulletSplashVFX;
     [SerializeField] private AudioClip _splashSound;
-    private AudioSource audioSource;
+    private AudioSource _audioSource;
 
     void Awake()
     {
-        audioSource = GetComponent<AudioSource>();
+        _audioSource = GetComponent<AudioSource>();
     }
 
 
@@ -19,8 +19,10 @@ public class BulletSplash : MonoBehaviour, IPool
         transform.position = position;
         transform.rotation = rotation;
 
-        audioSource.PlayOneShot(_splashSound);
-        _bulletSplashVFX.Play(true);
+        if (_audioSource != null) 
+            _audioSource.PlayOneShot(_splashSound);
+        if (_bulletSplashVFX != null) 
+            _bulletSplashVFX.Play(true);
     }
 
     public void ResetInst() {}

@@ -2,23 +2,25 @@ using System.Collections;
 using System.Collections.Generic;
 using System.Diagnostics;
 using UnityEngine;
+using UnityEngine.Rendering;
 using UnityEngine.XR.Interaction.Toolkit;
 
 public class RecoilPerformance : MonoBehaviour
 {
     private XRBaseController controller;
-    private Vector2 previousPosition;
+    private Vector3 previousPosition;
     public bool InRecoil;
     private bool _canStartCheck;
 
     [SerializeField] private float _minimalRecoilSecondes = 0.1f;
+    [SerializeField] private float _RecoilMinVelocity = 0.2f;
 
-    public Vector2 Velocity {get; private set; }
-    public Vector2 MaxVelocity { get; private set; }
-    private Vector2 previousVelocity;
+    public Vector3 Velocity {get; private set; }
+    public Vector3 MaxVelocity { get; private set; }
+    private Vector3 previousVelocity;
 
-    public Vector2 Pos {get; private set; }
-    public Vector2 MaxPos { get; private set; }
+    public Vector3 Pos {get; private set; }
+    public Vector3 MaxPos { get; private set; }
 
     public Vector3 Rot { get; private set; }
     public Vector3 MaxRot { get; private set; }
@@ -26,9 +28,9 @@ public class RecoilPerformance : MonoBehaviour
     private void Start()
     {
         controller = GetComponentInParent<XRBaseController>();
-        previousPosition = new(controller.transform.position.y, controller.transform.position.z);
+        previousPosition = controller.transform.position;
+        previousVelocity = Vector3.zero;
         MaxVelocity = new();
-        previousVelocity = Vector2.zero;
         MaxPos = new();
         MaxRot = new();
         InRecoil = false;
@@ -40,26 +42,33 @@ public class RecoilPerformance : MonoBehaviour
 
     private void Update()
     {
-        if (!InRecoil) return;
         CalculateVelocity();
+        if (!InRecoil) return;
         CalculatingMaxPosRot();
 
-        if(previousVelocity == Vector2.zero)
+        if(previousVelocity == Vector3.zero)
         {
             previousVelocity = Velocity;
             return;
         }
 
         if (!_canStartCheck) return;
-        if(Mathf.Sign(Velocity.x) != Mathf.Sign(previousVelocity.x) && Mathf.Sign(Velocity.y) != Mathf.Sign(previousVelocity.y))
+        bool signCheck = Mathf.Sign(Velocity.y) != Mathf.Sign(previousVelocity.y);
+        bool magnitudeCheck = Velocity.magnitude < _RecoilMinVelocity;
+    
+        if (signCheck || magnitudeCheck)
+        {
             EventSystem.Events.TriggerRecoilEnd();
+            UnityEngine.Debug.Log("Velocity.magnitude");
+        }
+
     }
 
     private void CalculateVelocity()
     {
-        Vector2 currentPosition = new(controller.transform.position.y, controller.transform.position.z);
+        Vector3 currentPosition = controller.transform.position;
         Velocity = (currentPosition - previousPosition) / Time.deltaTime;
-        MaxVelocity = Vector2.Max(MaxVelocity, Velocity);
+        MaxVelocity = Vector3.Max(MaxVelocity, Velocity);
 
         previousPosition = currentPosition;
     }
@@ -67,21 +76,21 @@ public class RecoilPerformance : MonoBehaviour
     private void CalculatingMaxPosRot()
     {
         var controllerTrns = controller.transform;
-        MaxPos = Vector2.Max(MaxPos, new(controllerTrns.position.y, controllerTrns.position.z));
-        MaxRot = Vector2.Max(MaxRot, controllerTrns.rotation.eulerAngles);
+        MaxPos = Vector3.Max(MaxPos, controllerTrns.position);
+        MaxRot = Vector3.Max(MaxRot, controllerTrns.rotation.eulerAngles);
     }
 
     public void StartRecoil()
     {
-        previousVelocity = Vector2.zero;
-        Velocity = Vector2.zero;
-        MaxVelocity = Vector2.zero;
+        previousVelocity = Vector3.zero;
+        Velocity = Vector3.zero;
+        MaxVelocity = Vector3.zero;
 
         InRecoil = true;
         Invoke(nameof(StartCheck), _minimalRecoilSecondes);
 
         var controllerTrns = controller.transform;
-        Pos = new(controllerTrns.position.y, controllerTrns.position.z);
+        Pos = controllerTrns.position;
         Rot = controllerTrns.rotation.eulerAngles;
     }
 
@@ -96,7 +105,7 @@ public class RecoilPerformance : MonoBehaviour
         _canStartCheck = false;
 
         var controllerTrns = controller.transform;
-        Pos = new(controllerTrns.position.y - Pos.x, controllerTrns.position.z - Pos.y);
+        Pos = controllerTrns.position - Pos;
         Rot = controllerTrns.rotation.eulerAngles - Rot;
     }
 

@@ -633,8 +633,9 @@ MonoBehaviour:
   m_Script: {fileID: 11500000, guid: 7172e893c563ada4f8d41f55c5699523, type: 3}
   m_Name: 
   m_EditorClassIdentifier: 
-  InRecoil: 1
+  InRecoil: 0
   _minimalRecoilSecondes: 0.1
+  _RecoilMinVelocity: 0.005
 --- !u!82 &6917299753527231469
 AudioSource:
   m_ObjectHideFlags: 0

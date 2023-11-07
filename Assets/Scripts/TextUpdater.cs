@@ -24,7 +24,8 @@ public class TextUpdates : MonoBehaviour
         
         if (Recoil != null)
             Text.text = 
-            $"Vel: {Recoil.Velocity} / {Recoil.MaxVelocity}\nPos: {Recoil.Pos} / {Recoil.MaxPos}\nPos: {Recoil.Rot} / {Recoil.MaxRot}\n{Recoil.InRecoil}\n{Recoil.MaxVelocity.magnitude}";
+            $"Vel: {Recoil.Velocity}\n{Recoil.Velocity.magnitude}";
+           // $"Vel: {Recoil.Velocity} / {Recoil.MaxVelocity}\nPos: {Recoil.Pos} / {Recoil.MaxPos}\nPos: {Recoil.Rot} / {Recoil.MaxRot}\n{Recoil.InRecoil}\n{Recoil.MaxVelocity.magnitude}";
         //Debug.Log($"Velocity: {Recoil.Velocity}");   
     }
 }
