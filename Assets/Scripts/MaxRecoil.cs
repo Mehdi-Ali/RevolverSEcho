@@ -7,7 +7,7 @@ public class MaxRecoil : MonoBehaviour
 {
     public XRBaseController controller;
     
-    void Start()
+    void OnEnable()
     {
         EventSystem.Events.OnRecoilEnd += Placer;
     }
@@ -17,7 +17,7 @@ public class MaxRecoil : MonoBehaviour
         transform.position = controller.transform.position;
     }
 
-    void OnDestroy()
+    void  OnDisable()
     {
         EventSystem.Events.OnRecoilEnd -= Placer;
     }

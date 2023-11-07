@@ -13,28 +13,27 @@ public class RecoilPerformance : MonoBehaviour
     private bool _canStartCheck;
 
     [SerializeField] private float _minimalRecoilSecondes = 0.1f;
-    [SerializeField] private float _RecoilMinVelocity = 0.2f;
+    [SerializeField] private float _RecoilMinVelocity = 0.1f;
 
     public Vector3 Velocity {get; private set; }
     public Vector3 MaxVelocity { get; private set; }
     private Vector3 previousVelocity;
 
-    public Vector3 Pos {get; private set; }
-    public Vector3 MaxPos { get; private set; }
-
-    public Vector3 Rot { get; private set; }
-    public Vector3 MaxRot { get; private set; }
+    public Vector3 DeltaPos { get; private set; }
+    public Vector3 DeltaRot { get; private set; }
 
     private void Start()
     {
         controller = GetComponentInParent<XRBaseController>();
         previousPosition = controller.transform.position;
-        previousVelocity = Vector3.zero;
-        MaxVelocity = new();
-        MaxPos = new();
-        MaxRot = new();
+        MaxVelocity = Vector3.zero;
+        DeltaPos = Vector3.zero;
+        DeltaRot = Vector3.zero;
         InRecoil = false;
+    }
 
+    void OnEnable()
+    {
         EventSystem.Events.OnShoot += StartRecoil;
         EventSystem.Events.OnRecoilEnd += EndRecoil;
     }
@@ -42,15 +41,8 @@ public class RecoilPerformance : MonoBehaviour
 
     private void Update()
     {
-        CalculateVelocity();
         if (!InRecoil) return;
-        CalculatingMaxPosRot();
-
-        if(previousVelocity == Vector3.zero)
-        {
-            previousVelocity = Velocity;
-            return;
-        }
+        CalculateVelocity();
 
         if (!_canStartCheck) return;
         bool signCheck = Mathf.Sign(Velocity.y) != Mathf.Sign(previousVelocity.y);
@@ -58,8 +50,10 @@ public class RecoilPerformance : MonoBehaviour
     
         if (signCheck || magnitudeCheck)
         {
+            var controllerTrns = controller.transform;
+            DeltaPos = controllerTrns.position - DeltaPos;
+            DeltaRot = controllerTrns.rotation.eulerAngles - DeltaRot;
             EventSystem.Events.TriggerRecoilEnd();
-            UnityEngine.Debug.Log("Velocity.magnitude");
         }
 
     }
@@ -69,29 +63,21 @@ public class RecoilPerformance : MonoBehaviour
         Vector3 currentPosition = controller.transform.position;
         Velocity = (currentPosition - previousPosition) / Time.deltaTime;
         MaxVelocity = Vector3.Max(MaxVelocity, Velocity);
-
         previousPosition = currentPosition;
-    }
-
-    private void CalculatingMaxPosRot()
-    {
-        var controllerTrns = controller.transform;
-        MaxPos = Vector3.Max(MaxPos, controllerTrns.position);
-        MaxRot = Vector3.Max(MaxRot, controllerTrns.rotation.eulerAngles);
     }
 
     public void StartRecoil()
     {
         previousVelocity = Vector3.zero;
-        Velocity = Vector3.zero;
         MaxVelocity = Vector3.zero;
-
-        InRecoil = true;
-        Invoke(nameof(StartCheck), _minimalRecoilSecondes);
+        Velocity = Vector3.zero;
 
         var controllerTrns = controller.transform;
-        Pos = controllerTrns.position;
-        Rot = controllerTrns.rotation.eulerAngles;
+        DeltaPos = controllerTrns.position;
+        DeltaRot = controllerTrns.rotation.eulerAngles;
+        InRecoil = true;
+
+        Invoke(nameof(StartCheck), _minimalRecoilSecondes);
     }
 
     private void StartCheck()
@@ -104,12 +90,12 @@ public class RecoilPerformance : MonoBehaviour
         InRecoil = false;
         _canStartCheck = false;
 
-        var controllerTrns = controller.transform;
-        Pos = controllerTrns.position - Pos;
-        Rot = controllerTrns.rotation.eulerAngles - Rot;
+        previousVelocity = Vector3.zero;
+        MaxVelocity = Vector3.zero;
+        Velocity = Vector3.zero;
     }
 
-    void OnDestroy()
+    void OnDisable()
     {
         EventSystem.Events.OnShoot -= StartRecoil;
         EventSystem.Events.OnRecoilEnd -= EndRecoil;
