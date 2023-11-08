@@ -12,9 +12,9 @@ MonoBehaviour:
   m_Script: {fileID: 11500000, guid: e879aa73aa35fae42be803aedaeaa1c7, type: 3}
   m_Name: RecoilEvaluationType1
   m_EditorClassIdentifier: 
+  IdealVelocity: 1.5
   IdealPosition: 0.25
   IdealRotation: 45
-  IdealVelocity: 10
+  VelocityFactor: 0.34
   PositionFactor: 0.33
   RotationFactor: 0.33
-  VelocityFactor: 0.34

@@ -47,16 +47,15 @@ public class RecoilPerformance : MonoBehaviour
         if (controllerName != _controller.name)
         return;
 
-        _previousPosition = Vector3.zero;
+        var controllerTrns = _controller.transform;
+        _previousPosition = controllerTrns.position;
+        _rotation = controllerTrns.rotation;
+        _deltaPos = _previousPosition;
         _previousVelocity = Vector3.zero;
         _velocity = Vector3.zero;
         _maxVelocity = Vector3.zero;
 
-        var controllerTrns = _controller.transform;
-        _deltaPos = controllerTrns.position;
-        _rotation = controllerTrns.rotation;
         InRecoil = true;
-
         Invoke(nameof(StartCheck), _minimalRecoilSecondes);
     }
 
@@ -70,6 +69,7 @@ public class RecoilPerformance : MonoBehaviour
     {
         if (!InRecoil) return;
         CalculateVelocity();
+        UnityEngine.Debug.Log(_velocity.magnitude);
 
         if (!_canStartCheck) return;
         bool signCheck = Mathf.Sign(_velocity.y) != Mathf.Sign(_previousVelocity.y);

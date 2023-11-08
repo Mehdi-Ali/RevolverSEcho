@@ -5,15 +5,15 @@ using UnityEngine;
 public class RecoilEvaluationTypeSO : ScriptableObject
 {
     [Header("Ideals")]
+    public float IdealVelocity;
     public float IdealPosition;
     public float IdealRotation;
-    public float IdealVelocity;
 
     [Space]
     [Header("Factors")]
+    public float VelocityFactor;
     public float PositionFactor;
     public float RotationFactor;
-    public float VelocityFactor;
 
     public Action OnApply;
         
