@@ -50,11 +50,11 @@ public class RecoilPerformance : MonoBehaviour
     
         if (signCheck || magnitudeCheck)
         {
-            UnityEngine.Debug.Log($"vel: {Velocity.y}, preVel: {_previousVelocity.y}, SignCheck: {signCheck}");
+            //UnityEngine.Debug.Log($"vel: {Velocity.y}, preVel: {_previousVelocity.y}, SignCheck: {signCheck}");
             var controllerTrns = _controller.transform;
             DeltaPos = controllerTrns.position - DeltaPos;
             DeltaRot = controllerTrns.rotation.eulerAngles - DeltaRot;
-            EventSystem.Events.TriggerRecoilEnd();
+            EventSystem.Events.TriggerRecoilEnd(_controller.name);
         }
     }
 
@@ -66,8 +66,11 @@ public class RecoilPerformance : MonoBehaviour
         _previousPosition = currentPosition;
     }
 
-    public void StartRecoil()
+    public void StartRecoil(string controllerName)
     {
+        if (controllerName != _controller.name)
+        return;
+
         _previousVelocity = Vector3.zero;
         MaxVelocity = Vector3.zero;
         Velocity = Vector3.zero;
@@ -86,8 +89,11 @@ public class RecoilPerformance : MonoBehaviour
         _canStartCheck = true;
     }
 
-    public void EndRecoil()
+    public void EndRecoil(string controllerName)
     {
+        if (controllerName != _controller.name)
+            return;
+        
         InRecoil = false;
         _canStartCheck = false;
 

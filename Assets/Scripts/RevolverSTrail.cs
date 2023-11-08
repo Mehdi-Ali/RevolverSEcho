@@ -7,10 +7,12 @@ using UnityEngine;
 public class RevolverSTrail : MonoBehaviour
 {
     private TrailRenderer _trail;
+    private string _controllerName;
 
     void Start()
     {
         _trail = GetComponent<TrailRenderer>();
+        _controllerName = GetComponentInParent<Weapon>().transform.parent.name;
     }
 
     void OnEnable()
@@ -19,14 +21,16 @@ public class RevolverSTrail : MonoBehaviour
         EventSystem.Events.OnRecoilEnd += StopTrail;
     }
 
-    private void StartTrail()
+    private void StartTrail(string controllerName)
     {
-        _trail.emitting = true;
+        if (controllerName == _controllerName)
+            _trail.emitting = true;
     }
 
-    private void StopTrail()
+    private void StopTrail(string controllerName)
     {
-        _trail.emitting = false;
+        if (controllerName == _controllerName)
+            _trail.emitting = false;
     }
 
     void OnDisable()

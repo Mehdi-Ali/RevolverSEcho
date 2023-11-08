@@ -12,9 +12,10 @@ public class MaxRecoil : MonoBehaviour
         EventSystem.Events.OnRecoilEnd += Placer;
     }
 
-    private void Placer()
+    private void Placer(string controllerName)
     {
-        transform.position = controller.transform.position;
+        if (controllerName == controller.name)
+            transform.position = controller.transform.position;
     }
 
     void  OnDisable()

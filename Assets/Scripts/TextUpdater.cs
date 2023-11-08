@@ -28,7 +28,7 @@ public class TextUpdates : MonoBehaviour
         Text = GetComponent<TextMeshProUGUI>();
     }
 
-    void UpdateText()
+    void UpdateText(string _)
     {
         if (Recoil == null)
             Recoil = Controller.GetComponentInChildren<RecoilPerformance>();

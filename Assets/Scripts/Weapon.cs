@@ -52,11 +52,10 @@ public class Weapon : MonoBehaviour
         if (Time.time < nextFireTime) return;
         nextFireTime = Time.time + _fireRate;
 
-        EventSystem.Events.TriggerOnShoot();
+        EventSystem.Events.TriggerOnShoot(transform.parent.name);
 
         var bullet = _bulletPool.Get(_bulletSpawn.position, _bulletSpawn.rotation);
 
-        Recoil.StartRecoil();
         _muzzleFlashVFX.Play(true);
         audioSource.PlayOneShot(_shootSound);
         _bulletPool.Return(bullet, 5.0f);
@@ -65,6 +64,6 @@ public class Weapon : MonoBehaviour
     private void EndShooting(InputAction.CallbackContext context)
     {
         if (EndRecoilAtTriggerRelease)
-            EventSystem.Events.TriggerRecoilEnd();
+            EventSystem.Events.TriggerRecoilEnd(transform.parent.name);
     }
 }

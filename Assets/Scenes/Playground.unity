@@ -1430,10 +1430,18 @@ PrefabInstance:
       propertyPath: m_ModelPrefab
       value: 
       objectReference: {fileID: 9119320810270313850, guid: e2c8ec1848989964581079e7896749c6, type: 3}
+    - target: {fileID: 9108937120212209936, guid: 4c12e27c61f297c438d3cb594c0c5171, type: 3}
+      propertyPath: m_IsTrackedAction.m_Action.m_Flags
+      value: -1
+      objectReference: {fileID: 0}
     - target: {fileID: 9108937120891769328, guid: 4c12e27c61f297c438d3cb594c0c5171, type: 3}
       propertyPath: m_ModelPrefab
       value: 
       objectReference: {fileID: 6919390527376824187, guid: cd2745d88e979b44e9997cba5c6acd5a, type: 3}
+    - target: {fileID: 9108937120891769328, guid: 4c12e27c61f297c438d3cb594c0c5171, type: 3}
+      propertyPath: m_IsTrackedAction.m_Action.m_Flags
+      value: -1
+      objectReference: {fileID: 0}
     m_RemovedComponents: []
     m_RemovedGameObjects:
     - {fileID: 576729954587585253, guid: 4c12e27c61f297c438d3cb594c0c5171, type: 3}
