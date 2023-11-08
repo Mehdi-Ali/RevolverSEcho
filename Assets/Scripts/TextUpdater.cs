@@ -26,13 +26,17 @@ public class TextUpdates : MonoBehaviour
 
     void UpdateText(string _)
     {
+        if (_performance == null)
+            _performance = Controller.GetComponentInChildren<RecoilPerformance>();
+        
         if (_evolution == null)
             _evolution = Controller.GetComponentInChildren<RecoilEvaluation>();
-        
-        if (_evolution != null)
-            Text.text = 
-            $"MaxVel: {_evolution.VelocityScore}\nDeltaPos: {_evolution.PositionScore}\nDeltaRot: {_evolution.RotationScore}";
-            //Add the Performance satrats also.
+
+        if (_performance == null || _evolution == null) return;
+
+        Text.text = $"MaxVel: {Math.Round(_performance.MaxVelocity.magnitude, 2)} : {_evolution.VelocityScore}\n" +
+                $"DeltaPos: {Math.Round(_performance.DeltaPos.magnitude, 2)} : {_evolution.PositionScore}\n" +
+                $"DeltaRot: {_performance.DeltaRot} : {_evolution.RotationScore}";
     }
 
     void OnDisable()
