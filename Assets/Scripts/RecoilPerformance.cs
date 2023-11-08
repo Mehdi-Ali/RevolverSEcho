@@ -7,25 +7,25 @@ using UnityEngine.XR.Interaction.Toolkit;
 
 public class RecoilPerformance : MonoBehaviour
 {
-    private XRBaseController controller;
-    private Vector3 previousPosition;
     public bool InRecoil;
-    private bool _canStartCheck;
-
     [SerializeField] private float _minimalRecoilSecondes = 0.1f;
     [SerializeField] private float _RecoilMinVelocity = 0.1f;
+    private XRBaseController _controller;
+    private Vector3 _previousPosition;
+    private Vector3 _previousVelocity;
+    private bool _canStartCheck;
+
 
     public Vector3 Velocity {get; private set; }
     public Vector3 MaxVelocity { get; private set; }
-    private Vector3 previousVelocity;
 
     public Vector3 DeltaPos { get; private set; }
     public Vector3 DeltaRot { get; private set; }
 
     private void Start()
     {
-        controller = GetComponentInParent<XRBaseController>();
-        previousPosition = controller.transform.position;
+        _controller = GetComponentInParent<XRBaseController>();
+        _previousPosition = _controller.transform.position;
         MaxVelocity = Vector3.zero;
         DeltaPos = Vector3.zero;
         DeltaRot = Vector3.zero;
@@ -45,34 +45,34 @@ public class RecoilPerformance : MonoBehaviour
         CalculateVelocity();
 
         if (!_canStartCheck) return;
-        bool signCheck = Mathf.Sign(Velocity.y) != Mathf.Sign(previousVelocity.y);
+        bool signCheck = Mathf.Sign(Velocity.y) != Mathf.Sign(_previousVelocity.y);
         bool magnitudeCheck = Velocity.magnitude < _RecoilMinVelocity;
     
         if (signCheck || magnitudeCheck)
         {
-            var controllerTrns = controller.transform;
+            UnityEngine.Debug.Log($"vel: {Velocity.y}, preVel: {_previousVelocity.y}, SignCheck: {signCheck}");
+            var controllerTrns = _controller.transform;
             DeltaPos = controllerTrns.position - DeltaPos;
             DeltaRot = controllerTrns.rotation.eulerAngles - DeltaRot;
             EventSystem.Events.TriggerRecoilEnd();
         }
-
     }
 
     private void CalculateVelocity()
     {
-        Vector3 currentPosition = controller.transform.position;
-        Velocity = (currentPosition - previousPosition) / Time.deltaTime;
+        Vector3 currentPosition = _controller.transform.position;
+        Velocity = (currentPosition - _previousPosition) / Time.deltaTime;
         MaxVelocity = Vector3.Max(MaxVelocity, Velocity);
-        previousPosition = currentPosition;
+        _previousPosition = currentPosition;
     }
 
     public void StartRecoil()
     {
-        previousVelocity = Vector3.zero;
+        _previousVelocity = Vector3.zero;
         MaxVelocity = Vector3.zero;
         Velocity = Vector3.zero;
 
-        var controllerTrns = controller.transform;
+        var controllerTrns = _controller.transform;
         DeltaPos = controllerTrns.position;
         DeltaRot = controllerTrns.rotation.eulerAngles;
         InRecoil = true;
@@ -82,6 +82,7 @@ public class RecoilPerformance : MonoBehaviour
 
     private void StartCheck()
     {
+        _previousVelocity = Velocity;
         _canStartCheck = true;
     }
 
@@ -90,7 +91,7 @@ public class RecoilPerformance : MonoBehaviour
         InRecoil = false;
         _canStartCheck = false;
 
-        previousVelocity = Vector3.zero;
+        _previousVelocity = Vector3.zero;
         MaxVelocity = Vector3.zero;
         Velocity = Vector3.zero;
     }
