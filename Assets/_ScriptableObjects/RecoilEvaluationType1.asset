@@ -1,0 +1,20 @@
+%YAML 1.1
+%TAG !u! tag:unity3d.com,2011:
+--- !u!114 &11400000
+MonoBehaviour:
+  m_ObjectHideFlags: 0
+  m_CorrespondingSourceObject: {fileID: 0}
+  m_PrefabInstance: {fileID: 0}
+  m_PrefabAsset: {fileID: 0}
+  m_GameObject: {fileID: 0}
+  m_Enabled: 1
+  m_EditorHideFlags: 0
+  m_Script: {fileID: 11500000, guid: e879aa73aa35fae42be803aedaeaa1c7, type: 3}
+  m_Name: RecoilEvaluationType1
+  m_EditorClassIdentifier: 
+  IdealPosition: 0.25
+  IdealRotation: 45
+  IdealVelocity: 10
+  PositionFactor: 0.33
+  RotationFactor: 0.33
+  VelocityFactor: 0.34
