@@ -20,15 +20,13 @@ public class RecoilPerformance : MonoBehaviour
     public Vector3 MaxVelocity { get; private set; }
 
     public Vector3 DeltaPos { get; private set; }
-    public Vector3 DeltaRot { get; private set; }
+    public Quaternion Rot { get; private set; }
+    public float DeltaRot { get; private set; }
 
     private void Start()
     {
         _controller = GetComponentInParent<XRBaseController>();
         _previousPosition = _controller.transform.position;
-        MaxVelocity = Vector3.zero;
-        DeltaPos = Vector3.zero;
-        DeltaRot = Vector3.zero;
         InRecoil = false;
     }
 
@@ -50,12 +48,17 @@ public class RecoilPerformance : MonoBehaviour
     
         if (signCheck || magnitudeCheck)
         {
-            //UnityEngine.Debug.Log($"vel: {Velocity.y}, preVel: {_previousVelocity.y}, SignCheck: {signCheck}");
-            var controllerTrns = _controller.transform;
-            DeltaPos = controllerTrns.position - DeltaPos;
-            DeltaRot = controllerTrns.rotation.eulerAngles - DeltaRot;
-            EventSystem.Events.TriggerRecoilEnd(_controller.name);
+            SetMaxPosRot();
         }
+    }
+
+    private void SetMaxPosRot()
+    {
+        var controllerTrns = _controller.transform;
+        DeltaPos = controllerTrns.position - DeltaPos;
+        DeltaRot = Quaternion.Angle(Rot, controllerTrns.rotation);
+
+        EventSystem.Events.TriggerRecoilEnd(_controller.name);
     }
 
     private void CalculateVelocity()
@@ -77,7 +80,7 @@ public class RecoilPerformance : MonoBehaviour
 
         var controllerTrns = _controller.transform;
         DeltaPos = controllerTrns.position;
-        DeltaRot = controllerTrns.rotation.eulerAngles;
+        Rot = controllerTrns.rotation;
         InRecoil = true;
 
         Invoke(nameof(StartCheck), _minimalRecoilSecondes);

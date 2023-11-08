@@ -35,7 +35,7 @@ public class TextUpdates : MonoBehaviour
         
         if (Recoil != null)
             Text.text = 
-            $"MaxVel: {Math.Round(Recoil.MaxVelocity.magnitude, 2)}\nDeltaPos: {Math.Round(Recoil.DeltaPos.magnitude, 2)}\nDeltaRot: {Math.Round(Recoil.DeltaRot.magnitude, 2)}";    
+            $"MaxVel: {Math.Round(Recoil.MaxVelocity.magnitude, 2)}\nDeltaPos: {Math.Round(Recoil.DeltaPos.magnitude, 2)}\nDeltaRot: {Recoil.DeltaRot}";    
 
     }
 
