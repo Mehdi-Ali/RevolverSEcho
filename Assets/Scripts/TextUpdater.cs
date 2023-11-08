@@ -11,16 +11,12 @@ public class TextUpdates : MonoBehaviour
 {
     private TextMeshProUGUI Text;
     public XRBaseController Controller;
-    private RecoilPerformance Recoil;
+    private RecoilPerformance _performance;
+    private RecoilEvaluation _evolution;
 
     void OnEnable()
     {
         EventSystem.Events.OnRecoilEnd += UpdateText;
-    }
-
-    void OnDisable()
-    {
-        EventSystem.Events.OnRecoilEnd -= UpdateText;
     }
 
     void Start()
@@ -30,26 +26,17 @@ public class TextUpdates : MonoBehaviour
 
     void UpdateText(string _)
     {
-        if (Recoil == null)
-            Recoil = Controller.GetComponentInChildren<RecoilPerformance>();
+        if (_evolution == null)
+            _evolution = Controller.GetComponentInChildren<RecoilEvaluation>();
         
-        if (Recoil != null)
+        if (_evolution != null)
             Text.text = 
-            $"MaxVel: {Math.Round(Recoil.MaxVelocity.magnitude, 2)}\nDeltaPos: {Math.Round(Recoil.DeltaPos.magnitude, 2)}\nDeltaRot: {Recoil.DeltaRot}";    
-
+            $"MaxVel: {_evolution.VelocityScore}\nDeltaPos: {_evolution.PositionScore}\nDeltaRot: {_evolution.RotationScore}";
+            //Add the Performance satrats also.
     }
 
-    //delete
-    // void Update()
-    // {
-    //     if (Recoil == null)
-    //         Recoil = Controller.GetComponentInChildren<RecoilPerformance>();
-        
-    //     if (Recoil != null)
-    //         Text.text = 
-    //         $"Vel: {Recoil.Velocity}";    
-    //         //$"MaxVel: {Math.Round(Recoil.MaxVelocity.magnitude, 2)}\nDeltaPos: {Math.Round(Recoil.DeltaPos.magnitude, 2)}\nDeltaRot: {Math.Round(Recoil.DeltaRot.magnitude, 2)}";    
-    //     //Debug.Log($"Velocity: {Recoil.Velocity}");   
-
-    // }
+    void OnDisable()
+    {
+        EventSystem.Events.OnRecoilEnd -= UpdateText;
+    }
 }

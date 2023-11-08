@@ -523,6 +523,7 @@ GameObject:
   - component: {fileID: 2888721650253217670}
   - component: {fileID: 3932983652918636866}
   - component: {fileID: 398423426651598418}
+  - component: {fileID: 3747861721120114036}
   - component: {fileID: 6917299753527231469}
   m_Layer: 0
   m_Name: Revolver
@@ -637,6 +638,18 @@ MonoBehaviour:
   InRecoil: 0
   _minimalRecoilSecondes: 0.1
   _RecoilMinVelocity: 0.1
+--- !u!114 &3747861721120114036
+MonoBehaviour:
+  m_ObjectHideFlags: 0
+  m_CorrespondingSourceObject: {fileID: 0}
+  m_PrefabInstance: {fileID: 0}
+  m_PrefabAsset: {fileID: 0}
+  m_GameObject: {fileID: 3681184141669113427}
+  m_Enabled: 1
+  m_EditorHideFlags: 0
+  m_Script: {fileID: 11500000, guid: 397c07434c31a6d4b9ec65e4b05aa8fe, type: 3}
+  m_Name: 
+  m_EditorClassIdentifier: 
 --- !u!82 &6917299753527231469
 AudioSource:
   m_ObjectHideFlags: 0

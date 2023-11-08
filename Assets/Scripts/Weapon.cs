@@ -66,4 +66,6 @@ public class Weapon : MonoBehaviour
         if (EndRecoilAtTriggerRelease)
             EventSystem.Events.TriggerRecoilEnd(transform.parent.name);
     }
+
+    
 }
