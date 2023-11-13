@@ -12,7 +12,7 @@ public class RevolverSTrail : MonoBehaviour
     void Start()
     {
         _trail = GetComponent<TrailRenderer>();
-        _controllerName = GetComponentInParent<Weapon>().transform.parent.name;
+        _controllerName = transform.parent.parent.name;
     }
 
     void OnEnable()
