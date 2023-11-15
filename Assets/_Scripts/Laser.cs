@@ -12,6 +12,7 @@ public class Laser : MonoBehaviour
     private GameObject _reticle;
     private Camera _mainCamera;
     private LineRenderer _lineRender;
+    private string _controllerName;
 
     void OnEnable()
     {
@@ -23,33 +24,38 @@ public class Laser : MonoBehaviour
     {
         _lineRender = GetComponent<LineRenderer>();
         _mainCamera = Camera.main;
+        _controllerName = transform.parent.parent.name;
 
         if (_reticle == null)
             GetReticle();
 
-        EnableLaserAndReticle();
+        EnableLaserAndReticle(_controllerName);
     }
 
-    private void EnableLaserAndReticle(string _="")
+    private void EnableLaserAndReticle(string controllerName)
     {
+        if (controllerName != _controllerName)
+            return;
+        
         _lineRender.enabled = true;
         _reticle.SetActive(true);
     }
 
-    private void DisableLaser(string obj)
+    private void DisableLaser(string controllerName)
     {
+        if (controllerName != _controllerName)
+            return;
+        
         _lineRender.enabled = false;
         _reticle.SetActive(false);
     }
 
     private void GetReticle()
     {
-        var controllerName = transform.parent.parent.name;
-
-        if (controllerName == "Right Controller")
+        if (_controllerName == "Right Controller")
             _reticle = Reticles.Instance.RightReticle;
 
-        else if (controllerName == "Left Controller")
+        else if (_controllerName == "Left Controller")
             _reticle = Reticles.Instance.LeftReticle;
     }
 
