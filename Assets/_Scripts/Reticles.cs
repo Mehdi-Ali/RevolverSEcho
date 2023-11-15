@@ -3,18 +3,18 @@ using System.Collections.Generic;
 using UnityEngine;
 using UnityEngine.UI;
 
-public class WorldUIElement : MonoBehaviour
+public class Reticles : MonoBehaviour
 {
-    public static WorldUIElement Elements { get; private set; }
+    public static Reticles Instance { get; private set; }
 
-    public Image RightReticle;
-    public Image LeftReticle;
+    public GameObject RightReticle;
+    public GameObject LeftReticle;
 
     private void Awake()
     {
-        if (Elements == null)
+        if (Instance == null)
         {
-            Elements = this;
+            Instance = this;
             DontDestroyOnLoad(gameObject);
         }
         else

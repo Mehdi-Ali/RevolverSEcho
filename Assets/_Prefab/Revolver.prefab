@@ -857,7 +857,7 @@ MonoBehaviour:
   m_Name: 
   m_EditorClassIdentifier: 
   _maxDistance: 50
-  _crosshair: {fileID: 0}
+  _reticleSize: 0.15
 --- !u!120 &1660509054637412427
 LineRenderer:
   serializedVersion: 2
