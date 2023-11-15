@@ -12,7 +12,6 @@ public class Laser : MonoBehaviour
     private GameObject _reticle;
     private Camera _mainCamera;
     private LineRenderer _lineRender;
-    private float _previousDistance;
 
     void OnEnable()
     {
@@ -24,7 +23,6 @@ public class Laser : MonoBehaviour
     {
         _lineRender = GetComponent<LineRenderer>();
         _mainCamera = Camera.main;
-        _previousDistance = 0;
 
         if (_reticle == null)
             GetReticle();
@@ -75,23 +73,14 @@ public class Laser : MonoBehaviour
     private void HandleReticle(Vector3 endPoint)
     {
         var reticleTrans = _reticle.transform;
-        var distance = Vector3.Distance(reticleTrans.position, _mainCamera.transform.position);
+        var distance = Vector3.Distance(endPoint, _mainCamera.transform.position);
         var scale = _reticleSize * distance * (Vector3.up + Vector3.right) + Vector3.forward;
-        bool isGettingCloser = distance <= _previousDistance;
-
-        Debug.Log(isGettingCloser + ": " + distance + " / " + _previousDistance);
-
-        if (isGettingCloser)
-            reticleTrans.localScale = scale;
 
         reticleTrans.position = endPoint;
-
-        if (!isGettingCloser)
-            reticleTrans.localScale = scale;
-
+        reticleTrans.localScale = scale;
         reticleTrans.LookAt(_mainCamera.transform);
-        _previousDistance = distance;
     }
+    
 
     void OnDisable()
     {
