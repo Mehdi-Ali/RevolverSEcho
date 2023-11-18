@@ -10,6 +10,8 @@ public class EchoManager : MonoBehaviour
     private string _controllerName;
 
     private List<BulletData> _landedBullets;
+    private Dictionary<int, float> _pendingEvaluations;
+
 
     void OnEnable()
     {
@@ -21,11 +23,19 @@ public class EchoManager : MonoBehaviour
     {
         _controllerName = transform.parent.name;
         _landedBullets = new();
+        _pendingEvaluations = new Dictionary<int, float>();
     }
 
     private void SaveHitBulletData(int bulletID, IDamageable target)
     {
-        _landedBullets.Add(new(bulletID, target));
+        BulletData bulletData = new(bulletID, target);
+        _landedBullets.Add(bulletData);
+
+        if (_pendingEvaluations.TryGetValue(bulletID, out var score))
+        {
+            ApplyEvaluation(score, bulletData);
+            _pendingEvaluations.Remove(bulletID);
+        }
     }
 
     private void EvaluationEnd(string controllerName, float score, int bulletID)
@@ -36,8 +46,17 @@ public class EchoManager : MonoBehaviour
 
         var bullet = _landedBullets.Find(bullet => bullet._bulletID == bulletID);
         if (bullet._bulletTarget == null)
+        {
+            _pendingEvaluations.Add(bulletID, score);
+            StartCoroutine(RemovePendingEvaluation(bulletID, 2f));
             return;
+        }
 
+        ApplyEvaluation(score, bullet);
+    }
+
+    private void ApplyEvaluation(float score, BulletData bullet)
+    {
         _landedBullets.Remove(bullet);
         var damage = score * _echoDamage;
         EchoCharge += score;
@@ -45,13 +64,18 @@ public class EchoManager : MonoBehaviour
         Debug.Log("Echo damage: " + damage);
     }
 
+    private IEnumerator RemovePendingEvaluation(int bulletID, float delay)
+    {
+        yield return new WaitForSeconds(delay);
 
+        if (_pendingEvaluations.ContainsKey(bulletID))
+            _pendingEvaluations.Remove(bulletID);
+    }
 
     void OnDisable()
     {
         EventSystem.Events.OnBulletHit -= SaveHitBulletData;
         EventSystem.Events.OnEvolutionEnd -= EvaluationEnd;
-
     }
 }
 
