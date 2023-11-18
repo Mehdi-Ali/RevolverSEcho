@@ -9,7 +9,8 @@ public class EventSystem : MonoBehaviour
 
     public event Action<string, int> OnShoot;
     public event Action<string> OnRecoilEnd;
-    public event Action<string, int> OnBulletHit;
+    public event Action<int, IDamageable> OnBulletHit;
+    public event Action<string, float, int> OnEvolutionEnd;
 
     private void Awake()
     {
@@ -34,8 +35,13 @@ public class EventSystem : MonoBehaviour
         OnRecoilEnd?.Invoke(controllerName);
     }
 
-    public void TriggerBulletHit(string controllerName, int bulletID)
+    public void TriggerBulletHit(int bulletID, IDamageable target)
     {
-        OnBulletHit?.Invoke(controllerName, bulletID);
+        OnBulletHit?.Invoke(bulletID, target);
+    }
+
+    public void TriggerEvolutionEnd(string controllerName, float Score, int bulletID)
+    {
+        OnEvolutionEnd?.Invoke(controllerName, Score, bulletID);
     }
 }

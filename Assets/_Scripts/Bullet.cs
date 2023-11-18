@@ -38,15 +38,14 @@ public class Bullet : MonoBehaviour, IPool
     void OnCollisionEnter(Collision collision)
     {
         EnableSplash(collision.GetContact(0).point);
-        _bulletPool.Return(gameObject);
 
-        if (collision.gameObject.TryGetComponent<IDamageable>(out IDamageable damageable))
+        if (collision.gameObject.TryGetComponent<IDamageable>(out IDamageable target))
         {
-            damageable.TakeDamage(_bulletDamage);
-            EventSystem.Events.TriggerBulletHit(transform.parent.name, _id);
-            // validate the echo charge and ask for the echo charge abd echo damage.
-
+            target.TakeDamage(_bulletDamage);
+            EventSystem.Events.TriggerBulletHit(_id, target);
         }
+
+        _bulletPool.Return(gameObject);
     }
 
 

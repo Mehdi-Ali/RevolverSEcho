@@ -588,7 +588,7 @@ GameObject:
   - component: {fileID: 3932983652918636866}
   - component: {fileID: 398423426651598418}
   - component: {fileID: 3747861721120114036}
-  - component: {fileID: 1052995560044975664}
+  - component: {fileID: -104302905892500812}
   - component: {fileID: 1149044904710785868}
   - component: {fileID: 2888721650253217670}
   - component: {fileID: 6917299753527231469}
@@ -667,7 +667,7 @@ MonoBehaviour:
   m_Name: 
   m_EditorClassIdentifier: 
   RecoilType: {fileID: 11400000, guid: c859e0a001674444bb05985e8d2983fc, type: 2}
---- !u!114 &1052995560044975664
+--- !u!114 &-104302905892500812
 MonoBehaviour:
   m_ObjectHideFlags: 0
   m_CorrespondingSourceObject: {fileID: 0}
@@ -676,11 +676,11 @@ MonoBehaviour:
   m_GameObject: {fileID: 3681184141669113427}
   m_Enabled: 1
   m_EditorHideFlags: 0
-  m_Script: {fileID: 11500000, guid: 8764e1ac6034a64448a4da1099201a4e, type: 3}
+  m_Script: {fileID: 11500000, guid: 7c3787e165a586146baed5291c82e713, type: 3}
   m_Name: 
   m_EditorClassIdentifier: 
-  keys: 
-  values: []
+  _echoDamage: 25
+  EchoCharge: 0
 --- !u!33 &1149044904710785868
 MeshFilter:
   m_ObjectHideFlags: 0

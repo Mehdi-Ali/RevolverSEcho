@@ -17,7 +17,6 @@ public class RecoilEvaluation : MonoBehaviour
     public float VelocityScore { get; private set; }
     public float FinalScore { get; private set; }
 
-    public Dictionary<int, float> PerformanceDictionary;
     private float _positionFactor;
     private float _rotationFactor;
     private float _velocityFactor;
@@ -25,12 +24,14 @@ public class RecoilEvaluation : MonoBehaviour
     private float _idealRotation;
     private float _idealVelocity;
 
+    private string _controllerName;
+
 
     void Start()
     {
         _performance = GetComponent<RecoilPerformance>();
         UpdateRecoilTypeProperties();
-        PerformanceDictionary = new Dictionary<int, float>();
+        _controllerName = transform.parent.name;
     }
 
     void OnEnable()
@@ -51,7 +52,7 @@ public class RecoilEvaluation : MonoBehaviour
 
     public void CalculateScore(string controllerName)
     {
-        if (controllerName != transform.parent.name)
+        if (controllerName != _controllerName)
             return;
 
         var (id, MaxVelocity, DeltaPos, DeltaRot ) = _performance.GetEvaluationStats();
@@ -62,8 +63,7 @@ public class RecoilEvaluation : MonoBehaviour
 
         FinalScore = PositionScore + RotationScore + VelocityScore;
 
-        PerformanceDictionary.Add(id, FinalScore);
-        Debug.Log(id + " : " + FinalScore);
+        EventSystem.Events.TriggerEvolutionEnd(_controllerName, FinalScore, id);
     }
 
     void OnDisable()

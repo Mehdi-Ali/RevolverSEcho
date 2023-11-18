@@ -48,8 +48,6 @@ public class PoolSystem : MonoBehaviour
         return instance;
     }
 
-    
-
 
     public void Return(GameObject instance, float delay = 0f)
     {
