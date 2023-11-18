@@ -21,7 +21,7 @@ public class RevolverSTrail : MonoBehaviour
         EventSystem.Events.OnRecoilEnd += StopTrail;
     }
 
-    private void StartTrail(string controllerName)
+    private void StartTrail(string controllerName, int _)
     {
         if (controllerName == _controllerName)
             _trail.emitting = true;

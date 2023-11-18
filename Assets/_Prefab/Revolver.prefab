@@ -585,9 +585,10 @@ GameObject:
   serializedVersion: 6
   m_Component:
   - component: {fileID: 4061650746155549929}
+  - component: {fileID: 3932983652918636866}
   - component: {fileID: 398423426651598418}
   - component: {fileID: 3747861721120114036}
-  - component: {fileID: 3932983652918636866}
+  - component: {fileID: 1052995560044975664}
   - component: {fileID: 1149044904710785868}
   - component: {fileID: 2888721650253217670}
   - component: {fileID: 6917299753527231469}
@@ -618,6 +619,26 @@ Transform:
   - {fileID: 3380379258752162175}
   m_Father: {fileID: 0}
   m_LocalEulerAnglesHint: {x: 0, y: 0, z: 0}
+--- !u!114 &3932983652918636866
+MonoBehaviour:
+  m_ObjectHideFlags: 0
+  m_CorrespondingSourceObject: {fileID: 0}
+  m_PrefabInstance: {fileID: 0}
+  m_PrefabAsset: {fileID: 0}
+  m_GameObject: {fileID: 3681184141669113427}
+  m_Enabled: 1
+  m_EditorHideFlags: 0
+  m_Script: {fileID: 11500000, guid: 871bc76157fe0194d942d18312a74e95, type: 3}
+  m_Name: 
+  m_EditorClassIdentifier: 
+  EndRecoilAtTriggerRelease: 0
+  _fireRate: 0.3
+  _bulletSpawn: {fileID: 6677739618058480584}
+  _muzzleFlashVFX: {fileID: 2242406854180794708}
+  _shootSound: {fileID: 8300000, guid: 00a6e399a0ce09e448d4de99cbb05fb4, type: 3}
+  _hapticDuration: 0.2
+  _hapticAmplitude: 1
+  _shootInputAction: {fileID: 0}
 --- !u!114 &398423426651598418
 MonoBehaviour:
   m_ObjectHideFlags: 0
@@ -646,7 +667,7 @@ MonoBehaviour:
   m_Name: 
   m_EditorClassIdentifier: 
   RecoilType: {fileID: 11400000, guid: c859e0a001674444bb05985e8d2983fc, type: 2}
---- !u!114 &3932983652918636866
+--- !u!114 &1052995560044975664
 MonoBehaviour:
   m_ObjectHideFlags: 0
   m_CorrespondingSourceObject: {fileID: 0}
@@ -655,17 +676,11 @@ MonoBehaviour:
   m_GameObject: {fileID: 3681184141669113427}
   m_Enabled: 1
   m_EditorHideFlags: 0
-  m_Script: {fileID: 11500000, guid: 871bc76157fe0194d942d18312a74e95, type: 3}
+  m_Script: {fileID: 11500000, guid: 8764e1ac6034a64448a4da1099201a4e, type: 3}
   m_Name: 
   m_EditorClassIdentifier: 
-  EndRecoilAtTriggerRelease: 0
-  _fireRate: 0.3
-  _bulletSpawn: {fileID: 6677739618058480584}
-  _muzzleFlashVFX: {fileID: 2242406854180794708}
-  _shootSound: {fileID: 8300000, guid: 00a6e399a0ce09e448d4de99cbb05fb4, type: 3}
-  _hapticDuration: 0.2
-  _hapticAmplitude: 1
-  _shootInputAction: {fileID: 0}
+  keys: 
+  values: []
 --- !u!33 &1149044904710785868
 MeshFilter:
   m_ObjectHideFlags: 0

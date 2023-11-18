@@ -58,9 +58,9 @@ public class Weapon : MonoBehaviour
         if (Time.time < nextFireTime) return;
         nextFireTime = Time.time + _fireRate;
 
-        EventSystem.Events.TriggerOnShoot(transform.parent.name);
 
-        var bullet = _bulletPool.Get(_bulletSpawn.position, _bulletSpawn.rotation);
+        var bullet = _bulletPool.Get(_bulletSpawn.position, _bulletSpawn.rotation , out int id);
+        EventSystem.Events.TriggerOnShoot(transform.parent.name, id);
 
         _muzzleFlashVFX.Play(true);
         audioSource.PlayOneShot(_shootSound);

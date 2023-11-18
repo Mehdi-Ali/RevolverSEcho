@@ -7,6 +7,11 @@ public class PoolSystem : MonoBehaviour
     public GameObject IPoolPrefab;
     public int normalSize;
     private Queue<GameObject> pool;
+    private int _nextID = 0;
+    public  int NextID
+    {
+        get { return _nextID++; }
+    }
 
 
     void Start()
@@ -22,6 +27,11 @@ public class PoolSystem : MonoBehaviour
 
     public GameObject Get(Vector3 position, Quaternion rotation)
     {
+        return Get(position, rotation, out _);
+    }
+
+    public GameObject Get(Vector3 position, Quaternion rotation , out int id)
+    {
         GameObject instance;
         if (pool.Count > 0)
         {
@@ -31,11 +41,15 @@ public class PoolSystem : MonoBehaviour
         else
             instance = Instantiate(IPoolPrefab, transform);
 
+        id = NextID;
         if (instance.TryGetComponent<IPool>(out var iPool))
-            iPool.Initialize(position, rotation);
+            iPool.Initialize(id, position, rotation);
         
         return instance;
     }
+
+    
+
 
     public void Return(GameObject instance, float delay = 0f)
     {
@@ -56,6 +70,6 @@ public class PoolSystem : MonoBehaviour
 
 public interface IPool
 {
-    public void Initialize(Vector3 position, Quaternion rotation);
+    public void Initialize(int id, Vector3 position, Quaternion rotation);
     public void ResetInst();
 }

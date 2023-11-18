@@ -41,9 +41,9 @@ public class TextUpdater : MonoBehaviour
 
         if (_performance == null || _evaluation == null) yield break;
 
-        var (MaxVelocity, DeltaPos, DeltaRot) = _performance.GetEvaluationStats();
+        var (_, MaxVelocity, DeltaPos, DeltaRot) = _performance.GetEvaluationStats();
 
-        Text.text = $"VelScore: {Math.Round(MaxVelocity, 2)} : {_evaluation.VelocityScore / _evaluation.RecoilType.VelocityFactor}\n" +
+        Text.text = $"VelScore: {Math.Round((float)MaxVelocity, 2)} : {_evaluation.VelocityScore / _evaluation.RecoilType.VelocityFactor}\n" +
                 $"PosScore: {Math.Round(DeltaPos, 2)} : {_evaluation.PositionScore / _evaluation.RecoilType.PositionFactor}\n" +
                 $"RotScore: {DeltaRot} : {_evaluation.RotationScore / _evaluation.RecoilType.RotationFactor}\n" +
                 $"Total Score: {_evaluation.FinalScore}";

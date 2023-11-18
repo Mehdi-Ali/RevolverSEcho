@@ -27,6 +27,7 @@ public class RecoilPerformance : MonoBehaviour
     private Vector3 _maxVelocity;
     private Vector3 _deltaPos;
     private float _deltaRot;
+    private int _currentID;
 
     private void Start()
     {
@@ -42,10 +43,12 @@ public class RecoilPerformance : MonoBehaviour
     }
 
 
-    public void StartRecoil(string controllerName)
+    public void StartRecoil(string controllerName, int id)
     {
         if (controllerName != _controller.name)
         return;
+
+        _currentID = id;
 
         var controllerTrns = _controller.transform;
         _previousPosition = controllerTrns.position;
@@ -69,7 +72,6 @@ public class RecoilPerformance : MonoBehaviour
     {
         if (!InRecoil) return;
         CalculateVelocity();
-        UnityEngine.Debug.Log(_velocity.magnitude);
 
         if (!_canStartCheck) return;
         bool signCheck = Mathf.Sign(_velocity.y) != Mathf.Sign(_previousVelocity.y);
@@ -121,9 +123,9 @@ public class RecoilPerformance : MonoBehaviour
         EventSystem.Events.OnRecoilEnd -= EndRecoil;
     }
 
-    public (float, float, float) GetEvaluationStats()
+    public (int, float, float, float) GetEvaluationStats()
     {
-        return (_finalMaxVelocity, _finalDeltaPos, _finalDeltaRot);
+        return (_currentID, _finalMaxVelocity, _finalDeltaPos, _finalDeltaRot);
     }
 }
  

@@ -17,6 +17,7 @@ public class RecoilEvaluation : MonoBehaviour
     public float VelocityScore { get; private set; }
     public float FinalScore { get; private set; }
 
+    public Dictionary<int, float> PerformanceDictionary;
     private float _positionFactor;
     private float _rotationFactor;
     private float _velocityFactor;
@@ -29,6 +30,7 @@ public class RecoilEvaluation : MonoBehaviour
     {
         _performance = GetComponent<RecoilPerformance>();
         UpdateRecoilTypeProperties();
+        PerformanceDictionary = new Dictionary<int, float>();
     }
 
     void OnEnable()
@@ -52,20 +54,16 @@ public class RecoilEvaluation : MonoBehaviour
         if (controllerName != transform.parent.name)
             return;
 
-        var (MaxVelocity, DeltaPos, DeltaRot ) = _performance.GetEvaluationStats();
+        var (id, MaxVelocity, DeltaPos, DeltaRot ) = _performance.GetEvaluationStats();
 
         VelocityScore = (float)Math.Round(_velocityFactor * Math.Min((MaxVelocity / _idealVelocity), 1), 2);
         PositionScore = (float)Math.Round(_positionFactor * Math.Min((DeltaPos / _idealPosition), 1), 2);
         RotationScore = (float)Math.Round(_rotationFactor * Math.Min((DeltaRot / _idealRotation), 1), 2);
 
-
         FinalScore = PositionScore + RotationScore + VelocityScore;
-        Debug.Log("Vel: " + VelocityScore + " = " + _velocityFactor + " *( " + MaxVelocity + " / " + _idealVelocity + " )");
-        Debug.Log("Pos: " + PositionScore + " = " + _positionFactor + " *( " + DeltaPos + " / " + _idealPosition + " )");
-        Debug.Log("Rot: " + RotationScore + " = " + _rotationFactor + " *( " + DeltaRot + " / " + _idealRotation + " )");
 
-
-
+        PerformanceDictionary.Add(id, FinalScore);
+        Debug.Log(id + " : " + FinalScore);
     }
 
     void OnDisable()

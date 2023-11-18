@@ -41,7 +41,7 @@ public class Laser : MonoBehaviour
         _reticle.SetActive(true);
     }
 
-    private void DisableLaser(string controllerName)
+    private void DisableLaser(string controllerName, int _)
     {
         if (controllerName != _controllerName)
             return;

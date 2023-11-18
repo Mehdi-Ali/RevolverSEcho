@@ -14,7 +14,7 @@ public class BulletSplash : MonoBehaviour, IPool
     }
 
 
-    public void Initialize(Vector3 position, Quaternion rotation)
+    public void Initialize(int _, Vector3 position, Quaternion rotation)
     {
         transform.position = position;
         transform.rotation = rotation;

@@ -1,3 +1,4 @@
+using System;
 using System.Collections;
 using System.Collections.Generic;
 using System.Diagnostics;
@@ -7,11 +8,11 @@ public class Bullet : MonoBehaviour, IPool
 {
     [SerializeField] private Rigidbody rigidB;
     [SerializeField] private float _bulletSpeed = 100;
-
+    [SerializeField] private float _bulletDamage = 20;
 
     private PoolSystem _bulletSplashPool;
     private PoolSystem _bulletPool;
-
+    private int _id;
 
 
     void Start()
@@ -20,8 +21,9 @@ public class Bullet : MonoBehaviour, IPool
         _bulletSplashPool = PoolManager.PoolInst.BulletSplash;
     }
 
-    public void Initialize(Vector3 position, Quaternion rotation)
+    public void Initialize(int id, Vector3 position, Quaternion rotation)
     {
+        _id = id; 
         transform.position = position;
         transform.rotation = rotation;
 
@@ -37,6 +39,14 @@ public class Bullet : MonoBehaviour, IPool
     {
         EnableSplash(collision.GetContact(0).point);
         _bulletPool.Return(gameObject);
+
+        if (collision.gameObject.TryGetComponent<IDamageable>(out IDamageable damageable))
+        {
+            damageable.TakeDamage(_bulletDamage);
+            EventSystem.Events.TriggerBulletHit(transform.parent.name, _id);
+            // validate the echo charge and ask for the echo charge abd echo damage.
+
+        }
     }
 
 
