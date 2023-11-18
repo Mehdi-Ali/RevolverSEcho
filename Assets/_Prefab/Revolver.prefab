@@ -663,7 +663,8 @@ MonoBehaviour:
   _bulletSpawn: {fileID: 6677739618058480584}
   _muzzleFlashVFX: {fileID: 2242406854180794708}
   _shootSound: {fileID: 8300000, guid: 00a6e399a0ce09e448d4de99cbb05fb4, type: 3}
-  Recoil: {fileID: 0}
+  _hapticDuration: 0.2
+  _hapticAmplitude: 1
   _shootInputAction: {fileID: 0}
 --- !u!33 &1149044904710785868
 MeshFilter:

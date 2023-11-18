@@ -4,6 +4,7 @@ using System.Collections.Generic;
 using System.Diagnostics;
 using UnityEngine;
 using UnityEngine.InputSystem;
+using UnityEngine.XR.Interaction.Toolkit;
 
 public class Weapon : MonoBehaviour
 {
@@ -14,8 +15,10 @@ public class Weapon : MonoBehaviour
     [SerializeField] private Transform _bulletSpawn;
     [SerializeField] private ParticleSystem _muzzleFlashVFX;
     [SerializeField] private AudioClip _shootSound;
+    [SerializeField] private float _hapticDuration = 0.2f;
+    [SerializeField] private float _hapticAmplitude = 1f;
     private AudioSource audioSource;
-    public RecoilPerformance Recoil;
+    private RecoilPerformance _recoil;
 
     [SerializeField] private InputActionReference _shootInputAction;
 
@@ -23,6 +26,8 @@ public class Weapon : MonoBehaviour
     private float nextFireTime = 0;
 
     private PoolSystem _bulletPool;
+    private XRBaseController _controller;
+
 
 
     private void Start()
@@ -30,7 +35,8 @@ public class Weapon : MonoBehaviour
         _bulletPool = PoolManager.PoolInst.Bullet;
 
         audioSource = GetComponent<AudioSource>();
-        Recoil = GetComponent<RecoilPerformance>();
+        _recoil = GetComponent<RecoilPerformance>();
+        _controller = GetComponentInParent<XRBaseController>();
     }
 
     private void OnEnable()
@@ -58,6 +64,7 @@ public class Weapon : MonoBehaviour
 
         _muzzleFlashVFX.Play(true);
         audioSource.PlayOneShot(_shootSound);
+        _controller.SendHapticImpulse(_hapticAmplitude, _hapticDuration);
         _bulletPool.Return(bullet, 5.0f);
     }
 
