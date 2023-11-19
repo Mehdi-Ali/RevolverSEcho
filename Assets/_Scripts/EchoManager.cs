@@ -1,6 +1,7 @@
 using System;
 using System.Collections;
 using System.Collections.Generic;
+using Unity.VisualScripting;
 using UnityEngine;
 
 public class EchoManager : MonoBehaviour
@@ -51,7 +52,9 @@ public class EchoManager : MonoBehaviour
     {
         if (controllerName != _controllerName)
             return;
-
+        
+        if (score == 0)
+            return;
 
         var bullet = _landedBullets.Find(bullet => bullet._bulletID == bulletID);
         if (bullet._bulletTarget == null)
@@ -69,8 +72,7 @@ public class EchoManager : MonoBehaviour
         _landedBullets.Remove(bullet);
         var damage = score * _echoDamage;
         EchoCharge += score;
-        bullet._bulletTarget.TakeDamage(damage);
-        Debug.Log("Echo damage: " + damage);
+        bullet._bulletTarget?.TakeDamage(damage, true);
     }
 
     private IEnumerator RemovePendingEvaluation(int bulletID, float delay)

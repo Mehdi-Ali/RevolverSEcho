@@ -6,7 +6,6 @@ using UnityEngine;
 public class Target : MonoBehaviour, IDamageable
 {
     [SerializeField] float _health = 100f;
-    [SerializeField] float _damagePopupLifeTimeInSec= 2f;
     private PoolSystem _PopupPool;
 
 
@@ -17,10 +16,16 @@ public class Target : MonoBehaviour, IDamageable
 
     public void TakeDamage(float damage, bool isEcho = false)
     {
+        if (this == null) return;
+
         _health -= damage;
         _health = Math.Max(_health, 0);
 
-        DisplayDamage(damage);
+        if (!isEcho)
+            DisplayDamage(damage);
+        else
+            DisplayDamage(damage, true);
+            
         if (_health <= 0)
             Die();
     }
@@ -36,7 +41,6 @@ public class Target : MonoBehaviour, IDamageable
             textInfoAsQuaternion = new Quaternion(damage, 0f, 0f, 0f);
 
         var damagePopup = _PopupPool.Get(transform.position, textInfoAsQuaternion);
-        _PopupPool.Return(damagePopup, _damagePopupLifeTimeInSec);
     }
 
     public void Die()
