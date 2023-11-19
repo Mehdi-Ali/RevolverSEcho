@@ -30,12 +30,21 @@ public class EchoManager : MonoBehaviour
     {
         BulletData bulletData = new(bulletID, target);
         _landedBullets.Add(bulletData);
+        StartCoroutine(RemoveBullet(bulletData, 2f));
 
         if (_pendingEvaluations.TryGetValue(bulletID, out var score))
         {
             ApplyEvaluation(score, bulletData);
             _pendingEvaluations.Remove(bulletID);
         }
+    }
+
+    private IEnumerator RemoveBullet(BulletData bulletData, float delay)
+    {
+        yield return new WaitForSeconds(delay);
+
+        if (_landedBullets.Contains(bulletData))
+            _landedBullets.Remove(bulletData);
     }
 
     private void EvaluationEnd(string controllerName, float score, int bulletID)

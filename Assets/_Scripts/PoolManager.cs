@@ -9,6 +9,7 @@ public class PoolManager : MonoBehaviour
 
     public PoolSystem Bullet;
     public PoolSystem BulletSplash;
+    public PoolSystem DamagePopup;
 
     private void Awake()
     {
