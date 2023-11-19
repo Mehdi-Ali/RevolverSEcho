@@ -680,6 +680,7 @@ MonoBehaviour:
   m_Name: 
   m_EditorClassIdentifier: 
   _echoDamage: 25
+  _maxEchoCharge: 10
   EchoCharge: 0
 --- !u!33 &1149044904710785868
 MeshFilter:

@@ -26,8 +26,8 @@ public class Laser : MonoBehaviour
         _mainCamera = Camera.main;
         _controllerName = transform.parent.parent.name;
 
-        if (_reticle == null)
-            GetReticle();
+        // if (_reticle == null)
+        GetReticle();
 
         EnableLaserAndReticle(_controllerName);
     }

@@ -3,15 +3,19 @@ using System.Collections;
 using System.Collections.Generic;
 using Unity.VisualScripting;
 using UnityEngine;
+using UnityEngine.UI;
 
 public class EchoManager : MonoBehaviour
 {
     [SerializeField] private float _echoDamage;
-    public float EchoCharge;
+    [SerializeField] private int _maxEchoCharge = 10;
+    [SerializeField] private float EchoCharge;
     private string _controllerName;
 
     private List<BulletData> _landedBullets;
     private Dictionary<int, float> _pendingEvaluations;
+    private Image _echoBar;
+
 
 
     void OnEnable()
@@ -25,6 +29,19 @@ public class EchoManager : MonoBehaviour
         _controllerName = transform.parent.name;
         _landedBullets = new();
         _pendingEvaluations = new Dictionary<int, float>();
+
+        GetEchoBar();
+    }
+
+    private void GetEchoBar()
+    {
+        if (_controllerName == "Right Controller")
+            _echoBar = HUDManager.HUD.RightEchoBar;
+
+        else if (_controllerName == "Left Controller")
+            _echoBar = HUDManager.HUD.LightEchoBar;
+
+        _echoBar.fillAmount = 0;
     }
 
     private void SaveHitBulletData(int bulletID, IDamageable target)
@@ -71,8 +88,25 @@ public class EchoManager : MonoBehaviour
     {
         _landedBullets.Remove(bullet);
         var damage = score * _echoDamage;
-        EchoCharge += score;
+        ChargeEcho(score);
         bullet._bulletTarget?.TakeDamage(damage, true);
+    }
+
+    public void ChargeEcho(float score)
+    {
+        EchoCharge += score;
+        EchoCharge = Math.Min(EchoCharge, _maxEchoCharge);
+        _echoBar.fillAmount = EchoCharge / _maxEchoCharge;
+    }
+
+    public bool ConsumeEcho(float score)
+    {
+        var newEchoCharge = EchoCharge - score;
+        if (newEchoCharge < 0)
+            return false;
+
+        EchoCharge = newEchoCharge;
+        return true;
     }
 
     private IEnumerator RemovePendingEvaluation(int bulletID, float delay)
