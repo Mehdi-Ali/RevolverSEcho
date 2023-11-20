@@ -10,12 +10,10 @@ public class EchoManager : MonoBehaviour
     [SerializeField] private float _echoDamage;
     [SerializeField] private int _maxEchoCharge = 10;
     [SerializeField] private float EchoCharge;
-    private string _controllerName;
+    public string ControllerName;
 
     private List<BulletData> _landedBullets;
     private Dictionary<int, float> _pendingEvaluations;
-
-
 
     void OnEnable()
     {
@@ -25,11 +23,11 @@ public class EchoManager : MonoBehaviour
     
     void Start()
     {
-        _controllerName = transform.parent.name;
+        ControllerName = transform.parent.name;
         _landedBullets = new();
         _pendingEvaluations = new Dictionary<int, float>();
 
-        EventSystem.Events.TriggerEchoChargeChanged(_controllerName, 0);
+        EventSystem.Events.TriggerEchoChargeChanged(ControllerName, 0);
     }
 
     private void SaveHitBulletData(int bulletID, IDamageable target)
@@ -55,7 +53,7 @@ public class EchoManager : MonoBehaviour
 
     private void EvaluationEnd(string controllerName, float score, int bulletID)
     {
-        if (controllerName != _controllerName)
+        if (controllerName != ControllerName)
             return;
         
         if (score == 0)
@@ -86,12 +84,12 @@ public class EchoManager : MonoBehaviour
         EchoCharge = Math.Min(EchoCharge, _maxEchoCharge);
         var fillAmount = EchoCharge / _maxEchoCharge;
 
-        EventSystem.Events.TriggerEchoChargeChanged(_controllerName, fillAmount);
+        EventSystem.Events.TriggerEchoChargeChanged(ControllerName, fillAmount);
     }
 
-    public bool ConsumeEcho(float score)
+    public bool ConsumeEcho(float consumedCharges)
     {
-        var newEchoCharge = EchoCharge - score;
+        var newEchoCharge = EchoCharge - consumedCharges;
         if (newEchoCharge < 0)
             return false;
 
