@@ -11,6 +11,7 @@ public class EventSystem : MonoBehaviour
     public event Action<string> OnRecoilEnd;
     public event Action<int, IDamageable> OnBulletHit;
     public event Action<string, float, int> OnEvolutionEnd;
+    public event Action<string, float> OnEchoChargeChanged;
 
     private void Awake()
     {
@@ -43,5 +44,10 @@ public class EventSystem : MonoBehaviour
     public void TriggerEvolutionEnd(string controllerName, float Score, int bulletID)
     {
         OnEvolutionEnd?.Invoke(controllerName, Score, bulletID);
+    }
+
+    public void TriggerEchoChargeChanged(string controllerName, float fillAmount)
+    {
+        OnEchoChargeChanged?.Invoke(controllerName, fillAmount);
     }
 }

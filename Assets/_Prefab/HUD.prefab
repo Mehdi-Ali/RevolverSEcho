@@ -1520,7 +1520,7 @@ MonoBehaviour:
   m_Name: 
   m_EditorClassIdentifier: 
   RightEchoBar: {fileID: 1089257180065776079}
-  LightEchoBar: {fileID: 3153250453412175894}
+  LeftEchoBar: {fileID: 3153250453412175894}
 --- !u!223 &5626604297984344686
 Canvas:
   m_ObjectHideFlags: 0

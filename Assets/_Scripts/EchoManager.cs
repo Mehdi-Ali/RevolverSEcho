@@ -14,7 +14,6 @@ public class EchoManager : MonoBehaviour
 
     private List<BulletData> _landedBullets;
     private Dictionary<int, float> _pendingEvaluations;
-    private Image _echoBar;
 
 
 
@@ -30,18 +29,7 @@ public class EchoManager : MonoBehaviour
         _landedBullets = new();
         _pendingEvaluations = new Dictionary<int, float>();
 
-        GetEchoBar();
-    }
-
-    private void GetEchoBar()
-    {
-        if (_controllerName == "Right Controller")
-            _echoBar = HUDManager.HUD.RightEchoBar;
-
-        else if (_controllerName == "Left Controller")
-            _echoBar = HUDManager.HUD.LightEchoBar;
-
-        _echoBar.fillAmount = 0;
+        EventSystem.Events.TriggerEchoChargeChanged(_controllerName, 0);
     }
 
     private void SaveHitBulletData(int bulletID, IDamageable target)
@@ -96,7 +84,9 @@ public class EchoManager : MonoBehaviour
     {
         EchoCharge += score;
         EchoCharge = Math.Min(EchoCharge, _maxEchoCharge);
-        _echoBar.fillAmount = EchoCharge / _maxEchoCharge;
+        var fillAmount = EchoCharge / _maxEchoCharge;
+
+        EventSystem.Events.TriggerEchoChargeChanged(_controllerName, fillAmount);
     }
 
     public bool ConsumeEcho(float score)

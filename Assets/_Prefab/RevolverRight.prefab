@@ -8,6 +8,14 @@ PrefabInstance:
     serializedVersion: 3
     m_TransformParent: {fileID: 0}
     m_Modifications:
+    - target: {fileID: 1345172252395639050, guid: 2a0589cbf10e9f943991f1fa7ba61ad1, type: 3}
+      propertyPath: m_Name
+      value: EchoBar
+      objectReference: {fileID: 0}
+    - target: {fileID: 1446401536901285067, guid: 2a0589cbf10e9f943991f1fa7ba61ad1, type: 3}
+      propertyPath: _controllerName
+      value: Right Controller
+      objectReference: {fileID: 0}
     - target: {fileID: 3681184141669113427, guid: 2a0589cbf10e9f943991f1fa7ba61ad1, type: 3}
       propertyPath: m_Name
       value: RevolverRight
@@ -63,6 +71,14 @@ PrefabInstance:
     - target: {fileID: 4061650746155549929, guid: 2a0589cbf10e9f943991f1fa7ba61ad1, type: 3}
       propertyPath: m_LocalEulerAnglesHint.z
       value: 0
+      objectReference: {fileID: 0}
+    - target: {fileID: 6377145902234165895, guid: 2a0589cbf10e9f943991f1fa7ba61ad1, type: 3}
+      propertyPath: m_Name
+      value: RightEchoBar
+      objectReference: {fileID: 0}
+    - target: {fileID: 7862090022720365263, guid: 2a0589cbf10e9f943991f1fa7ba61ad1, type: 3}
+      propertyPath: m_PresetInfoIsWorld
+      value: 1
       objectReference: {fileID: 0}
     m_RemovedComponents: []
     m_RemovedGameObjects: []

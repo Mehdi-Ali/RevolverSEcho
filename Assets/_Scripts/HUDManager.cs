@@ -1,3 +1,4 @@
+using System;
 using System.Collections;
 using System.Collections.Generic;
 using UnityEngine;
@@ -8,18 +9,37 @@ public class HUDManager : MonoBehaviour
     public static HUDManager HUD { get; private set; }
 
     public Image RightEchoBar;
-    public Image LightEchoBar;
+    public Image LeftEchoBar;
 
-    private void Awake()
+    // private void Awake()
+    // {
+    //     if (HUD == null)
+    //     {
+    //         HUD = this;
+    //         DontDestroyOnLoad(gameObject);
+    //     }
+    //     else
+    //     {
+    //         Destroy(gameObject);
+    //     }
+    // }
+
+    void OnEnable()
     {
-        if (HUD == null)
-        {
-            HUD = this;
-            DontDestroyOnLoad(gameObject);
-        }
-        else
-        {
-            Destroy(gameObject);
-        }
+        EventSystem.Events.OnEchoChargeChanged += UpdateEchoCHarge;
+    }
+
+    private void UpdateEchoCHarge(string controllerName, float fillAmount)
+    {
+        if (controllerName == "Right Controller")
+            RightEchoBar.fillAmount = fillAmount;
+
+        else if (controllerName == "Left Controller")
+            LeftEchoBar.fillAmount = fillAmount;
+    }
+
+    void OnDisable()
+    {
+        EventSystem.Events.OnEchoChargeChanged -= UpdateEchoCHarge;
     }
 }
