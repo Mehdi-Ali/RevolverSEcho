@@ -13,6 +13,9 @@ public class DashAbilitySO : Ability
     [SerializeField] private float _dashSpeed;
     [SerializeField] private float _dashDurationSec;
 
+
+    //private 
+
     public override bool ActivateAbility(EchoManager echo)
     {
         if (!base.ActivateAbility(echo))
@@ -25,13 +28,28 @@ public class DashAbilitySO : Ability
 
     IEnumerator Dash()
     {
-        var direction = System.MainCamera.transform.forward;
-        float startTime = Time.time;
+        Vector3 direction;
+        var inputDirection = System.LeftThumbStick.action.ReadValue<Vector2>();
 
+        if (inputDirection.magnitude == 0f)
+            direction = System.MainCamera.transform.forward;
+        else
+        {
+            var direction2D = inputDirection.normalized;
+            float playerYRotation = System.MainCamera.transform.eulerAngles.y;
+            direction = Quaternion.Euler(0, playerYRotation, 0) * new Vector3(direction2D.x, 0, direction2D.y);
+        }
+
+        System.LeftController.smoothMotionEnabled = false;
+
+        float startTime = Time.time;
         while(Time.time < startTime + _dashDurationSec)
         {
             System.controller.SimpleMove(direction * _dashSpeed);
             yield return null;
         }
+
+        System.LeftController.smoothMotionEnabled = true;
+
     }
 }

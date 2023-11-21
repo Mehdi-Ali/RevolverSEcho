@@ -15,5 +15,5 @@ MonoBehaviour:
   level: 1
   Description: 'Dash in the direction head '
   System: {fileID: 0}
-  _dashSpeed: 10
-  _dashDurationSec: 1
+  _dashSpeed: 20
+  _dashDurationSec: 0.25

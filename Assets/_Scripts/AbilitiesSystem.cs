@@ -6,6 +6,8 @@ using EasyButtons;
 using Unity.XR.CoreUtils;
 using UnityEngine;
 using UnityEngine.InputSystem;
+using UnityEngine.XR.Interaction.Toolkit;
+using UnityEngine.XR.Interaction.Toolkit.Samples.StarterAssets;
 
 public class AbilitiesSystem : MonoBehaviour
 {
@@ -25,6 +27,7 @@ public class AbilitiesSystem : MonoBehaviour
     [SerializeField] private InputActionReference _secondLeftAbility;
     [SerializeField] private InputActionReference _thirdLeftAbility;
 
+
     private EchoManager _rightEchoManager;
     private EchoManager _leftEchoManager;
 
@@ -33,6 +36,10 @@ public class AbilitiesSystem : MonoBehaviour
     public XROrigin xROrigin;
     public Camera MainCamera;
     public CharacterController controller;
+    public InputActionReference RightThumbStick;
+    public InputActionReference LeftThumbStick;
+    public ActionBasedControllerManager RightController;
+    public ActionBasedControllerManager LeftController;
 
     private void OnEnable()
     {

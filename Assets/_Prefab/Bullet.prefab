@@ -245,7 +245,7 @@ MonoBehaviour:
   m_Name: 
   m_EditorClassIdentifier: 
   rigidB: {fileID: -7134308962685838794}
-  _bulletSpeed: 100
+  _bulletSpeed: 200
   _bulletDamage: 10
 --- !u!54 &-7134308962685838794
 Rigidbody:
