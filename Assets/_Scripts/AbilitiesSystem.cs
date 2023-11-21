@@ -36,6 +36,8 @@ public class AbilitiesSystem : MonoBehaviour
 
     private void OnEnable()
     {
+        EventSystem.Events.OnEchoManagerStart += GetEchoManager;
+
         _firstRightAbility.action.Enable();
         _firstRightAbility.action.started += StartFirstRightAbility;
         _firstRightAbility.action.canceled += CancelFirstRightAbility;
@@ -48,7 +50,6 @@ public class AbilitiesSystem : MonoBehaviour
     void Start()
     {
         InjectDependency();
-        StartCoroutine(DelayedGetEchoManagers());
     }
 
     [Button]
@@ -66,13 +67,16 @@ public class AbilitiesSystem : MonoBehaviour
 
     }
 
-    private IEnumerator DelayedGetEchoManagers()
+    private void GetEchoManager(string controllerName)
     {
-        // !! make a better other system, probably an event that is trigered after both revolvers are instantiated 
-        yield return new WaitForSeconds(1f);
-        var mangers = FindObjectsOfType<EchoManager>().ToList();
-        _rightEchoManager = mangers.Find(x => x.ControllerName == "Right Controller");
-        _leftEchoManager = mangers.Find(x => x.ControllerName == "Left Controller");
+        if (controllerName == "Right Controller")
+            _rightEchoManager = FindObjectsOfType<EchoManager>()
+                                .FirstOrDefault(manager => 
+                                manager.ControllerName == controllerName);
+        else
+            _leftEchoManager = FindObjectsOfType<EchoManager>()
+                            .FirstOrDefault(manager =>
+                            manager.ControllerName == controllerName);
     }
 
 
@@ -85,6 +89,8 @@ public class AbilitiesSystem : MonoBehaviour
 
     private void OnDisable()
     {
+        EventSystem.Events.OnEchoManagerStart -= GetEchoManager;
+
         _firstRightAbility.action.started -= StartFirstRightAbility;
         _firstRightAbility.action.canceled -= CancelFirstRightAbility;
         _firstRightAbility.action.Disable();

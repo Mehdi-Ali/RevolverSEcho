@@ -12,6 +12,7 @@ public class EventSystem : MonoBehaviour
     public event Action<int, IDamageable> OnBulletHit;
     public event Action<string, float, int> OnEvolutionEnd;
     public event Action<string, float> OnEchoChargeChanged;
+    public event Action<string> OnEchoManagerStart;
 
     private void Awake()
     {
@@ -31,23 +32,29 @@ public class EventSystem : MonoBehaviour
         OnShoot?.Invoke(controllerName, bulletID);
     }
 
-    public void TriggerRecoilEnd(string controllerName)
+    public void TriggerOnRecoilEnd(string controllerName)
     {
         OnRecoilEnd?.Invoke(controllerName);
     }
 
-    public void TriggerBulletHit(int bulletID, IDamageable target)
+    public void TriggerOnBulletHit(int bulletID, IDamageable target)
     {
         OnBulletHit?.Invoke(bulletID, target);
     }
 
-    public void TriggerEvolutionEnd(string controllerName, float Score, int bulletID)
+    public void TriggerOnEvolutionEnd(string controllerName, float Score, int bulletID)
     {
         OnEvolutionEnd?.Invoke(controllerName, Score, bulletID);
     }
 
-    public void TriggerEchoChargeChanged(string controllerName, float fillAmount)
+    public void TriggerOnEchoChargeChanged(string controllerName, float fillAmount)
     {
         OnEchoChargeChanged?.Invoke(controllerName, fillAmount);
+    }
+
+
+    public void TriggerOnEchoManagerStart(string controllerName)
+    {
+        OnEchoManagerStart?.Invoke(controllerName);
     }
 }

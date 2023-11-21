@@ -42,7 +42,7 @@ public class Bullet : MonoBehaviour, IPool
         if (collision.gameObject.TryGetComponent<IDamageable>(out IDamageable target))
         {
             target.TakeDamage(_bulletDamage);
-            EventSystem.Events.TriggerBulletHit(_id, target);
+            EventSystem.Events.TriggerOnBulletHit(_id, target);
         }
 
         _bulletPool.Return(gameObject);

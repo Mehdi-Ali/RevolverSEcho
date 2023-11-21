@@ -71,7 +71,7 @@ public class Weapon : MonoBehaviour
     private void EndShooting(InputAction.CallbackContext context)
     {
         if (EndRecoilAtTriggerRelease)
-            EventSystem.Events.TriggerRecoilEnd(transform.parent.name);
+            EventSystem.Events.TriggerOnRecoilEnd(transform.parent.name);
     }
 
     

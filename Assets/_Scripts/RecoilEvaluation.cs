@@ -63,7 +63,7 @@ public class RecoilEvaluation : MonoBehaviour
 
         FinalScore = PositionScore + RotationScore + VelocityScore;
 
-        EventSystem.Events.TriggerEvolutionEnd(_controllerName, FinalScore, id);
+        EventSystem.Events.TriggerOnEvolutionEnd(_controllerName, FinalScore, id);
     }
 
     void OnDisable()

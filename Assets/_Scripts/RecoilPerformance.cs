@@ -97,7 +97,7 @@ public class RecoilPerformance : MonoBehaviour
         _deltaPos = controllerTrns.position - _deltaPos;
         _deltaRot = Quaternion.Angle(_rotation, controllerTrns.rotation);
         UpdateFinalEvaluationStats();
-        EventSystem.Events.TriggerRecoilEnd(_controller.name);
+        EventSystem.Events.TriggerOnRecoilEnd(_controller.name);
     }
 
     private void UpdateFinalEvaluationStats()

@@ -15,7 +15,7 @@ public class Ability : ScriptableObject
 
     public virtual bool ActivateAbility(EchoManager echo)
     {
-        if(echo.ConsumeEcho(level))
+        if(!echo.ConsumeEcho(level))
         {
             Debug.Log("not enough charges, perform a better recoil!!!");
             return false;
@@ -26,7 +26,7 @@ public class Ability : ScriptableObject
 
     public virtual void CancelAbility()
     {
-        Debug.Log("ab");
+        //Debug.Log("CancelAbility");
     }
 
 }

@@ -8,8 +8,9 @@ using UnityEngine.UI;
 public class EchoManager : MonoBehaviour
 {
     [SerializeField] private float _echoDamage;
+    [SerializeField] private float _initialEchoCharge = 3f;
+    [SerializeField] private float _echoCharge;
     [SerializeField] private int _maxEchoCharge = 10;
-    [SerializeField] private float EchoCharge;
     public string ControllerName;
 
     private List<BulletData> _landedBullets;
@@ -27,7 +28,10 @@ public class EchoManager : MonoBehaviour
         _landedBullets = new();
         _pendingEvaluations = new Dictionary<int, float>();
 
-        EventSystem.Events.TriggerEchoChargeChanged(ControllerName, 0);
+        _echoCharge = _initialEchoCharge;
+        EventSystem.Events.TriggerOnEchoChargeChanged(ControllerName, _echoCharge/_maxEchoCharge);
+
+        EventSystem.Events.TriggerOnEchoManagerStart(ControllerName);
     }
 
     private void SaveHitBulletData(int bulletID, IDamageable target)
@@ -78,22 +82,26 @@ public class EchoManager : MonoBehaviour
         bullet._bulletTarget?.TakeDamage(damage, true);
     }
 
-    public void ChargeEcho(float score)
+    private void ChargeEcho(float score)
     {
-        EchoCharge += score;
-        EchoCharge = Math.Min(EchoCharge, _maxEchoCharge);
-        var fillAmount = EchoCharge / _maxEchoCharge;
+        _echoCharge += score;
+        _echoCharge = Math.Min(_echoCharge, _maxEchoCharge);
+        var fillAmount = _echoCharge / _maxEchoCharge;
 
-        EventSystem.Events.TriggerEchoChargeChanged(ControllerName, fillAmount);
+        EventSystem.Events.TriggerOnEchoChargeChanged(ControllerName, fillAmount);
     }
 
     public bool ConsumeEcho(float consumedCharges)
     {
-        var newEchoCharge = EchoCharge - consumedCharges;
+        var newEchoCharge = _echoCharge - consumedCharges;
         if (newEchoCharge < 0)
             return false;
 
-        EchoCharge = newEchoCharge;
+        _echoCharge = newEchoCharge;
+        
+        var fillAmount = _echoCharge / _maxEchoCharge;
+        EventSystem.Events.TriggerOnEchoChargeChanged(ControllerName, fillAmount);
+
         return true;
     }
 
