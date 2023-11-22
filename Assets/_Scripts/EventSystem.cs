@@ -9,7 +9,7 @@ public class EventSystem : MonoBehaviour
 
     public event Action<string, int> OnShoot;
     public event Action<string> OnRecoilEnd;
-    public event Action<int, IDamageable> OnBulletHit;
+    public event Action<IDamageable, Vector3, int> OnBulletHit;
     public event Action<string, float, int> OnEvolutionEnd;
     public event Action<string, float> OnEchoChargeChanged;
     public event Action<string> OnEchoManagerStart;
@@ -37,9 +37,9 @@ public class EventSystem : MonoBehaviour
         OnRecoilEnd?.Invoke(controllerName);
     }
 
-    public void TriggerOnBulletHit(int bulletID, IDamageable target)
+    public void TriggerOnBulletHit(int bulletID, IDamageable target, Vector3 contactPoint)
     {
-        OnBulletHit?.Invoke(bulletID, target);
+        OnBulletHit?.Invoke(target, contactPoint, bulletID);
     }
 
     public void TriggerOnEvolutionEnd(string controllerName, float Score, int bulletID)

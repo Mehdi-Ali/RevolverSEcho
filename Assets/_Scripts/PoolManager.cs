@@ -10,6 +10,7 @@ public class PoolManager : MonoBehaviour
     public PoolSystem Bullet;
     public PoolSystem BulletSplash;
     public PoolSystem DamagePopup;
+    public PoolSystem EchoDamageVFX;
 
     private void Awake()
     {

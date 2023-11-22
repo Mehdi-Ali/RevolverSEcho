@@ -7,6 +7,8 @@ using UnityEngine;
 public class Bullet : MonoBehaviour, IPool
 {
     [SerializeField] private Rigidbody rigidB;
+
+    // move to stat SO
     [SerializeField] private float _bulletSpeed = 100;
     [SerializeField] private float _bulletDamage = 20;
 
@@ -37,12 +39,13 @@ public class Bullet : MonoBehaviour, IPool
 
     void OnCollisionEnter(Collision collision)
     {
-        EnableSplash(collision.GetContact(0).point);
+        var contactPoint = collision.GetContact(0).point;
+        EnableSplash(contactPoint);
 
         if (collision.gameObject.TryGetComponent<IDamageable>(out IDamageable target))
         {
-            target.TakeDamage(_bulletDamage);
-            EventSystem.Events.TriggerOnBulletHit(_id, target);
+            target.TakeDamage(_bulletDamage, contactPoint, _id);
+            EventSystem.Events.TriggerOnBulletHit(_id, target, contactPoint);
         }
 
         _bulletPool.Return(gameObject);

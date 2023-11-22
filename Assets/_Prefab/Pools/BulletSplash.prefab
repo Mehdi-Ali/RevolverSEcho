@@ -130,8 +130,10 @@ MonoBehaviour:
   m_Script: {fileID: 11500000, guid: ba81c043dd9fbe74f9de0af7145fa4bb, type: 3}
   m_Name: 
   m_EditorClassIdentifier: 
-  _bulletSplashVFX: {fileID: 5540809581059960893}
-  _splashSound: {fileID: 8300000, guid: 2cf228cb59b6e0b468754534142b51f5, type: 3}
+  _position: 1
+  _rotation: 1
+  _particleSystem: {fileID: 5540809581059960893}
+  _audioClip: {fileID: 8300000, guid: 2cf228cb59b6e0b468754534142b51f5, type: 3}
 --- !u!82 &174572700321360552
 AudioSource:
   m_ObjectHideFlags: 0

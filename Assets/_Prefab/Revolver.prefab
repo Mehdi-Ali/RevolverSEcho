@@ -589,6 +589,7 @@ GameObject:
   - component: {fileID: 398423426651598418}
   - component: {fileID: 3747861721120114036}
   - component: {fileID: -104302905892500812}
+  - component: {fileID: 4785263616957647985}
   - component: {fileID: 1149044904710785868}
   - component: {fileID: 2888721650253217670}
   - component: {fileID: 6917299753527231469}
@@ -685,6 +686,18 @@ MonoBehaviour:
   _echoCharge: 0
   _maxEchoCharge: 10
   ControllerName: 
+--- !u!114 &4785263616957647985
+MonoBehaviour:
+  m_ObjectHideFlags: 0
+  m_CorrespondingSourceObject: {fileID: 0}
+  m_PrefabInstance: {fileID: 0}
+  m_PrefabAsset: {fileID: 0}
+  m_GameObject: {fileID: 3681184141669113427}
+  m_Enabled: 1
+  m_EditorHideFlags: 0
+  m_Script: {fileID: 11500000, guid: 2adb6c29af24b8e47a3a8d0ff859ba6b, type: 3}
+  m_Name: 
+  m_EditorClassIdentifier: 
 --- !u!33 &1149044904710785868
 MeshFilter:
   m_ObjectHideFlags: 0

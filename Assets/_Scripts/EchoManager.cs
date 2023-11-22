@@ -34,9 +34,9 @@ public class EchoManager : MonoBehaviour
         EventSystem.Events.TriggerOnEchoManagerStart(ControllerName);
     }
 
-    private void SaveHitBulletData(int bulletID, IDamageable target)
+    private void SaveHitBulletData(IDamageable target, Vector3 contactPoint, int bulletID)
     {
-        BulletData bulletData = new(bulletID, target);
+        BulletData bulletData = new(bulletID, target, contactPoint);
         _landedBullets.Add(bulletData);
         StartCoroutine(RemoveBullet(bulletData, 2f));
 
@@ -63,8 +63,8 @@ public class EchoManager : MonoBehaviour
         if (score == 0)
             return;
 
-        var bullet = _landedBullets.Find(bullet => bullet._bulletID == bulletID);
-        if (bullet._bulletTarget == null)
+        var bullet = _landedBullets.Find(bullet => bullet.ID == bulletID);
+        if (bullet.Target == null)
         {
             _pendingEvaluations.Add(bulletID, score);
             StartCoroutine(RemovePendingEvaluation(bulletID, 2f));
@@ -79,7 +79,7 @@ public class EchoManager : MonoBehaviour
         _landedBullets.Remove(bullet);
         var damage = score * _echoDamage;
         ChargeEcho(score);
-        bullet._bulletTarget?.TakeDamage(damage, true);
+        bullet.Target?.TakeDamage(damage, bullet.ContactPoint, bullet.ID, true);
     }
 
     private void ChargeEcho(float score)
@@ -122,12 +122,14 @@ public class EchoManager : MonoBehaviour
 
 public struct BulletData
 {
-    public int _bulletID;
-    public IDamageable _bulletTarget;
+    public int ID;
+    public IDamageable Target;
+    public Vector3 ContactPoint;
 
-    public BulletData(int bulletID, IDamageable bulletTarget)
+    public BulletData(int bulletID, IDamageable bulletTarget, Vector3 bulletContactPoint)
     {
-        _bulletID = bulletID;
-        _bulletTarget = bulletTarget;
+        ID = bulletID;
+        Target = bulletTarget;
+        ContactPoint = bulletContactPoint;
     }
 }
