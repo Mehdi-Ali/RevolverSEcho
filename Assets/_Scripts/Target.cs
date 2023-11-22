@@ -57,7 +57,7 @@ public class Target : MonoBehaviour, IDamageable
     {
         // maybe randomize rotation?
         var vfxInstance = _VFXPool.Get(contactPoint, transform.rotation);
-        vfxInstance.transform.localScale = math.min((damage / 15f), 0.8f) * Vector3.one;
+        vfxInstance.transform.localScale = math.min((damage / 20f), 1f) * Vector3.one;
         _VFXPool.Return(vfxInstance, 2f);
     }
 
