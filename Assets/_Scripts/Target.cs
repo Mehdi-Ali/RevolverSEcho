@@ -1,16 +1,14 @@
 using System;
-using System.Collections;
-using System.Collections.Generic;
-using System.Data.Common;
 using Unity.Mathematics;
 using UnityEngine;
 
-public class Target : MonoBehaviour, IDamageable
+public class DamageableTarget : MonoBehaviour
 {
-    [SerializeField] float _health = 100f;
+    [SerializeField] private float _health = 100f;
+    [SerializeField] private DeformableTarget deformableTarget;
+    public SplashType SplashType;
     private PoolSystem _PopupPool;
     private PoolSystem _VFXPool;
-
 
 
     void Start()
@@ -21,17 +19,20 @@ public class Target : MonoBehaviour, IDamageable
 
     public void TakeDamage(float damage, Vector3 contactPoint,  int id = -1, bool isEcho = false)
     {
+        if (deformableTarget != null)
+            deformableTarget.DamageTarget();
+            
         if (this == null) return;
 
         _health -= damage;
         _health = Math.Max(_health, 0);
 
         if (!isEcho)
-            DisplayNumbers(damage);
+            DisplayNumbers(damage, contactPoint);
             
         else 
         {
-            DisplayNumbers(damage, isEcho);
+            DisplayNumbers(damage, contactPoint, isEcho);
             StartEchoVFX(damage, contactPoint);
         }
 
@@ -40,7 +41,7 @@ public class Target : MonoBehaviour, IDamageable
     }
 
 
-    private void DisplayNumbers(float damage, bool isEcho = false)
+    private void DisplayNumbers(float damage, Vector3 contactPoint, bool isEcho = false)
     {
         // we can make the damage types indexed as int and passed here and make a switch case
         Quaternion textInfoAsQuaternion;
@@ -50,13 +51,13 @@ public class Target : MonoBehaviour, IDamageable
         else
             textInfoAsQuaternion = new Quaternion(damage, 0f, 0f, 0f);
 
-        var damagePopup = _PopupPool.Get(transform.position, textInfoAsQuaternion);
+        var damagePopup = _PopupPool.Get(transform.TransformPoint(contactPoint), textInfoAsQuaternion);
     }
 
     private void StartEchoVFX(float damage, Vector3 contactPoint)
     {
         // maybe randomize rotation?
-        var vfxInstance = _VFXPool.Get(contactPoint, transform.rotation);
+        var vfxInstance = _VFXPool.Get(transform.TransformPoint(contactPoint), transform.rotation);
         vfxInstance.transform.localScale = math.min((damage / 20f), 1f) * Vector3.one;
         _VFXPool.Return(vfxInstance, 2f);
     }
@@ -68,8 +69,12 @@ public class Target : MonoBehaviour, IDamageable
     }
 }
 
-public interface IDamageable
+public enum SplashType
 {
-    public void TakeDamage(float damage, Vector3 contactPoint, int id = -1, bool isEcho = false);
-    public void Die();
+    Default,
+    NoSplash,
+    Metal,
+    Wood,
+    ElectronicEnemy,
+    OrganicEnemy
 }

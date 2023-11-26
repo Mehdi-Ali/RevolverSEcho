@@ -34,7 +34,7 @@ public class EchoManager : MonoBehaviour
         EventSystem.Events.TriggerOnEchoManagerStart(ControllerName);
     }
 
-    private void SaveHitBulletData(IDamageable target, Vector3 contactPoint, int bulletID)
+    private void SaveHitBulletData(DamageableTarget target, Vector3 contactPoint, int bulletID)
     {
         BulletData bulletData = new(bulletID, target, contactPoint);
         _landedBullets.Add(bulletData);
@@ -123,10 +123,10 @@ public class EchoManager : MonoBehaviour
 public struct BulletData
 {
     public int ID;
-    public IDamageable Target;
+    public DamageableTarget Target;
     public Vector3 ContactPoint;
 
-    public BulletData(int bulletID, IDamageable bulletTarget, Vector3 bulletContactPoint)
+    public BulletData(int bulletID, DamageableTarget bulletTarget, Vector3 bulletContactPoint)
     {
         ID = bulletID;
         Target = bulletTarget;

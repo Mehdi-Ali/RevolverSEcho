@@ -40,20 +40,40 @@ public class Bullet : MonoBehaviour, IPool
     void OnCollisionEnter(Collision collision)
     {
         var contactPoint = collision.GetContact(0).point;
-        EnableSplash(contactPoint);
 
-        if (collision.gameObject.TryGetComponent<IDamageable>(out IDamageable target))
+        if (collision.gameObject.TryGetComponent<DamageableTarget>(out DamageableTarget target))
         {
+            contactPoint = target.transform.InverseTransformPoint(contactPoint);
             target.TakeDamage(_bulletDamage, contactPoint, _id);
             EventSystem.Events.TriggerOnBulletHit(_id, target, contactPoint);
+            EnableSplash(contactPoint, target.SplashType);
+
         }
+        else
+            EnableSplash(contactPoint);
 
         _bulletPool.Return(gameObject);
     }
 
 
-    private void EnableSplash(Vector3 splashPosition)
+    private void EnableSplash(Vector3 splashPosition, SplashType splashTyp = SplashType.Default)
     {
+        switch (splashTyp)
+        {
+            case SplashType.Default:
+                break;
+            case SplashType.NoSplash:
+                return;
+            case SplashType.Metal:
+                break;
+            case SplashType.Wood:
+                break;
+            case SplashType.ElectronicEnemy:
+                break;
+            case SplashType.OrganicEnemy:
+                break;
+        }
+        // todo I need to make the splash parent to the object: (modify the GET to accept Transforms parents)
         var splash = _bulletSplashPool.Get(splashPosition, transform.rotation);
         _bulletSplashPool.Return(splash, 7.5f);
     }

@@ -1,6 +1,7 @@
 using System;
 using System.Collections;
 using System.Collections.Generic;
+using Unity.Mathematics;
 using UnityEngine;
 using UnityEngine.UI;
 
@@ -59,7 +60,7 @@ public class Laser : MonoBehaviour
             _reticle = Reticles.Instance.LeftReticle;
     }
 
-    void Update()
+    void LateUpdate()
     {
         _lineRender.SetPosition(0, transform.position);
         Vector3 endPoint;
@@ -79,7 +80,7 @@ public class Laser : MonoBehaviour
     private void HandleReticle(Vector3 endPoint)
     {
         var reticleTrans = _reticle.transform;
-        var distance = Vector3.Distance(endPoint, _mainCamera.transform.position);
+        var distance = math.max(Vector3.Distance(endPoint, _mainCamera.transform.position), 1.2f);
         var scale = _reticleSize * distance * (Vector3.up + Vector3.right) + Vector3.forward;
 
         reticleTrans.position = endPoint;
