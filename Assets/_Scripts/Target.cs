@@ -69,6 +69,7 @@ public class DamageableTarget : MonoBehaviour
         if (direction == default)
         {
             direction = UnityEngine.Random.insideUnitSphere.normalized;
+            direction.y = math.abs(direction.y);
         }
         _rigidbody.AddForce(magnitude * direction);
     }
