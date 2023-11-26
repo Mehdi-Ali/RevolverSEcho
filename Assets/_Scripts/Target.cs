@@ -7,6 +7,7 @@ public class DamageableTarget : MonoBehaviour
     [SerializeField] private float _health = 100f;
     [SerializeField] private DeformableTarget deformableTarget;
     public SplashType SplashType;
+    private Rigidbody _rigidbody;
     private PoolSystem _PopupPool;
     private PoolSystem _VFXPool;
 
@@ -15,6 +16,7 @@ public class DamageableTarget : MonoBehaviour
     {
         _PopupPool = PoolManager.PoolInst.DamagePopup;
         _VFXPool = PoolManager.PoolInst.EchoDamageVFX;
+        _rigidbody = GetComponent<Rigidbody>();
     }
 
     public void TakeDamage(float damage, Vector3 contactPoint,  int id = -1, bool isEcho = false)
@@ -56,10 +58,19 @@ public class DamageableTarget : MonoBehaviour
 
     private void StartEchoVFX(float damage, Vector3 contactPoint)
     {
-        // maybe randomize rotation?
+        // todo randomize rotation?
         var vfxInstance = _VFXPool.Get(transform.TransformPoint(contactPoint), transform.rotation);
         vfxInstance.transform.localScale = math.min((damage / 20f), 1f) * Vector3.one;
         _VFXPool.Return(vfxInstance, 2f);
+    }
+
+    public void ApplyForce(float magnitude, Vector3 direction = default)
+    {
+        if (direction == default)
+        {
+            direction = UnityEngine.Random.insideUnitSphere.normalized;
+        }
+        _rigidbody.AddForce(magnitude * direction);
     }
 
     public void Die()

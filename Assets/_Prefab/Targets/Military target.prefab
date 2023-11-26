@@ -49,6 +49,8 @@ MonoBehaviour:
   m_Name: 
   m_EditorClassIdentifier: 
   _health: 250
+  deformableTarget: {fileID: 0}
+  SplashType: 0
 --- !u!33 &33848685573292062
 MeshFilter:
   m_ObjectHideFlags: 0
