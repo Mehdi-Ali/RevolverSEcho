@@ -1,6 +1,6 @@
 using UnityEngine;
 
-public abstract class BaseState : ScriptableObject
+public abstract class BaseState : MonoBehaviour
 {
     protected BaseEnemy Enemy { get; private set; }
 
