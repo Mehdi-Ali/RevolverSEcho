@@ -5,7 +5,8 @@ using UnityEngine;
 public class DamageableTarget : MonoBehaviour
 {
     [SerializeField] private float _health = 100f;
-    [SerializeField] private DeformableTarget deformableTarget;
+    [SerializeField] private DeformableTarget _deformableTarget;
+    [SerializeField] private EnemyPhysics _enemyPhysics;
     public SplashType SplashType;
     private Rigidbody _rigidbody;
     private PoolSystem _PopupPool;
@@ -21,8 +22,8 @@ public class DamageableTarget : MonoBehaviour
 
     public void TakeDamage(float damage, Vector3 contactPoint,  int id = -1, bool isEcho = false)
     {
-        if (deformableTarget != null)
-            deformableTarget.DamageTarget();
+        if (_deformableTarget != null)
+            _deformableTarget.DamageTarget();
             
         if (this == null) return;
 
@@ -36,6 +37,9 @@ public class DamageableTarget : MonoBehaviour
         {
             DisplayNumbers(damage, contactPoint, isEcho);
             StartEchoVFX(damage, contactPoint);
+
+            if (_enemyPhysics != null)
+                _enemyPhysics.TookDamage(damage);
         }
 
         if (_health <= 0)
