@@ -100,9 +100,11 @@ GameObject:
   serializedVersion: 6
   m_Component:
   - component: {fileID: 2058370156643471001}
+  - component: {fileID: 2317073843548240216}
   - component: {fileID: 6595878865888720032}
   - component: {fileID: 2827387294571801434}
   - component: {fileID: 4434785292818063252}
+  - component: {fileID: 1392561908828415672}
   m_Layer: 0
   m_Name: Drone
   m_TagString: Untagged
@@ -127,6 +129,22 @@ Transform:
   - {fileID: 3360670469289295398}
   m_Father: {fileID: 0}
   m_LocalEulerAnglesHint: {x: 0, y: 0, z: 0}
+--- !u!114 &2317073843548240216
+MonoBehaviour:
+  m_ObjectHideFlags: 0
+  m_CorrespondingSourceObject: {fileID: 0}
+  m_PrefabInstance: {fileID: 0}
+  m_PrefabAsset: {fileID: 0}
+  m_GameObject: {fileID: 975877825138846191}
+  m_Enabled: 1
+  m_EditorHideFlags: 0
+  m_Script: {fileID: 11500000, guid: 526fb09eb3e62724eb8ba14536ebc3f1, type: 3}
+  m_Name: 
+  m_EditorClassIdentifier: 
+  _currentState: {fileID: 11400000, guid: 0015528ee9fce0942ab062b9570a67ef, type: 2}
+  _states:
+  - {fileID: 11400000, guid: 0015528ee9fce0942ab062b9570a67ef, type: 2}
+  NavAgent: {fileID: 1392561908828415672}
 --- !u!114 &6595878865888720032
 MonoBehaviour:
   m_ObjectHideFlags: 0
@@ -139,7 +157,6 @@ MonoBehaviour:
   m_Script: {fileID: 11500000, guid: 1974f4189608dc949aec2f20fb1e26e4, type: 3}
   m_Name: 
   m_EditorClassIdentifier: 
-  _rest: {fileID: 0}
   _stabilizationTime: 2
 --- !u!114 &2827387294571801434
 MonoBehaviour:
@@ -184,6 +201,28 @@ Rigidbody:
   m_Interpolate: 1
   m_Constraints: 0
   m_CollisionDetection: 2
+--- !u!195 &1392561908828415672
+NavMeshAgent:
+  m_ObjectHideFlags: 0
+  m_CorrespondingSourceObject: {fileID: 0}
+  m_PrefabInstance: {fileID: 0}
+  m_PrefabAsset: {fileID: 0}
+  m_GameObject: {fileID: 975877825138846191}
+  m_Enabled: 1
+  m_AgentTypeID: -1372625422
+  m_Radius: 0.5
+  m_Speed: 3.5
+  m_Acceleration: 8
+  avoidancePriority: 50
+  m_AngularSpeed: 120
+  m_StoppingDistance: 0
+  m_AutoTraverseOffMeshLink: 1
+  m_AutoBraking: 1
+  m_AutoRepath: 1
+  m_Height: 2
+  m_BaseOffset: 0
+  m_WalkableMask: 4294967295
+  m_ObstacleAvoidanceType: 4
 --- !u!1 &2332243232374855744
 GameObject:
   m_ObjectHideFlags: 0
