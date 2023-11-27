@@ -6,7 +6,6 @@ using UnityEngine;
 [RequireComponent(typeof(Rigidbody))]
 public class EnemyPhysics : MonoBehaviour
 {
-    [SerializeField] private Transform _rest;
     [SerializeField] private float _stabilizationTime = 1.5f;
     private Rigidbody _rb;
     private bool _stopStabilization;
@@ -37,8 +36,13 @@ public class EnemyPhysics : MonoBehaviour
         {
             float progress = t / duration;
 
+            // the target will depend on the machine state ( player, 0, next point...)
+            //var target = Quaternion.identity; // reset to 0.
+            var target = Quaternion.LookRotation(Camera.main.transform.position - _rb.position);
+
+            _rb.rotation = Quaternion.Lerp(_rb.rotation, target, progress);
             // _rb.position = Vector3.Lerp(_rb.position, _rest.transform.position, progress);
-            _rb.rotation = Quaternion.Lerp(_rb.rotation, Quaternion.identity, progress);
+
 
             _rb.velocity = Vector3.Lerp(_rb.velocity, Vector3.zero, progress);
             _rb.angularVelocity = Vector3.Lerp(_rb.angularVelocity, Vector3.zero, progress);
