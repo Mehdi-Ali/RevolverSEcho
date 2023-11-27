@@ -1,4 +1,3 @@
-using System;
 using Unity.Mathematics;
 using UnityEngine;
 
@@ -28,7 +27,7 @@ public class DamageableTarget : MonoBehaviour
         if (this == null) return;
 
         _health -= damage;
-        _health = Math.Max(_health, 0);
+        _health = math.max(_health, 0);
 
         if (!isEcho)
             DisplayNumbers(damage, contactPoint);
@@ -49,6 +48,9 @@ public class DamageableTarget : MonoBehaviour
 
     private void DisplayNumbers(float damage, Vector3 contactPoint, bool isEcho = false)
     {
+        if (damage == 0)
+            return;
+        
         // we can make the damage types indexed as int and passed here and make a switch case
         Quaternion textInfoAsQuaternion;
         if (isEcho)
@@ -68,14 +70,23 @@ public class DamageableTarget : MonoBehaviour
         _VFXPool.Return(vfxInstance, 2f);
     }
 
-    public void ApplyForce(float magnitude, Vector3 direction = default)
+    public void ApplyForce(float magnitude, Vector3 contactPoint = default)
     {
-        if (direction == default)
+        Vector3 direction;
+        if (contactPoint == default)
         {
             direction = UnityEngine.Random.insideUnitSphere.normalized;
             direction.y = math.abs(direction.y);
         }
+        else
+            direction = (transform.position - contactPoint).normalized;
+
         _rigidbody.AddForce(magnitude * direction);
+
+        var randomTorque = new Vector3(    UnityEngine.Random.Range(-1f, 1f),
+                                        UnityEngine.Random.Range(-1f, 1f),
+                                        UnityEngine.Random.Range(-1f, 1f)).normalized;
+        _rigidbody.AddTorque(randomTorque * magnitude);
     }
 
     public void Die()

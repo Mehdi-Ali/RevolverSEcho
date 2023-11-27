@@ -694,7 +694,7 @@ MeshCollider:
   m_PrefabInstance: {fileID: 0}
   m_PrefabAsset: {fileID: 0}
   m_GameObject: {fileID: 295424071}
-  m_Material: {fileID: 0}
+  m_Material: {fileID: 13400000, guid: bcfbbca717fbdc548a0b15a53c30fe02, type: 2}
   m_IncludeLayers:
     serializedVersion: 2
     m_Bits: 0
@@ -708,7 +708,7 @@ MeshCollider:
   serializedVersion: 5
   m_Convex: 0
   m_CookingOptions: 30
-  m_Mesh: {fileID: 1589599998}
+  m_Mesh: {fileID: 1559194606}
 --- !u!33 &295424073
 MeshFilter:
   m_ObjectHideFlags: 10
@@ -716,7 +716,7 @@ MeshFilter:
   m_PrefabInstance: {fileID: 0}
   m_PrefabAsset: {fileID: 0}
   m_GameObject: {fileID: 295424071}
-  m_Mesh: {fileID: 1589599998}
+  m_Mesh: {fileID: 1559194606}
 --- !u!23 &295424074
 MeshRenderer:
   m_ObjectHideFlags: 0
@@ -750,7 +750,7 @@ MeshRenderer:
   m_IgnoreNormalsForChartDetection: 0
   m_ImportantGI: 0
   m_StitchLightmapSeams: 1
-  m_SelectedEditorRenderState: 2
+  m_SelectedEditorRenderState: 3
   m_MinimumChartSize: 4
   m_AutoUVMaxDistance: 0.5
   m_AutoUVMaxAngle: 89
@@ -16566,8 +16566,8 @@ MonoBehaviour:
     m_AreaError: 15
   m_PreserveMeshAssetOnDestroy: 0
   assetGuid: 
-  m_Mesh: {fileID: 1589599998}
-  m_VersionIndex: 5626
+  m_Mesh: {fileID: 1559194606}
+  m_VersionIndex: 5638
   m_IsSelectable: 1
   m_SelectedFaces: 
   m_SelectedEdges: []
@@ -18221,13 +18221,13 @@ Transform:
   m_Children: []
   m_Father: {fileID: 116506179}
   m_LocalEulerAnglesHint: {x: 0, y: 0, z: 0}
---- !u!43 &1589599998
+--- !u!43 &1559194606
 Mesh:
   m_ObjectHideFlags: 0
   m_CorrespondingSourceObject: {fileID: 0}
   m_PrefabInstance: {fileID: 0}
   m_PrefabAsset: {fileID: 0}
-  m_Name: pb_Mesh-294154
+  m_Name: pb_Mesh33120
   serializedVersion: 11
   m_SubMeshes:
   - serializedVersion: 2

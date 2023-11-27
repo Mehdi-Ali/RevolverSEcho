@@ -11,7 +11,7 @@ public class EchoManager : MonoBehaviour
     [SerializeField] private float _initialEchoCharge = 3f;
     [SerializeField] private float _echoCharge;
     [SerializeField] private int _maxEchoCharge = 10;
-    [SerializeField] private float _forceFactor = 5f;
+    [SerializeField] private float _echoForceFactor = 5f;
     public string ControllerName;
 
     private List<BulletData> _landedBullets;
@@ -61,9 +61,6 @@ public class EchoManager : MonoBehaviour
         if (controllerName != ControllerName)
             return;
         
-        if (score == 0)
-            return;
-
         var bullet = _landedBullets.Find(bullet => bullet.ID == bulletID);
         if (bullet.Target == null)
         {
@@ -85,7 +82,7 @@ public class EchoManager : MonoBehaviour
             return;
 
         bullet.Target.TakeDamage(damage, bullet.ContactPoint, bullet.ID, true);
-        bullet.Target.ApplyForce(damage * _forceFactor);
+        bullet.Target.ApplyForce(damage * _echoForceFactor, bullet.ContactPoint);
     }
 
     private void ChargeEcho(float score)

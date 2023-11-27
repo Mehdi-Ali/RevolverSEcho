@@ -9,6 +9,7 @@ public class EnemyPhysics : MonoBehaviour
     [SerializeField] private Transform _rest;
     [SerializeField] private float _stabilizationTime = 1.5f;
     private Rigidbody _rb;
+    private bool _stopStabilization;
 
     void Start()
     {
@@ -18,6 +19,7 @@ public class EnemyPhysics : MonoBehaviour
 
     public void TookDamage(float damage)
     {
+        _stopStabilization = true;
         StartCoroutine(Stabilize(damage / 20f));
     }
 
@@ -30,6 +32,7 @@ public class EnemyPhysics : MonoBehaviour
 
     IEnumerator StabilizeOverTime(float duration)
     {
+        _stopStabilization = false;
         for (float t = 0; t < duration; t += Time.deltaTime)
         {
             float progress = t / duration;
@@ -40,6 +43,9 @@ public class EnemyPhysics : MonoBehaviour
             _rb.velocity = Vector3.Lerp(_rb.velocity, Vector3.zero, progress);
             _rb.angularVelocity = Vector3.Lerp(_rb.angularVelocity, Vector3.zero, progress);
 
+            if (_stopStabilization)
+                break;
+            
             yield return null;
         }
     }
