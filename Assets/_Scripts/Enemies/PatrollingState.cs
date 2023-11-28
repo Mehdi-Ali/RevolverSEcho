@@ -1,6 +1,7 @@
 using System.Collections;
 using System.Collections.Generic;
 using System.Threading.Tasks;
+using Unity.VisualScripting;
 using UnityEngine;
 using UnityEngine.AI;
 
@@ -14,6 +15,7 @@ public class PatrollingState : BaseState
     [SerializeField] private float _rotationSpeed = 300f;
     [SerializeField] private float _minRange = 5f;
     [SerializeField] private float _maxRange = 10.0f;
+    [SerializeField] private float _transitionTime = 2f;
     [SerializeField] private float _droneMinimalAltitude = 0.50f; // may should getthose from the map it self 
     [SerializeField] private float _droneNormalAltitude = 3f; // may should getthose from the map it self 
     [SerializeField] private Transform _altitudeFree;
@@ -25,7 +27,6 @@ public class PatrollingState : BaseState
     private float _timer;
     private float _startingAltitude;
     private float _altitudeToTravel;
-    private float _velocity;
     private bool _isInPause;
     private Vector3 _roamingPos;
 
@@ -51,39 +52,46 @@ public class PatrollingState : BaseState
             _altitudeToTravel = _roamingPos.y - _startingAltitude;
             Enemy.NavAgent.SetDestination(_roamingPos);
 
+            float transitionTime = 2 * Enemy.NavAgent.remainingDistance / Enemy.NavAgent.speed;
+            StartCoroutine(AltitudeTransition(transitionTime));
+
             _timer = 0;
-            _velocity = 0.0f;
             _isInPause = false;
         }
 
         if (_isInPause)
             return;
-        
-        if (_altitudeToTravel != 0)
-        {
-            float totalDistance = Vector3.Distance(GetDronePosition(), _roamingPos);
-            float remainingDistance = Enemy.NavAgent.remainingDistance;
-            float progress = (totalDistance - remainingDistance) / totalDistance;
-
-            var calculatedAltitude = Mathf.Lerp(_startingAltitude, _roamingPos.y, progress);
-
-            calculatedAltitude = Mathf.SmoothDamp(_altitudeFree.localPosition.y, calculatedAltitude, ref _velocity, 0.3f);
-
-            _altitudeFree.localPosition = new Vector3(_altitudeFree.localPosition.x,
-                                                        calculatedAltitude,
-                                                        _altitudeFree.localPosition.z);
-        }
 
 
-        
 
-        if (Vector3.Distance(GetDronePosition(), _roamingPos) < _stopPatrollingDistance)
+        if (Vector3.Distance(GetDronePosition(), _roamingPos) <= _stopPatrollingDistance)
         {
             _isInPause = true;
             StopRoaming();
         }
     }
 
+    private IEnumerator AltitudeTransition(float transitionTime)
+    {
+        if (transitionTime == 0)
+            yield break;
+
+        float progress = 0;
+
+        while (progress < 1)
+        {
+            progress += Time.deltaTime / transitionTime;
+            progress = Mathf.Min(1, progress);
+            Debug.Log(progress);
+            var calculatedAltitude = Mathf.Lerp(_startingAltitude, _roamingPos.y, progress);
+
+            _altitudeFree.localPosition = new Vector3(_altitudeFree.localPosition.x,
+                                                        calculatedAltitude,
+                                                        _altitudeFree.localPosition.z);
+
+            yield return null;
+        }
+    }
 
     private Vector3 GetRandomPosition(bool inNavMeshBound = false)
     {

@@ -237,7 +237,7 @@ NavMeshAgent:
   m_Acceleration: 8
   avoidancePriority: 50
   m_AngularSpeed: 120
-  m_StoppingDistance: 0
+  m_StoppingDistance: 0.1
   m_AutoTraverseOffMeshLink: 1
   m_AutoBraking: 1
   m_AutoRepath: 1
@@ -545,7 +545,7 @@ MonoBehaviour:
   _patrollingSpeed: 10
   _maxRoamingPause: 5
   _minRoamingPause: 2.5
-  _stopPatrollingDistance: 0.6
+  _stopPatrollingDistance: 0.1
   _rotationSpeed: 300
   _minRange: 5
   _maxRange: 10
