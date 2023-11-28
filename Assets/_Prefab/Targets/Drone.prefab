@@ -9,6 +9,7 @@ GameObject:
   serializedVersion: 6
   m_Component:
   - component: {fileID: 3360670469289295398}
+  - component: {fileID: 4319280698800509295}
   m_Layer: 0
   m_Name: PhysicColliders
   m_TagString: Untagged
@@ -36,6 +37,27 @@ Transform:
   - {fileID: 8049767507758230067}
   m_Father: {fileID: 8733816100949317278}
   m_LocalEulerAnglesHint: {x: 5.745, y: 0, z: 0}
+--- !u!95 &4319280698800509295
+Animator:
+  serializedVersion: 5
+  m_ObjectHideFlags: 0
+  m_CorrespondingSourceObject: {fileID: 0}
+  m_PrefabInstance: {fileID: 0}
+  m_PrefabAsset: {fileID: 0}
+  m_GameObject: {fileID: 154985591410463642}
+  m_Enabled: 1
+  m_Avatar: {fileID: 0}
+  m_Controller: {fileID: 9100000, guid: 62ea7ef1c1330734db643685e9f72c39, type: 2}
+  m_CullingMode: 0
+  m_UpdateMode: 0
+  m_ApplyRootMotion: 0
+  m_LinearVelocityBlending: 0
+  m_StabilizeFeet: 0
+  m_WarningMessage: 
+  m_HasTransformHierarchy: 1
+  m_AllowConstantClipSamplingOptimization: 1
+  m_KeepAnimatorStateOnDisable: 0
+  m_WriteDefaultValuesOnDisable: 0
 --- !u!1 &580719412438850579
 GameObject:
   m_ObjectHideFlags: 0
@@ -197,8 +219,8 @@ Rigidbody:
   m_ImplicitCom: 1
   m_ImplicitTensor: 1
   m_UseGravity: 0
-  m_IsKinematic: 0
-  m_Interpolate: 1
+  m_IsKinematic: 1
+  m_Interpolate: 0
   m_Constraints: 0
   m_CollisionDetection: 2
 --- !u!195 &1392561908828415672
@@ -523,8 +545,8 @@ MonoBehaviour:
   _patrollingSpeed: 10
   _maxRoamingPause: 5
   _minRoamingPause: 2.5
-  _stopPatrollingDistance: 0.5
-  _rotationSpeed: 5
+  _stopPatrollingDistance: 0.6
+  _rotationSpeed: 300
   _minRange: 5
   _maxRange: 10
   _droneMinimalAltitude: 0.1
@@ -616,7 +638,7 @@ PrefabInstance:
     m_AddedComponents:
     - targetCorrespondingSourceObject: {fileID: 919132149155446097, guid: 274be81ed07f355469990f23ea9e31af, type: 3}
       insertIndex: -1
-      addedObject: {fileID: 2893721187507377593}
+      addedObject: {fileID: 3897101576974622104}
   m_SourcePrefab: {fileID: 100100000, guid: 274be81ed07f355469990f23ea9e31af, type: 3}
 --- !u!4 &1426708448628271125 stripped
 Transform:
@@ -628,7 +650,7 @@ GameObject:
   m_CorrespondingSourceObject: {fileID: 919132149155446097, guid: 274be81ed07f355469990f23ea9e31af, type: 3}
   m_PrefabInstance: {fileID: 1460880121949065214}
   m_PrefabAsset: {fileID: 0}
---- !u!95 &2893721187507377593
+--- !u!95 &3897101576974622104
 Animator:
   serializedVersion: 5
   m_ObjectHideFlags: 0

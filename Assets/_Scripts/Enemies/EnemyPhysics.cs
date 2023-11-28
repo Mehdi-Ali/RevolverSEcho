@@ -2,24 +2,43 @@ using System.Collections;
 using System.Collections.Generic;
 using EasyButtons;
 using UnityEngine;
+using UnityEngine.AI;
 
 [RequireComponent(typeof(Rigidbody))]
 public class EnemyPhysics : MonoBehaviour
 {
     [SerializeField] private float _stabilizationTime = 1.5f;
     private Rigidbody _rb;
+    private NavMeshAgent _navAgent;
     private bool _stopStabilization;
 
     void Start()
     {
         _rb = GetComponent<Rigidbody>();
+        _navAgent = GetComponent<NavMeshAgent>();
+
     }
 
 
     public void TookDamage(float damage)
     {
         _stopStabilization = true;
+        SwitchControlsToRigidBody(true);
         StartCoroutine(Stabilize(damage / 20f));
+    }
+
+    private void SwitchControlsToRigidBody(bool isRigidBodyInControl)
+    {
+        // !!! To check
+        if (isRigidBodyInControl)
+            _rb.position = _navAgent.nextPosition; // should includ the y if our altitude free 
+
+        else
+            _navAgent.nextPosition = _rb.position;
+
+        _navAgent.updatePosition = !isRigidBodyInControl;
+        _navAgent.updateRotation = !isRigidBodyInControl;
+        _rb.isKinematic = !isRigidBodyInControl;
     }
 
     [Button]
@@ -48,9 +67,14 @@ public class EnemyPhysics : MonoBehaviour
             _rb.angularVelocity = Vector3.Lerp(_rb.angularVelocity, Vector3.zero, progress);
 
             if (_stopStabilization)
+            {
+                SwitchControlsToRigidBody(false);
                 break;
+            }
             
             yield return null;
         }
+
+        SwitchControlsToRigidBody(false);
     }
 }
