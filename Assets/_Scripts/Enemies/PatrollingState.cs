@@ -62,8 +62,6 @@ public class PatrollingState : BaseState
         if (_isInPause)
             return;
 
-
-
         if (Vector3.Distance(GetDronePosition(), _roamingPos) <= _stopPatrollingDistance)
         {
             _isInPause = true;
@@ -82,7 +80,7 @@ public class PatrollingState : BaseState
         {
             progress += Time.deltaTime / transitionTime;
             progress = Mathf.Min(1, progress);
-            Debug.Log(progress);
+
             var calculatedAltitude = Mathf.Lerp(_startingAltitude, _roamingPos.y, progress);
 
             _altitudeFree.localPosition = new Vector3(_altitudeFree.localPosition.x,

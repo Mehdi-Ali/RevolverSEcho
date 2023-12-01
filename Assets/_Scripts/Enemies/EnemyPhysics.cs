@@ -29,10 +29,8 @@ public class EnemyPhysics : MonoBehaviour
 
     private void SwitchControlsToRigidBody(bool isRigidBodyInControl)
     {
-        // !!! To check
         if (isRigidBodyInControl)
-            _rb.position = _navAgent.nextPosition; // should includ the y if our altitude free 
-
+            _rb.position = _navAgent.nextPosition;
         else
             _navAgent.nextPosition = _rb.position;
 
