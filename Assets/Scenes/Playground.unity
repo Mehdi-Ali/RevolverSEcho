@@ -312,6 +312,10 @@ PrefabInstance:
       propertyPath: m_Name
       value: Drone (8)
       objectReference: {fileID: 0}
+    - target: {fileID: 975877825138846191, guid: c150e900ae070fa4ab637215ac295419, type: 3}
+      propertyPath: m_IsActive
+      value: 1
+      objectReference: {fileID: 0}
     - target: {fileID: 2058370156643471001, guid: c150e900ae070fa4ab637215ac295419, type: 3}
       propertyPath: m_LocalPosition.x
       value: 0.02
@@ -539,7 +543,7 @@ PrefabInstance:
       objectReference: {fileID: 0}
     - target: {fileID: 6598815579406187037, guid: 18ddb545287c546e19cc77dc9fbb2189, type: 3}
       propertyPath: m_IsActive
-      value: 1
+      value: 0
       objectReference: {fileID: 0}
     m_RemovedComponents: []
     m_RemovedGameObjects: []
@@ -1516,6 +1520,10 @@ PrefabInstance:
     - target: {fileID: 975877825138846191, guid: c150e900ae070fa4ab637215ac295419, type: 3}
       propertyPath: m_Name
       value: Drone (13)
+      objectReference: {fileID: 0}
+    - target: {fileID: 975877825138846191, guid: c150e900ae070fa4ab637215ac295419, type: 3}
+      propertyPath: m_IsActive
+      value: 1
       objectReference: {fileID: 0}
     - target: {fileID: 2058370156643471001, guid: c150e900ae070fa4ab637215ac295419, type: 3}
       propertyPath: m_LocalPosition.x
@@ -17733,6 +17741,10 @@ PrefabInstance:
       propertyPath: m_Name
       value: Drone (9)
       objectReference: {fileID: 0}
+    - target: {fileID: 975877825138846191, guid: c150e900ae070fa4ab637215ac295419, type: 3}
+      propertyPath: m_IsActive
+      value: 1
+      objectReference: {fileID: 0}
     - target: {fileID: 2058370156643471001, guid: c150e900ae070fa4ab637215ac295419, type: 3}
       propertyPath: m_LocalPosition.x
       value: -1.42
@@ -18325,6 +18337,10 @@ PrefabInstance:
     - target: {fileID: 975877825138846191, guid: c150e900ae070fa4ab637215ac295419, type: 3}
       propertyPath: m_Name
       value: Drone (10)
+      objectReference: {fileID: 0}
+    - target: {fileID: 975877825138846191, guid: c150e900ae070fa4ab637215ac295419, type: 3}
+      propertyPath: m_IsActive
+      value: 1
       objectReference: {fileID: 0}
     - target: {fileID: 2058370156643471001, guid: c150e900ae070fa4ab637215ac295419, type: 3}
       propertyPath: m_LocalPosition.x
@@ -19066,7 +19082,7 @@ PrefabInstance:
       objectReference: {fileID: 0}
     - target: {fileID: 975877825138846191, guid: c150e900ae070fa4ab637215ac295419, type: 3}
       propertyPath: m_IsActive
-      value: 0
+      value: 1
       objectReference: {fileID: 0}
     - target: {fileID: 2058370156643471001, guid: c150e900ae070fa4ab637215ac295419, type: 3}
       propertyPath: m_LocalPosition.x
@@ -19459,7 +19475,7 @@ PrefabInstance:
       objectReference: {fileID: 0}
     - target: {fileID: 975877825138846191, guid: c150e900ae070fa4ab637215ac295419, type: 3}
       propertyPath: m_IsActive
-      value: 0
+      value: 1
       objectReference: {fileID: 0}
     - target: {fileID: 2058370156643471001, guid: c150e900ae070fa4ab637215ac295419, type: 3}
       propertyPath: m_LocalPosition.x
@@ -19584,6 +19600,10 @@ PrefabInstance:
     - target: {fileID: 975877825138846191, guid: c150e900ae070fa4ab637215ac295419, type: 3}
       propertyPath: m_Name
       value: Drone (11)
+      objectReference: {fileID: 0}
+    - target: {fileID: 975877825138846191, guid: c150e900ae070fa4ab637215ac295419, type: 3}
+      propertyPath: m_IsActive
+      value: 1
       objectReference: {fileID: 0}
     - target: {fileID: 2058370156643471001, guid: c150e900ae070fa4ab637215ac295419, type: 3}
       propertyPath: m_LocalPosition.x
@@ -19710,7 +19730,7 @@ PrefabInstance:
       objectReference: {fileID: 0}
     - target: {fileID: 975877825138846191, guid: c150e900ae070fa4ab637215ac295419, type: 3}
       propertyPath: m_IsActive
-      value: 0
+      value: 1
       objectReference: {fileID: 0}
     - target: {fileID: 2058370156643471001, guid: c150e900ae070fa4ab637215ac295419, type: 3}
       propertyPath: m_LocalPosition.x
@@ -19843,7 +19863,7 @@ PrefabInstance:
       objectReference: {fileID: 0}
     - target: {fileID: 975877825138846191, guid: c150e900ae070fa4ab637215ac295419, type: 3}
       propertyPath: m_IsActive
-      value: 0
+      value: 1
       objectReference: {fileID: 0}
     - target: {fileID: 2058370156643471001, guid: c150e900ae070fa4ab637215ac295419, type: 3}
       propertyPath: m_LocalPosition.x
@@ -20036,6 +20056,10 @@ PrefabInstance:
       propertyPath: m_Name
       value: Drone (6)
       objectReference: {fileID: 0}
+    - target: {fileID: 975877825138846191, guid: c150e900ae070fa4ab637215ac295419, type: 3}
+      propertyPath: m_IsActive
+      value: 1
+      objectReference: {fileID: 0}
     - target: {fileID: 2058370156643471001, guid: c150e900ae070fa4ab637215ac295419, type: 3}
       propertyPath: m_LocalPosition.x
       value: 1.64
@@ -20099,7 +20123,7 @@ PrefabInstance:
       objectReference: {fileID: 0}
     - target: {fileID: 975877825138846191, guid: c150e900ae070fa4ab637215ac295419, type: 3}
       propertyPath: m_IsActive
-      value: 0
+      value: 1
       objectReference: {fileID: 0}
     - target: {fileID: 2058370156643471001, guid: c150e900ae070fa4ab637215ac295419, type: 3}
       propertyPath: m_LocalPosition.x
@@ -20327,6 +20351,10 @@ PrefabInstance:
     - target: {fileID: 975877825138846191, guid: c150e900ae070fa4ab637215ac295419, type: 3}
       propertyPath: m_Name
       value: Drone (7)
+      objectReference: {fileID: 0}
+    - target: {fileID: 975877825138846191, guid: c150e900ae070fa4ab637215ac295419, type: 3}
+      propertyPath: m_IsActive
+      value: 1
       objectReference: {fileID: 0}
     - target: {fileID: 2058370156643471001, guid: c150e900ae070fa4ab637215ac295419, type: 3}
       propertyPath: m_LocalPosition.x
@@ -21275,6 +21303,10 @@ PrefabInstance:
     - target: {fileID: 975877825138846191, guid: c150e900ae070fa4ab637215ac295419, type: 3}
       propertyPath: m_Name
       value: Drone (12)
+      objectReference: {fileID: 0}
+    - target: {fileID: 975877825138846191, guid: c150e900ae070fa4ab637215ac295419, type: 3}
+      propertyPath: m_IsActive
+      value: 1
       objectReference: {fileID: 0}
     - target: {fileID: 2058370156643471001, guid: c150e900ae070fa4ab637215ac295419, type: 3}
       propertyPath: m_LocalPosition.x

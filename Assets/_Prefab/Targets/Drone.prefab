@@ -158,7 +158,7 @@ MonoBehaviour:
   m_PrefabInstance: {fileID: 0}
   m_PrefabAsset: {fileID: 0}
   m_GameObject: {fileID: 975877825138846191}
-  m_Enabled: 1
+  m_Enabled: 0
   m_EditorHideFlags: 0
   m_Script: {fileID: 11500000, guid: 526fb09eb3e62724eb8ba14536ebc3f1, type: 3}
   m_Name: 
@@ -180,6 +180,7 @@ MonoBehaviour:
   m_Name: 
   m_EditorClassIdentifier: 
   _stabilizationTime: 2
+  _damageToDestabilizedTimeFactor: 2
 --- !u!114 &2827387294571801434
 MonoBehaviour:
   m_ObjectHideFlags: 0
@@ -219,7 +220,7 @@ Rigidbody:
   m_ImplicitCom: 1
   m_ImplicitTensor: 1
   m_UseGravity: 0
-  m_IsKinematic: 1
+  m_IsKinematic: 0
   m_Interpolate: 0
   m_Constraints: 0
   m_CollisionDetection: 2
@@ -230,7 +231,7 @@ NavMeshAgent:
   m_PrefabInstance: {fileID: 0}
   m_PrefabAsset: {fileID: 0}
   m_GameObject: {fileID: 975877825138846191}
-  m_Enabled: 1
+  m_Enabled: 0
   m_AgentTypeID: -1372625422
   m_Radius: 0.55
   m_Speed: 3.5
@@ -549,6 +550,7 @@ MonoBehaviour:
   _rotationSpeed: 300
   _minRange: 5
   _maxRange: 10
+  _transitionTime: 2
   _droneMinimalAltitude: 0.1
   _droneNormalAltitude: 5
   _altitudeFree: {fileID: 8733816100949317278}
