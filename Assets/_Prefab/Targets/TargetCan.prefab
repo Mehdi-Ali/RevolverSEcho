@@ -50,7 +50,8 @@ MonoBehaviour:
   m_Name: 
   m_EditorClassIdentifier: 
   _health: 100
-  deformableTarget: {fileID: 8165828401822794850}
+  _deformableTarget: {fileID: 8165828401822794850}
+  _baseEnemy: {fileID: 0}
   SplashType: 1
 --- !u!114 &8165828401822794850
 MonoBehaviour:

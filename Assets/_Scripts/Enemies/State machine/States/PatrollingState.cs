@@ -5,7 +5,7 @@ using Unity.VisualScripting;
 using UnityEngine;
 using UnityEngine.AI;
 
-public class PatrollingState : BaseState
+public class Patrolling : BaseState
 {
 
     [SerializeField] private float _patrollingSpeed = 10f;
