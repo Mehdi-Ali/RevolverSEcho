@@ -1,6 +1,7 @@
 using System.Collections;
 using System.Collections.Generic;
 using System.Threading.Tasks;
+using EasyButtons;
 using Unity.VisualScripting;
 using UnityEngine;
 using UnityEngine.AI;
@@ -9,25 +10,17 @@ public class Patrolling : BaseState
 {
 
     [SerializeField] private float _patrollingSpeed = 10f;
-    [SerializeField] private float _maxRoamingPause = 5f;
-    [SerializeField] private float _minRoamingPause = 1f;
     [SerializeField] private float _stopPatrollingDistance = 1f;
     [SerializeField] private float _rotationSpeed = 300f;
     [SerializeField] private float _minRange = 5f;
     [SerializeField] private float _maxRange = 10.0f;
-    [SerializeField] private float _transitionTime = 2f;
     [SerializeField] private float _droneMinimalAltitude = 0.50f; // may should getthose from the map it self 
     [SerializeField] private float _droneNormalAltitude = 3f; // may should getthose from the map it self 
     [SerializeField] private Transform _altitudeFree;
 
 
-
-
-    private float _roamingPause;
-    private float _timer;
     private float _startingAltitude;
     private float _altitudeToTravel;
-    private bool _isInPause;
     private Vector3 _roamingPos;
 
 
@@ -35,40 +28,21 @@ public class Patrolling : BaseState
     {
         Enemy.NavAgent.speed = _patrollingSpeed;
         Enemy.NavAgent.angularSpeed = _rotationSpeed;
-        _startingAltitude = _altitudeFree.localPosition.y;
-        _roamingPause = Random.Range(_minRoamingPause, _maxRoamingPause);
-        _timer = _roamingPause;
-        _isInPause = false;
+        SetNavMeshDestination();
     }
 
-    public override void OnUpdateState()
+    private void SetNavMeshDestination()
     {
-        _timer += Time.deltaTime;
+        _roamingPos = GetRandomPosition(true);
+        _startingAltitude = _altitudeFree.localPosition.y;
+        _altitudeToTravel = _roamingPos.y - _startingAltitude;
+        Enemy.NavAgent.SetDestination(_roamingPos);
 
-        if (_timer >= _roamingPause)
-        {
-            _roamingPos = GetRandomPosition(true);
-            _startingAltitude = _altitudeFree.localPosition.y;
-            _altitudeToTravel = _roamingPos.y - _startingAltitude;
-            Enemy.NavAgent.SetDestination(_roamingPos);
-
-            float transitionTime = 2 * Enemy.NavAgent.remainingDistance / Enemy.NavAgent.speed;
-            StartCoroutine(AltitudeTransition(transitionTime));
-
-            _timer = 0;
-            _isInPause = false;
-        }
-
-        if (_isInPause)
-            return;
-
-        if (Vector3.Distance(GetDronePosition(), _roamingPos) <= _stopPatrollingDistance)
-        {
-            _isInPause = true;
-            StopRoaming();
-        }
+        float transitionTime = Vector3.Distance(GetDronePosition(), _roamingPos) / Enemy.NavAgent.speed;
+        StartCoroutine(AltitudeTransition(transitionTime));
     }
 
+    [Button]
     private IEnumerator AltitudeTransition(float transitionTime)
     {
         if (transitionTime == 0)
@@ -89,6 +63,30 @@ public class Patrolling : BaseState
 
             yield return null;
         }
+    }
+    
+    public override void OnUpdateState()
+    {
+        if (Enemy == null)
+            return;
+
+        var distance = Vector3.Distance(GetDronePosition(), _roamingPos);
+        if (distance <= _stopPatrollingDistance)
+        {
+            StopRoaming();
+        }
+    }
+
+
+    private void StopRoaming()
+    {
+        Enemy.SwitchState(Enemy.IdleState);
+    }
+
+    private Vector3 GetDronePosition()
+    {
+        var enemyTrans = Enemy.transform;
+        return new Vector3(enemyTrans.position.x, _altitudeFree.transform.position.y, enemyTrans.position.z);
     }
 
     private Vector3 GetRandomPosition(bool inNavMeshBound = false)
@@ -114,25 +112,9 @@ public class Patrolling : BaseState
         }
     }
 
-
     private Vector3 GetRandomDirection()
     {
         return new Vector3(Random.Range(-1f, 1f), Random.Range(-1f, 1f), Random.Range(-1f, 1f)).normalized;
-    }
-
-    private void StopRoaming()
-    {
-        Enemy.NavAgent.SetDestination(GetDronePosition());
-
-        // Enemy.TransitionToState(_enemy.IdleState);
-        // in the idle 
-        // Invoke(nameof(GoRoam), Random.Range(statics.MinRoamingPause , statics.MaxRoamingPause));
-    }
-
-    private Vector3 GetDronePosition()
-    {
-        var enemyTrans = Enemy.transform;
-        return new Vector3(enemyTrans.position.x, _altitudeFree.transform.position.y, enemyTrans.position.z);
     }
 
     protected override void OnExitState()

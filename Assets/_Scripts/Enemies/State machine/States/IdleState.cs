@@ -4,7 +4,6 @@ using UnityEngine;
 
 public class Idle : BaseState
 {
-    [SerializeField] Animator _animator;
     [SerializeField] private float _maxIdleDuration = 5f;
     [SerializeField] private float _minIdleDuration = 1f;
 
@@ -12,7 +11,6 @@ public class Idle : BaseState
 
     protected override void OnEnterState()
     {
-        _animator.enabled = true;
         _idlePause = Random.Range(_minIdleDuration, _maxIdleDuration);
     }
 
@@ -30,7 +28,6 @@ public class Idle : BaseState
 
     protected override void OnExitState()
     {
-        _animator.enabled = false;
 
     }
 

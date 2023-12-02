@@ -5,7 +5,6 @@ using UnityEngine.AI;
 
 public class BaseEnemy : MonoBehaviour
 {
-    public BaseState _currentState;
     [Space]
     public Idle IdleState;
     public Patrolling PatrollingState;
@@ -18,10 +17,11 @@ public class BaseEnemy : MonoBehaviour
     public Rigidbody RigidBody;
     public Transform Target;
 
+    [SerializeField] private BaseState _currentState;
 
     void Start()
     {
-        SwitchState(_currentState);
+        SwitchState(IdleState);
         NavAgent = GetComponent<NavMeshAgent>();
         RigidBody = GetComponent<Rigidbody>();
         Target = this.transform;

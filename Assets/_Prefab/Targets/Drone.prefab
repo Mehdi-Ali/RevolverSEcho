@@ -145,7 +145,6 @@ MonoBehaviour:
   m_Script: {fileID: 11500000, guid: 526fb09eb3e62724eb8ba14536ebc3f1, type: 3}
   m_Name: 
   m_EditorClassIdentifier: 
-  _currentState: {fileID: 2762623553576007250}
   IdleState: {fileID: 2762623553576007250}
   PatrollingState: {fileID: 8416833354100508808}
   TakingDamageState: {fileID: 5172642862297427864}
@@ -155,6 +154,7 @@ MonoBehaviour:
   NavAgent: {fileID: 1392561908828415672}
   RigidBody: {fileID: 4434785292818063252}
   Target: {fileID: 0}
+  _currentState: {fileID: 0}
 --- !u!114 &2827387294571801434
 MonoBehaviour:
   m_ObjectHideFlags: 0
@@ -676,15 +676,12 @@ MonoBehaviour:
   m_Script: {fileID: 11500000, guid: a015d24d67f0aaf498193ad738f49211, type: 3}
   m_Name: 
   m_EditorClassIdentifier: 
-  _patrollingSpeed: 10
-  _maxRoamingPause: 5
-  _minRoamingPause: 2.5
+  _patrollingSpeed: 3
   _stopPatrollingDistance: 0.1
   _rotationSpeed: 300
-  _minRange: 5
-  _maxRange: 10
-  _transitionTime: 2
-  _droneMinimalAltitude: 0.1
+  _minRange: 3
+  _maxRange: 7
+  _droneMinimalAltitude: 0.46
   _droneNormalAltitude: 5
   _altitudeFree: {fileID: 8733816100949317278}
 --- !u!1 &8837280203961934912
