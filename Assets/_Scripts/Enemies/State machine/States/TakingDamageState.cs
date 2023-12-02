@@ -20,20 +20,23 @@ public class TakingDamage : BaseState
     public void PrepareStabilization(float damage)
     {
         _stopStabilization = true;
-        //SwitchControlsToRigidBody(true);
+        SwitchControlsToRigidBody(true);
         StartCoroutine(StabilizeAfterSeconds(damage * _damageToDestabilizedTimeFactor / 20f));
     }
 
     private void SwitchControlsToRigidBody(bool isRigidBodyInControl)
     {
-        // if (isRigidBodyInControl)
-        //     _rb.position = _navAgent.nextPosition;
-        // else
-        //     _navAgent.nextPosition = _rb.position;
+        var rigidBody = Enemy.RigidBody;
+        var navAgent = Enemy.NavAgent;
 
-        // _navAgent.updatePosition = !isRigidBodyInControl;
-        // _navAgent.updateRotation = !isRigidBodyInControl;
-        // _rb.isKinematic = !isRigidBodyInControl;
+        if (isRigidBodyInControl)
+            rigidBody.position = navAgent.nextPosition;
+        else
+            navAgent.nextPosition = rigidBody.position;
+
+        navAgent.updatePosition = !isRigidBodyInControl;
+        navAgent.updateRotation = !isRigidBodyInControl;
+        rigidBody.isKinematic = !isRigidBodyInControl;
     }
 
     private IEnumerator StabilizeAfterSeconds(float seconds = 0f)
@@ -66,14 +69,9 @@ public class TakingDamage : BaseState
         for (float t = 0; t < duration; t += Time.deltaTime)
         {
             float progress = t / duration;
-
-            // the target will depend on the machine state ( player, 0, next point...)
-            //var target = Quaternion.identity; // reset to 0.
-            var target = Quaternion.LookRotation(Camera.main.transform.position - rigidBody.position);
+            var target = Quaternion.LookRotation(Enemy.Target.position - rigidBody.position);
 
             rigidBody.rotation = Quaternion.Lerp(rigidBody.rotation, target, progress);
-            // _rb.position = Vector3.Lerp(_rb.position, _rest.transform.position, progress);
-
 
             rigidBody.velocity = Vector3.Lerp(rigidBody.velocity, Vector3.zero, progress);
             rigidBody.angularVelocity = Vector3.Lerp(rigidBody.angularVelocity, Vector3.zero, progress);
@@ -84,13 +82,7 @@ public class TakingDamage : BaseState
             yield return null;
         }
 
-        EndTakingDamage();
-    }
-
-    private void EndTakingDamage()
-    {
-        //SwitchControlsToRigidBody(false);
-        Enemy.TransitionToState(Enemy.IdleState);
+        Enemy.SwitchState(Enemy.IdleState);
     }
 
     public override void OnUpdateState()
@@ -99,6 +91,6 @@ public class TakingDamage : BaseState
 
     protected override void OnExitState()
     {
-
+        SwitchControlsToRigidBody(false);
     }
 }

@@ -21,9 +21,10 @@ public class BaseEnemy : MonoBehaviour
 
     void Start()
     {
-        TransitionToState(_currentState);
+        SwitchState(_currentState);
         NavAgent = GetComponent<NavMeshAgent>();
         RigidBody = GetComponent<Rigidbody>();
+        Target = this.transform;
     }
 
 
@@ -39,11 +40,18 @@ public class BaseEnemy : MonoBehaviour
 
     public void TookDamage(float damage)
     {
-        TransitionToState(TakingDamageState);
+        SwitchState(TakingDamageState);
         TakingDamageState.PrepareStabilization(damage);
     }
 
-    public void TransitionToState(BaseState newState)
+    void Attack(Player target)
+    {
+        Target = target.transform;
+        SwitchState(AttackingState);
+
+    }
+
+    public void SwitchState(BaseState newState)
     {
         if (newState == _currentState || newState == null)
             return;

@@ -180,7 +180,7 @@ Rigidbody:
   m_GameObject: {fileID: 975877825138846191}
   serializedVersion: 4
   m_Mass: 2
-  m_Drag: 0.1
+  m_Drag: 0.5
   m_AngularDrag: 0.01
   m_CenterOfMass: {x: 0, y: 0, z: 0}
   m_InertiaTensor: {x: 1, y: 1, z: 1}
@@ -194,7 +194,7 @@ Rigidbody:
   m_ImplicitCom: 1
   m_ImplicitTensor: 1
   m_UseGravity: 0
-  m_IsKinematic: 0
+  m_IsKinematic: 1
   m_Interpolate: 0
   m_Constraints: 0
   m_CollisionDetection: 2
@@ -205,7 +205,7 @@ NavMeshAgent:
   m_PrefabInstance: {fileID: 0}
   m_PrefabAsset: {fileID: 0}
   m_GameObject: {fileID: 975877825138846191}
-  m_Enabled: 0
+  m_Enabled: 1
   m_AgentTypeID: -1372625422
   m_Radius: 0.55
   m_Speed: 3.5
@@ -630,6 +630,8 @@ MonoBehaviour:
   m_Name: 
   m_EditorClassIdentifier: 
   _animator: {fileID: 7050547279985555497}
+  _maxIdleDuration: 5
+  _minIdleDuration: 1
 --- !u!1 &7911368301567005565
 GameObject:
   m_ObjectHideFlags: 0
