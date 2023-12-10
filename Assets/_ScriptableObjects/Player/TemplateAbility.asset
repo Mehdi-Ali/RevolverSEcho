@@ -9,11 +9,9 @@ MonoBehaviour:
   m_GameObject: {fileID: 0}
   m_Enabled: 1
   m_EditorHideFlags: 0
-  m_Script: {fileID: 11500000, guid: 5d1921b67daaf5a4898944fa8aedec62, type: 3}
-  m_Name: Dash 2
+  m_Script: {fileID: 11500000, guid: a64bf6bf877deb141a889a6f76dca759, type: 3}
+  m_Name: TemplateAbility
   m_EditorClassIdentifier: 
   level: 1
-  Description: 'Dash in the direction head '
+  Description: PLACEhOLDER
   System: {fileID: 0}
-  _dashSpeed: 20
-  _dashDurationSec: 0.25
