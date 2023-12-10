@@ -14,6 +14,7 @@ GameObject:
   - component: {fileID: 23415105773652922}
   - component: {fileID: 7322962975978772525}
   - component: {fileID: 6091634783753321485}
+  - component: {fileID: -5067569386514286926}
   m_Layer: 0
   m_Name: Military target
   m_TagString: Untagged
@@ -49,7 +50,8 @@ MonoBehaviour:
   m_Name: 
   m_EditorClassIdentifier: 
   _health: 250
-  deformableTarget: {fileID: 0}
+  _deformableTarget: {fileID: 0}
+  _baseEnemy: {fileID: 0}
   SplashType: 0
 --- !u!33 &33848685573292062
 MeshFilter:
@@ -150,3 +152,22 @@ Rigidbody:
   m_Interpolate: 1
   m_Constraints: 0
   m_CollisionDetection: 2
+--- !u!114 &-5067569386514286926
+MonoBehaviour:
+  m_ObjectHideFlags: 0
+  m_CorrespondingSourceObject: {fileID: 0}
+  m_PrefabInstance: {fileID: 0}
+  m_PrefabAsset: {fileID: 0}
+  m_GameObject: {fileID: 1501084758933746}
+  m_Enabled: 1
+  m_EditorHideFlags: 0
+  m_Script: {fileID: 11500000, guid: 1e3fdca004f2d45fe8abbed571a8abd5, type: 3}
+  m_Name: 
+  m_EditorClassIdentifier: 
+  m_OverrideArea: 0
+  m_Area: 0
+  m_OverrideGenerateLinks: 0
+  m_GenerateLinks: 0
+  m_IgnoreFromBuild: 1
+  m_ApplyToChildren: 1
+  m_AffectedAgents: f2652fae

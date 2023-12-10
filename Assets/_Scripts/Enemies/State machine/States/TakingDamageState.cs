@@ -27,17 +27,19 @@ public class TakingDamage : BaseState
 
     private void SwitchControlsToRigidBody(bool isRigidBodyInControl)
     {
-        var rigidBody = Enemy.RigidBody;
-        var navAgent = Enemy.NavAgent;
+        // var rigidBody = Enemy.RigidBody;
+        // var navAgent = Enemy.NavAgent;
 
-        if (isRigidBodyInControl)
-            rigidBody.position = navAgent.nextPosition;
-        else
-            navAgent.nextPosition = rigidBody.position;
+        // if (isRigidBodyInControl)
+        //     rigidBody.position = navAgent.nextPosition;
 
-        navAgent.updatePosition = !isRigidBodyInControl;
-        navAgent.updateRotation = !isRigidBodyInControl;
-        rigidBody.isKinematic = !isRigidBodyInControl;
+        // else
+        //     navAgent.nextPosition = rigidBody.position;
+
+        // rigidBody.isKinematic = !isRigidBodyInControl;
+        // navAgent.enabled = !isRigidBodyInControl;
+        // navAgent.updatePosition = !isRigidBodyInControl;
+        // navAgent.updateRotation = !isRigidBodyInControl;
     }
 
     private IEnumerator StabilizeAfterSeconds(float seconds = 0f)

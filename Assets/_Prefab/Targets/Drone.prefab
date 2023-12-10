@@ -163,7 +163,7 @@ MonoBehaviour:
   m_Name: 
   m_EditorClassIdentifier: 
   IdleState: {fileID: 2762623553576007250}
-  PatrollingState: {fileID: 8416833354100508808}
+  PatrollingState: {fileID: 0}
   TakingDamageState: {fileID: 5172642862297427864}
   ChasingState: {fileID: 5463278073684494723}
   AttackingState: {fileID: 8422528099283264086}
@@ -196,7 +196,7 @@ Rigidbody:
   m_PrefabAsset: {fileID: 0}
   m_GameObject: {fileID: 975877825138846191}
   serializedVersion: 4
-  m_Mass: 2
+  m_Mass: 5
   m_Drag: 0.5
   m_AngularDrag: 0.01
   m_CenterOfMass: {x: 0, y: 0, z: 0}
@@ -211,7 +211,7 @@ Rigidbody:
   m_ImplicitCom: 1
   m_ImplicitTensor: 1
   m_UseGravity: 0
-  m_IsKinematic: 1
+  m_IsKinematic: 0
   m_Interpolate: 0
   m_Constraints: 0
   m_CollisionDetection: 2
@@ -222,7 +222,7 @@ NavMeshAgent:
   m_PrefabInstance: {fileID: 0}
   m_PrefabAsset: {fileID: 0}
   m_GameObject: {fileID: 975877825138846191}
-  m_Enabled: 1
+  m_Enabled: 0
   m_AgentTypeID: -1372625422
   m_Radius: 0.55
   m_Speed: 3.5
@@ -715,6 +715,7 @@ MonoBehaviour:
   _droneMinimalAltitude: 0.46
   _droneNormalAltitude: 5
   _altitudeFree: {fileID: 8733816100949317278}
+  _stateExist: 5
 --- !u!1 &8837280203961934912
 GameObject:
   m_ObjectHideFlags: 0

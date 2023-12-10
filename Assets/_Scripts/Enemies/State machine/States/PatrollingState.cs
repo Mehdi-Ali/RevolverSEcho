@@ -28,6 +28,10 @@ public class Patrolling : BaseState
 
     public override void OnEnterState()
     {
+        // // ! delete :
+        // Enemy.SwitchState(Enemy.IdleState);
+        // return;
+
         Enemy.NavAgent.speed = _patrollingSpeed;
         Enemy.NavAgent.angularSpeed = _rotationSpeed;
         SetNavMeshDestination();

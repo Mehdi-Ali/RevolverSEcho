@@ -668,7 +668,7 @@ MonoBehaviour:
   m_Script: {fileID: 11500000, guid: 397c07434c31a6d4b9ec65e4b05aa8fe, type: 3}
   m_Name: 
   m_EditorClassIdentifier: 
-  RecoilType: {fileID: 11400000, guid: c859e0a001674444bb05985e8d2983fc, type: 2}
+  RecoilType: {fileID: 11400000, guid: c4a1fa317d28f5b40b48c527e0179812, type: 2}
 --- !u!114 &-104302905892500812
 MonoBehaviour:
   m_ObjectHideFlags: 0
@@ -685,7 +685,7 @@ MonoBehaviour:
   _initialEchoCharge: 3
   _echoCharge: 0
   _maxEchoCharge: 10
-  _echoForceFactor: 1000
+  _echoForceFactor: 10
   ControllerName: 
 --- !u!114 &4785263616957647985
 MonoBehaviour:
