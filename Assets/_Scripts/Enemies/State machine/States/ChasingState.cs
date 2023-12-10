@@ -8,11 +8,11 @@ public class Chasing : BaseState
     {
     }
 
-    protected override void OnEnterState()
+    public override void OnEnterState()
     {
     }
 
-    protected override void OnExitState()
+    public override void OnExitState()
     {
     }
 

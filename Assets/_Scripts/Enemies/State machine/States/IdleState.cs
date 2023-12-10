@@ -9,7 +9,7 @@ public class Idle : BaseState
 
     private float _idlePause;
 
-    protected override void OnEnterState()
+    public override void OnEnterState()
     {
         _idlePause = Random.Range(_minIdleDuration, _maxIdleDuration);
     }
@@ -26,7 +26,7 @@ public class Idle : BaseState
         }
     }
 
-    protected override void OnExitState()
+    public override void OnExitState()
     {
 
     }

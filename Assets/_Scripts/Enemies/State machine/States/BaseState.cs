@@ -2,22 +2,14 @@ using UnityEngine;
 
 public abstract class BaseState : MonoBehaviour
 {
-    protected BaseEnemy Enemy { get; private set; }
+    protected BaseEnemy Enemy {get; private set; }
 
-    public void EnterState(BaseEnemy enemy)
+    void Start()
     {
-        Enemy = enemy;
-        OnEnterState();
+        Enemy = GetComponentInParent<BaseEnemy>();
     }
 
-    public void EnterExit()
-    {
-        OnExitState();
-        Enemy = null;
-    }
-
-
-    protected  abstract void OnEnterState();
+    public abstract void OnEnterState();
     public abstract void OnUpdateState();
-    protected  abstract void OnExitState();
+    public abstract void OnExitState();
 }

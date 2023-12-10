@@ -2,6 +2,7 @@ using System.Collections;
 using System.Collections.Generic;
 using System.Threading.Tasks;
 using EasyButtons;
+using JetBrains.Annotations;
 using Unity.VisualScripting;
 using UnityEngine;
 using UnityEngine.AI;
@@ -17,6 +18,7 @@ public class Patrolling : BaseState
     [SerializeField] private float _droneMinimalAltitude = 0.50f; // may should getthose from the map it self 
     [SerializeField] private float _droneNormalAltitude = 3f; // may should getthose from the map it self 
     [SerializeField] private Transform _altitudeFree;
+    [SerializeField] private float _stateExist = 5f;
 
 
     private float _startingAltitude;
@@ -24,11 +26,19 @@ public class Patrolling : BaseState
     private Vector3 _roamingPos;
 
 
-    protected override void OnEnterState()
+    public override void OnEnterState()
     {
         Enemy.NavAgent.speed = _patrollingSpeed;
         Enemy.NavAgent.angularSpeed = _rotationSpeed;
         SetNavMeshDestination();
+        StartCoroutine(ExistState());
+    }
+
+    private IEnumerator ExistState()
+    {
+        yield return new WaitForSeconds(_stateExist);
+        Enemy.SwitchState(Enemy.IdleState);
+        
     }
 
     private void SetNavMeshDestination()
@@ -117,7 +127,8 @@ public class Patrolling : BaseState
         return new Vector3(Random.Range(-1f, 1f), Random.Range(-1f, 1f), Random.Range(-1f, 1f)).normalized;
     }
 
-    protected override void OnExitState()
+    public override void OnExitState()
     {
+        StopCoroutine(ExistState());
     }
 }

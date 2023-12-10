@@ -57,9 +57,9 @@ public class BaseEnemy : MonoBehaviour
             return;
         
         if (_currentState != null)
-            _currentState.EnterExit();
+            _currentState.OnExitState();
 
         _currentState = newState;
-        _currentState.EnterState(this);
+        _currentState.OnEnterState();
     }
 }

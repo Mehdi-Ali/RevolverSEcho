@@ -12,8 +12,9 @@ public class TakingDamage : BaseState
     private Coroutine _currentStabilizeCoroutine;
     private float _timeToWait;
 
-    protected override void OnEnterState()
+    public override void OnEnterState()
     {
+
     }
 
 
@@ -89,7 +90,7 @@ public class TakingDamage : BaseState
     {
     }
 
-    protected override void OnExitState()
+    public override void OnExitState()
     {
         SwitchControlsToRigidBody(false);
     }
