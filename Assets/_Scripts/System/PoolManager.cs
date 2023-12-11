@@ -11,6 +11,7 @@ public class PoolManager : MonoBehaviour
     public PoolSystem BulletSplash;
     public PoolSystem DamagePopup;
     public PoolSystem EchoDamageVFX;
+    public PoolSystem TargetCan;
 
     private void Awake()
     {
@@ -20,8 +21,6 @@ public class PoolManager : MonoBehaviour
             DontDestroyOnLoad(gameObject);
         }
         else
-        {
             Destroy(gameObject);
-        }
     }
 }

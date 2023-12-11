@@ -14,10 +14,14 @@ public class DeformableTarget : MonoBehaviour
     // Start is called before the first frame update
     void Start()
     {
+        ResetTarget();
+    }
+
+    public void ResetTarget()
+    {
         _undamagedTransform.SetActive(true);
         _damagedTransform.SetActive(false);
     }
-
     public void DamageTarget()
     {
         _undamagedTransform.SetActive(false);

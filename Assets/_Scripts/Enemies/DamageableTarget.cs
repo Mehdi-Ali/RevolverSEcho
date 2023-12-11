@@ -1,12 +1,13 @@
 using Unity.Mathematics;
 using UnityEngine;
 
-public class DamageableTarget : MonoBehaviour
+public class DamageableTarget : MonoBehaviour, IPool
 {
-    [SerializeField] private float _health = 100f;
+    [SerializeField] private float _MaxHealth = 100f;
     [SerializeField] private DeformableTarget _deformableTarget;
     [SerializeField] private BaseEnemy _baseEnemy;
     public SplashType SplashType;
+    private float _currentHealth;
     private Rigidbody _rigidbody;
     private PoolSystem _PopupPool;
     private PoolSystem _VFXPool;
@@ -17,6 +18,7 @@ public class DamageableTarget : MonoBehaviour
         _PopupPool = PoolManager.PoolInst.DamagePopup;
         _VFXPool = PoolManager.PoolInst.EchoDamageVFX;
         _rigidbody = GetComponent<Rigidbody>();
+        _currentHealth = _MaxHealth;
     }
 
     public void TakeDamage(float damage, Vector3 contactPoint,  int id = -1, bool isEcho = false)
@@ -26,8 +28,8 @@ public class DamageableTarget : MonoBehaviour
             
         if (this == null) return;
 
-        _health -= damage;
-        _health = math.max(_health, 0);
+        _currentHealth -= damage;
+        _currentHealth = math.max(_currentHealth, 0);
 
         if (!isEcho)
             DisplayNumbers(damage, contactPoint);
@@ -41,7 +43,7 @@ public class DamageableTarget : MonoBehaviour
                 _baseEnemy.TookDamage(damage);
         }
 
-        if (_health <= 0)
+        if (_currentHealth <= 0)
             Die();
     }
 
@@ -95,6 +97,15 @@ public class DamageableTarget : MonoBehaviour
         // TODO add a pool system for targets
         Destroy(this.gameObject);
     }
+
+    public void Initialize(int id, Vector3 position, Quaternion rotation)
+    {
+        transform.position = position;
+        _currentHealth = _MaxHealth;
+        _deformableTarget.ResetTarget();
+    }
+
+    public void ResetInst() {}
 }
 
 public enum SplashType

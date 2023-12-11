@@ -98,7 +98,11 @@ public class EchoManager : MonoBehaviour
     {
         var newEchoCharge = _echoCharge - consumedCharges;
         if (newEchoCharge < 0)
+        {
+            UniversalMessage.Message.SendText($"You don't have enough Echo");
             return false;
+
+        }
 
         _echoCharge = newEchoCharge;
         
