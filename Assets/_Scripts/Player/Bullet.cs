@@ -29,11 +29,13 @@ public class Bullet : MonoBehaviour, IPool
         transform.position = position;
         transform.rotation = rotation;
 
+        rigidB.isKinematic = false;
         rigidB.velocity = transform.forward * _bulletSpeed;
     }
 
     public void ResetInst()
     {
+        rigidB.isKinematic = true;
         rigidB.velocity = Vector3.zero;
     }
 

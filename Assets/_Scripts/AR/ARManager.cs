@@ -66,12 +66,6 @@ public class ARManager : MonoBehaviour
     private void OnPlanesChanged(ARPlanesChangedEventArgs args)
     {
         SpawnDroneOnPlanes(args.added, PlaneAlignment.HorizontalUp);
-        foreach (var plane in args.added)
-        {
-            plane.GetComponent<MeshRenderer>().enabled = false;
-            //or 
-            // 
-        }
     }
 
     public void SpawnNextWave()

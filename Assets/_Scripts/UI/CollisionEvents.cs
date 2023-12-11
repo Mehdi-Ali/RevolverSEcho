@@ -19,13 +19,11 @@ public class CollisionEvents : MonoBehaviour
 
     void OnTriggerEnter(Collider other)
     {
-        UniversalMessage.Message.SendText("OnTrigger");
         OnTrigger?.Invoke();
     }
 
     void OnCollisionEnter(Collision other)
     {
-        UniversalMessage.Message.SendText("OnCollision");
         OnCollision?.Invoke();
     }
 }

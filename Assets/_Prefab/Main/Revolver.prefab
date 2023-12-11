@@ -685,7 +685,7 @@ MonoBehaviour:
   _initialEchoCharge: 3
   _echoCharge: 0
   _maxEchoCharge: 10
-  _echoForceFactor: 10
+  _echoForceFactor: 50
   ControllerName: 
 --- !u!114 &4785263616957647985
 MonoBehaviour:
