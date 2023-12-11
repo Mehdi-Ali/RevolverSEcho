@@ -299,6 +299,52 @@ MonoBehaviour:
   m_EditorClassIdentifier: 
   RightReticle: {fileID: 1124675174}
   LeftReticle: {fileID: 368306352}
+--- !u!1 &40565666
+GameObject:
+  m_ObjectHideFlags: 0
+  m_CorrespondingSourceObject: {fileID: 0}
+  m_PrefabInstance: {fileID: 0}
+  m_PrefabAsset: {fileID: 0}
+  serializedVersion: 6
+  m_Component:
+  - component: {fileID: 40565667}
+  - component: {fileID: 40565668}
+  m_Layer: 0
+  m_Name: TargetDronePool
+  m_TagString: Untagged
+  m_Icon: {fileID: 0}
+  m_NavMeshLayer: 0
+  m_StaticEditorFlags: 0
+  m_IsActive: 1
+--- !u!4 &40565667
+Transform:
+  m_ObjectHideFlags: 0
+  m_CorrespondingSourceObject: {fileID: 0}
+  m_PrefabInstance: {fileID: 0}
+  m_PrefabAsset: {fileID: 0}
+  m_GameObject: {fileID: 40565666}
+  serializedVersion: 2
+  m_LocalRotation: {x: 0, y: 0, z: 0, w: 1}
+  m_LocalPosition: {x: 0, y: 0, z: 0}
+  m_LocalScale: {x: 1, y: 1, z: 1}
+  m_ConstrainProportionsScale: 0
+  m_Children: []
+  m_Father: {fileID: 1099769960}
+  m_LocalEulerAnglesHint: {x: 0, y: 0, z: 0}
+--- !u!114 &40565668
+MonoBehaviour:
+  m_ObjectHideFlags: 0
+  m_CorrespondingSourceObject: {fileID: 0}
+  m_PrefabInstance: {fileID: 0}
+  m_PrefabAsset: {fileID: 0}
+  m_GameObject: {fileID: 40565666}
+  m_Enabled: 1
+  m_EditorHideFlags: 0
+  m_Script: {fileID: 11500000, guid: 9e15a6c059c46a2438f1dc3838cc0591, type: 3}
+  m_Name: 
+  m_EditorClassIdentifier: 
+  IPoolPrefab: {fileID: 975877825138846191, guid: c150e900ae070fa4ab637215ac295419, type: 3}
+  normalSize: 5
 --- !u!1001 &63621880
 PrefabInstance:
   m_ObjectHideFlags: 0
@@ -20491,6 +20537,7 @@ Transform:
   - {fileID: 1227232160}
   - {fileID: 713128120}
   - {fileID: 863983552}
+  - {fileID: 40565667}
   m_Father: {fileID: 940275944}
   m_LocalEulerAnglesHint: {x: 0, y: 0, z: 0}
 --- !u!114 &1099769963
@@ -20510,6 +20557,7 @@ MonoBehaviour:
   DamagePopup: {fileID: 1227232161}
   EchoDamageVFX: {fileID: 713128121}
   TargetCan: {fileID: 863983553}
+  TargetDrone: {fileID: 40565668}
 --- !u!1 &1104190489
 GameObject:
   m_ObjectHideFlags: 0
@@ -26077,6 +26125,14 @@ PrefabInstance:
       objectReference: {fileID: 0}
     - target: {fileID: 8633865286353579660, guid: cec6b1d281c1b54478aa5d20b83c6663, type: 3}
       propertyPath: m_AnchoredPosition.y
+      value: 0
+      objectReference: {fileID: 0}
+    - target: {fileID: 8829178851233707453, guid: cec6b1d281c1b54478aa5d20b83c6663, type: 3}
+      propertyPath: m_EnableTurnAround
+      value: 0
+      objectReference: {fileID: 0}
+    - target: {fileID: 8829178851233707453, guid: cec6b1d281c1b54478aa5d20b83c6663, type: 3}
+      propertyPath: m_EnableTurnLeftRight
       value: 0
       objectReference: {fileID: 0}
     m_RemovedComponents: []

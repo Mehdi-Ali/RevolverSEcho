@@ -12,6 +12,7 @@ public class PoolManager : MonoBehaviour
     public PoolSystem DamagePopup;
     public PoolSystem EchoDamageVFX;
     public PoolSystem TargetCan;
+    public PoolSystem TargetDrone;
 
     private void Awake()
     {

@@ -26,7 +26,6 @@ public class ARManager : MonoBehaviour
 
         StartCoroutine(StartARSession());
         _arPlanes = new();
-
     }
 
     IEnumerator StartARSession()
@@ -52,9 +51,6 @@ public class ARManager : MonoBehaviour
         if (!_arPlaneManager)
             return false;
 
-        UniversalMessage.Message.SendText($"{_arPlaneManager.trackables.count}");
-
-
         foreach (var item in _arPlaneManager.trackables)
         {
             _arPlanes.Add(item as ARPlane);
@@ -65,32 +61,54 @@ public class ARManager : MonoBehaviour
 
     private void OnPlanesChanged(ARPlanesChangedEventArgs args)
     {
-        SpawnDroneOnPlanes(args.added, PlaneAlignment.HorizontalUp);
+        _arPlanes = args.added;
+        SpawnCans();
+        SpawnDrones();
     }
+
+
 
     public void SpawnNextWave()
     {
-        if (GetARPlanes())
-            SpawnDroneOnPlanes(_arPlanes, PlaneAlignment.HorizontalUp);
+        if (!GetARPlanes())
+            return;
+
+        SpawnCans();
+        SpawnDrones();
     }
 
-    private void SpawnDroneOnPlanes(List<ARPlane> planesList, PlaneAlignment planesAlignment)
+    private void SpawnCans()
     {
-        if (planesList.Count > 0)
+        SpawnEnemies(PoolManager.PoolInst.TargetCan, PlaneAlignment.HorizontalUp, 0.25f);
+    }
+
+    private void SpawnDrones()
+    {
+        if (RandomBoolean(0.85f))
+            SpawnEnemies(PoolManager.PoolInst.TargetDrone, PlaneAlignment.HorizontalUp, 1f);
+    }
+
+    private void SpawnEnemies(PoolSystem poolSystem, PlaneAlignment planesAlignment, float yOffset)
+    {
+        if (_arPlanes.Count > 0)
         {
-            foreach (var plane in planesList)
+            foreach (var plane in _arPlanes)
             {
-                //UniversalMessage.Message.SendText($"{plane} , {plane.classification}");
                 if (plane.alignment != planesAlignment)
                     continue;
 
                 plane.transform.GetPositionAndRotation(out var position, out var Rotation);
-                position.y += 0.25f;
-                PoolManager.PoolInst.TargetCan.Get(position, Rotation);
+                position.y += yOffset;
+                poolSystem.Get(position, Rotation);
 
             }
 
         }
+    }
+
+    public bool RandomBoolean(float weight = 0.5f)
+    {
+        return UnityEngine.Random.value < weight;
     }
 
     void OnDestroy()
