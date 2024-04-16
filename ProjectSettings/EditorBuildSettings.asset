@@ -5,7 +5,7 @@ EditorBuildSettings:
   m_ObjectHideFlags: 0
   serializedVersion: 2
   m_Scenes:
-  - enabled: 1
+  - enabled: 0
     path: Assets/Scenes/ARPlayground.unity
     guid: 5b5bf61d3e0d8824392873e43e320f04
   - enabled: 1
