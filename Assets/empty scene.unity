@@ -26,7 +26,7 @@ RenderSettings:
   m_AmbientIntensity: 1.02
   m_AmbientMode: 3
   m_SubtractiveShadowColor: {r: 0.42, g: 0.478, b: 0.627, a: 1}
-  m_SkyboxMaterial: {fileID: 2100000, guid: 1e8a716d9f6a33a4d8c6f7ce6b95219d, type: 2}
+  m_SkyboxMaterial: {fileID: 2100000, guid: 8b43d527d28eea049ac446bce8c55b19, type: 2}
   m_HaloStrength: 0.5
   m_FlareStrength: 1
   m_FlareFadeSpeed: 3
@@ -37,8 +37,8 @@ RenderSettings:
   m_ReflectionBounces: 1
   m_ReflectionIntensity: 1
   m_CustomReflection: {fileID: 8900000, guid: 6faa5624b576ea94c99b1fe9c0beca1f, type: 3}
-  m_Sun: {fileID: 2132949987}
-  m_IndirectSpecularColor: {r: 0.21337931, g: 0.24633822, b: 0.39550775, a: 1}
+  m_Sun: {fileID: 0}
+  m_IndirectSpecularColor: {r: 0.019446827, g: 0.026405184, b: 0.045210212, a: 1}
   m_UseRadianceAmbientProbe: 0
 --- !u!157 &3
 LightmapSettings:
@@ -1341,6 +1341,10 @@ PrefabInstance:
       propertyPath: m_StaticEditorFlags
       value: 4294967295
       objectReference: {fileID: 0}
+    - target: {fileID: 2069121640978917487, guid: eb062ec49f40b17408a5dc25961a60ef, type: 3}
+      propertyPath: m_IsActive
+      value: 0
+      objectReference: {fileID: 0}
     - target: {fileID: 2069572591735138571, guid: eb062ec49f40b17408a5dc25961a60ef, type: 3}
       propertyPath: m_Materials.Array.data[0]
       value: 
@@ -1682,6 +1686,10 @@ PrefabInstance:
       value: 4294967295
       objectReference: {fileID: 0}
     - target: {fileID: 8594336824012026598, guid: eb062ec49f40b17408a5dc25961a60ef, type: 3}
+      propertyPath: m_ReceiveGI
+      value: 1
+      objectReference: {fileID: 0}
+    - target: {fileID: 8594336824012026598, guid: eb062ec49f40b17408a5dc25961a60ef, type: 3}
       propertyPath: m_Materials.Array.data[0]
       value: 
       objectReference: {fileID: 2100000, guid: 484cff06ebc737c4d91da37e869ede17, type: 2}
@@ -1971,7 +1979,7 @@ GameObject:
   m_Icon: {fileID: 0}
   m_NavMeshLayer: 0
   m_StaticEditorFlags: 0
-  m_IsActive: 1
+  m_IsActive: 0
 --- !u!108 &1741856221
 Light:
   m_ObjectHideFlags: 0
@@ -2246,8 +2254,8 @@ Light:
   serializedVersion: 10
   m_Type: 1
   m_Shape: 0
-  m_Color: {r: 0.9150943, g: 0.87922055, b: 0.78991634, a: 1}
-  m_Intensity: 1
+  m_Color: {r: 0.5598447, g: 0.4685831, b: 0.735849, a: 1}
+  m_Intensity: 0
   m_Range: 10
   m_SpotAngle: 30
   m_InnerSpotAngle: 21.80208
