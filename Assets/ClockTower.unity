@@ -516,6 +516,11 @@ Transform:
   m_CorrespondingSourceObject: {fileID: 2532901076028198570, guid: 5eb698d7f2410e94995e8062c4b03cd0, type: 3}
   m_PrefabInstance: {fileID: 2532901074882211702}
   m_PrefabAsset: {fileID: 0}
+--- !u!4 &1169561973 stripped
+Transform:
+  m_CorrespondingSourceObject: {fileID: 3221844317756425247, guid: 7727d53c333980c4fb66e84e68896a81, type: 3}
+  m_PrefabInstance: {fileID: 2126074572}
+  m_PrefabAsset: {fileID: 0}
 --- !u!114 &1229935146
 MonoBehaviour:
   m_ObjectHideFlags: 0
@@ -932,7 +937,7 @@ GameObject:
   m_Icon: {fileID: 0}
   m_NavMeshLayer: 0
   m_StaticEditorFlags: 0
-  m_IsActive: 1
+  m_IsActive: 0
 --- !u!4 &1932320114
 Transform:
   m_ObjectHideFlags: 0
@@ -1149,6 +1154,10 @@ PrefabInstance:
       propertyPath: m_AnchoredPosition.y
       value: 0
       objectReference: {fileID: 0}
+    - target: {fileID: 438104096049349941, guid: 7727d53c333980c4fb66e84e68896a81, type: 3}
+      propertyPath: m_TurnSpeed
+      value: 80
+      objectReference: {fileID: 0}
     - target: {fileID: 1223265618588565819, guid: 7727d53c333980c4fb66e84e68896a81, type: 3}
       propertyPath: m_AnchorMax.y
       value: 0
@@ -1273,6 +1282,18 @@ PrefabInstance:
       propertyPath: m_AnchoredPosition.y
       value: 0
       objectReference: {fileID: 0}
+    - target: {fileID: 3356667745523521230, guid: 7727d53c333980c4fb66e84e68896a81, type: 3}
+      propertyPath: m_MoveSpeed
+      value: 1.5
+      objectReference: {fileID: 0}
+    - target: {fileID: 3356667745523521230, guid: 7727d53c333980c4fb66e84e68896a81, type: 3}
+      propertyPath: m_UseGravity
+      value: 1
+      objectReference: {fileID: 0}
+    - target: {fileID: 3356667745523521230, guid: 7727d53c333980c4fb66e84e68896a81, type: 3}
+      propertyPath: m_ForwardSource
+      value: 
+      objectReference: {fileID: 1169561973}
     - target: {fileID: 4282712138008435243, guid: 7727d53c333980c4fb66e84e68896a81, type: 3}
       propertyPath: m_AnchorMax.y
       value: 0
