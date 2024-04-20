@@ -11,6 +11,7 @@ public class Bullet : MonoBehaviour, IPool
     // move to stat SO
     [SerializeField] private float _bulletSpeed = 100;
     [SerializeField] private float _bulletDamage = 20;
+    [SerializeField] private GameObject trail;
 
     private PoolSystem _bulletSplashPool;
     private PoolSystem _bulletPool;
@@ -31,12 +32,16 @@ public class Bullet : MonoBehaviour, IPool
 
         rigidB.isKinematic = false;
         rigidB.velocity = transform.forward * _bulletSpeed;
+
+        trail.SetActive(true);
     }
 
     public void ResetInst()
     {
-        rigidB.isKinematic = true;
         rigidB.velocity = Vector3.zero;
+        rigidB.isKinematic = true;
+        trail.SetActive(false);
+
     }
 
     void OnCollisionEnter(Collision collision)

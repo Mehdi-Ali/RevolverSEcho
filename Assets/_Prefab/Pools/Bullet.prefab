@@ -16,7 +16,7 @@ GameObject:
   m_Icon: {fileID: 0}
   m_NavMeshLayer: 0
   m_StaticEditorFlags: 0
-  m_IsActive: 1
+  m_IsActive: 0
 --- !u!4 &3548068369046531687
 Transform:
   m_ObjectHideFlags: 0
@@ -247,6 +247,7 @@ MonoBehaviour:
   rigidB: {fileID: -7134308962685838794}
   _bulletSpeed: 200
   _bulletDamage: 10
+  trail: {fileID: 256977179382357534}
 --- !u!54 &-7134308962685838794
 Rigidbody:
   m_ObjectHideFlags: 0

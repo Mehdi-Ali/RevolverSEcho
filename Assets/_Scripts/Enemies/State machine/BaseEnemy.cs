@@ -21,10 +21,10 @@ public class BaseEnemy : MonoBehaviour
 
     void Start()
     {
-        SwitchState(IdleState);
         NavAgent = GetComponent<NavMeshAgent>();
         RigidBody = GetComponent<Rigidbody>();
         Target = this.transform;
+        SwitchState(IdleState);
     }
 
 
