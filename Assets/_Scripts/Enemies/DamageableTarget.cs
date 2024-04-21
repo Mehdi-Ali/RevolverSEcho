@@ -1,5 +1,6 @@
 using Unity.Mathematics;
 using UnityEngine;
+using UnityEngine.Experimental.Rendering.RenderGraphModule;
 
 public class DamageableTarget : MonoBehaviour, IPool
 {
@@ -9,10 +10,11 @@ public class DamageableTarget : MonoBehaviour, IPool
     public SplashType SplashType;
     private float _currentHealth;
     private Rigidbody _rigidbody;
-    private PoolSystem _PopupPool;
-    private PoolSystem _VFXPool;
+    private PoolInstance _PopupPool;
+    private PoolInstance _VFXPool;
 
     public bool isInvulnerable;
+
 
     void Start()
     {
@@ -74,16 +76,16 @@ public class DamageableTarget : MonoBehaviour, IPool
         _VFXPool.Return(vfxInstance, 2f);
     }
 
-    public void ApplyForce(float magnitude, Vector3 contactPoint = default)
+    public void ApplyForce(float magnitude, Vector3? contactPoint = null)
     {
         Vector3 direction;
-        if (contactPoint == default)
+        if (contactPoint == null)
         {
             direction = UnityEngine.Random.insideUnitSphere.normalized;
             direction.y = math.abs(direction.y);
         }
         else
-            direction = (transform.position - contactPoint).normalized;
+            direction = (transform.position - (Vector3)contactPoint).normalized;
 
         _rigidbody.AddForce(magnitude * direction);
 
@@ -96,8 +98,7 @@ public class DamageableTarget : MonoBehaviour, IPool
 
     public void Die()
     {
-        // TODO add a pool system for targets
-        Destroy(this.gameObject);
+        PoolManager.PoolInst.DamageableTarget.Return(gameObject);
     }
 
     public void Initialize(int id, Vector3 position, Quaternion rotation)

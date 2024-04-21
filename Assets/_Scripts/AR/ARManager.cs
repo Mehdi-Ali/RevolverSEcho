@@ -88,7 +88,7 @@ public class ARManager : MonoBehaviour
             SpawnEnemies(PoolManager.PoolInst.TargetDrone, PlaneAlignment.HorizontalUp, 1f);
     }
 
-    private void SpawnEnemies(PoolSystem poolSystem, PlaneAlignment planesAlignment, float yOffset)
+    private void SpawnEnemies(PoolInstance poolSystem, PlaneAlignment planesAlignment, float yOffset)
     {
         if (_arPlanes.Count > 0)
         {

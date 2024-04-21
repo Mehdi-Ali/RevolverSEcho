@@ -1,11 +1,14 @@
 using System.Collections;
 using System.Collections.Generic;
+using UnityEditor.Rendering;
 using UnityEngine;
 
-public class PoolSystem : MonoBehaviour
+public class PoolInstance : MonoBehaviour
 {
     public GameObject IPoolPrefab;
     public int normalSize;
+    public bool DynamicParent = false;
+
     private Queue<GameObject> pool;
     private int _nextID = 0;
     public  int NextID
@@ -25,12 +28,12 @@ public class PoolSystem : MonoBehaviour
         }
     }
 
-    public GameObject Get(Vector3 position, Quaternion rotation)
+    public GameObject Get(Vector3 position, Quaternion rotation, Transform parent = null)
     {
-        return Get(position, rotation, out _);
+        return Get(position, rotation, out _, parent);
     }
 
-    public GameObject Get(Vector3 position, Quaternion rotation , out int id)
+    public GameObject Get(Vector3 position, Quaternion rotation , out int id, Transform parent = null)
     {
         GameObject instance;
         if (pool.Count > 0)
@@ -44,6 +47,9 @@ public class PoolSystem : MonoBehaviour
         id = NextID;
         if (instance.TryGetComponent<IPool>(out var iPool))
             iPool.Initialize(id, position, rotation);
+
+        if (parent != null && DynamicParent)
+            instance.transform.SetParent(parent);
         
         return instance;
     }
@@ -61,7 +67,10 @@ public class PoolSystem : MonoBehaviour
         pool.Enqueue(instance);
 
         if (instance.TryGetComponent<IPool>(out var iPool))
+        {
+            instance.transform.SetParent(this.transform);
             iPool.ResetInst();
+        }
     }
 
 }

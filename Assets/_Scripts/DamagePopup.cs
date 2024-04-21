@@ -15,7 +15,7 @@ public class DamagePopup : MonoBehaviour, IPool
     [SerializeField] private Vector3 _textRandomOffset;
     private Camera _mainCamera;
     private RectTransform rectTransform;
-    private PoolSystem _PopupPool;
+    private PoolInstance _PopupPool;
 
 
     public void Initialize(int id, Vector3 position, Quaternion textInfoAsQuaternion)

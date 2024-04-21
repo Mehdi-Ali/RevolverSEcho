@@ -25,7 +25,7 @@ public class Weapon : MonoBehaviour
 
     private float nextFireTime = 0;
 
-    private PoolSystem _bulletPool;
+    private PoolInstance _bulletPool;
     private XRBaseController _controller;
 
 
@@ -59,7 +59,7 @@ public class Weapon : MonoBehaviour
         nextFireTime = Time.time + _fireRate;
 
 
-        var bullet = _bulletPool.Get(_bulletSpawn.position, _bulletSpawn.rotation , out int id);
+        var bullet = _bulletPool.Get(_bulletSpawn.position, _bulletSpawn.rotation ,out int id);
         EventSystem.Events.TriggerOnShoot(transform.parent.name, id);
 
         _muzzleFlashVFX.Play(true);

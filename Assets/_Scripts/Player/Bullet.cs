@@ -2,6 +2,7 @@ using System;
 using System.Collections;
 using System.Collections.Generic;
 using System.Diagnostics;
+using Unity.XR.CoreUtils;
 using UnityEngine;
 
 public class Bullet : MonoBehaviour, IPool
@@ -13,11 +14,13 @@ public class Bullet : MonoBehaviour, IPool
     [SerializeField] private float _bulletDamage = 20;
     [SerializeField] private GameObject trail;
 
-    private PoolSystem _bulletSplashPool;
-    private PoolSystem _bulletPool;
+    private PoolInstance _bulletSplashPool;
+    private PoolInstance _bulletPool;
     private int _id;
-    
 
+    // Pool Settings
+    [SerializeField] private bool _dynamicParent = true;
+    public bool DynamicParent { get => _dynamicParent; set => _dynamicParent = value; }
 
     void Start()
     {
@@ -27,7 +30,7 @@ public class Bullet : MonoBehaviour, IPool
 
     public void Initialize(int id, Vector3 position, Quaternion rotation)
     {
-        _id = id; 
+        _id = id;
         transform.position = position;
         transform.rotation = rotation;
 
@@ -50,27 +53,24 @@ public class Bullet : MonoBehaviour, IPool
 
     void OnCollisionEnter(Collision collision)
     {
-        if (this.gameObject.activeSelf == false)
-            return;
-
-        var contactPoint = collision.GetContact(0).point;
+        Vector3 contactPoint = collision.GetContact(0).point;
+        Transform hitObject = collision.gameObject.transform;
 
         if (collision.gameObject.TryGetComponent<DamageableTarget>(out DamageableTarget target))
         {
-            contactPoint = target.transform.InverseTransformPoint(contactPoint);
             target.TakeDamage(_bulletDamage, contactPoint, _id);
             EventSystem.Events.TriggerOnBulletHit(_id, target, contactPoint);
-            EnableSplash(contactPoint, target.SplashType);
+            EnableSplash(contactPoint, hitObject, target.SplashType);
 
         }
         else
-            EnableSplash(contactPoint);
+            EnableSplash(contactPoint, hitObject);
 
         _bulletPool.Return(gameObject);
     }
 
 
-    private void EnableSplash(Vector3 splashPosition, SplashType splashTyp = SplashType.Default)
+    private void EnableSplash(Vector3 splashPosition, Transform hitObject, SplashType splashTyp = SplashType.Default)
     {
         switch (splashTyp)
         {
@@ -87,8 +87,8 @@ public class Bullet : MonoBehaviour, IPool
             case SplashType.NoSplash:
                 return;
         }
-        // todo I need to make the splash parent to the object: (modify the GET to accept Transforms parents)
-        GameObject splash = _bulletSplashPool.Get(splashPosition, transform.rotation);
+
+        GameObject splash = _bulletSplashPool.Get(splashPosition, transform.rotation, hitObject);
         _bulletSplashPool.Return(splash, 7.5f);
     }
 }

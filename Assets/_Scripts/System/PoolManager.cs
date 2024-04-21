@@ -7,12 +7,13 @@ public class PoolManager : MonoBehaviour
 {
     public static PoolManager PoolInst { get; private set; }
 
-    public PoolSystem Bullet;
-    public PoolSystem BulletSplash;
-    public PoolSystem DamagePopup;
-    public PoolSystem EchoDamageVFX;
-    public PoolSystem TargetCan;
-    public PoolSystem TargetDrone;
+    public PoolInstance Bullet;
+    public PoolInstance BulletSplash;
+    public PoolInstance DamagePopup;
+    public PoolInstance EchoDamageVFX;
+    public PoolInstance TargetCan;
+    public PoolInstance TargetDrone;
+    public PoolInstance DamageableTarget;
 
     private void Awake()
     {
