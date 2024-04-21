@@ -40,16 +40,11 @@ public class DashAbilitySO : Ability
             direction = Quaternion.Euler(0, playerYRotation, 0) * new Vector3(direction2D.x, 0, direction2D.y);
         }
 
-        System.LeftController.smoothMotionEnabled = false;
-
         float startTime = Time.time;
         while(Time.time < startTime + _dashDurationSec)
         {
             System.controller.SimpleMove(direction * _dashSpeed);
             yield return null;
         }
-
-        System.LeftController.smoothMotionEnabled = true;
-
     }
 }

@@ -101,7 +101,6 @@ public class EchoManager : MonoBehaviour
         {
             UniversalMessage.Message.SendText($"You don't have enough Echo");
             return false;
-
         }
 
         _echoCharge = newEchoCharge;

@@ -682,7 +682,7 @@ MonoBehaviour:
   m_Name: 
   m_EditorClassIdentifier: 
   _echoDamage: 20
-  _initialEchoCharge: 3
+  _initialEchoCharge: 10
   _echoCharge: 0
   _maxEchoCharge: 10
   _echoForceFactor: 50
