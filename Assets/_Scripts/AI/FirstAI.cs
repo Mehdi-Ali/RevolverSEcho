@@ -19,8 +19,8 @@ public class FirstAI : DamageableTarget
     {
         if (dashPosition == null)
         {
-            Vector3 randomVector = new Vector3(UnityEngine.Random.Range(-1f, 1f), 0,
-                                                 UnityEngine.Random.Range(-1f, 1f));
+            Vector3 randomVector = new Vector3(UnityEngine.Random.Range(-2f, 2f), 0,
+                                                 UnityEngine.Random.Range(-2f, 2f));
 
             dashPosition = transform.position + randomVector;
         }
