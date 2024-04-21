@@ -12,6 +12,7 @@ public class DamageableTarget : MonoBehaviour, IPool
     private PoolSystem _PopupPool;
     private PoolSystem _VFXPool;
 
+    public bool isInvulnerable;
 
     void Start()
     {
@@ -21,12 +22,13 @@ public class DamageableTarget : MonoBehaviour, IPool
         _currentHealth = _MaxHealth;
     }
 
-    public void TakeDamage(float damage, Vector3 contactPoint,  int id = -1, bool isEcho = false)
+    public virtual void TakeDamage(float damage, Vector3 contactPoint,  int id = -1, bool isEcho = false)
     {
         if (_deformableTarget != null)
             _deformableTarget.DamageTarget();
             
-        if (this == null) return;
+        if (this == null || isInvulnerable)
+            return;
 
         _currentHealth -= damage;
         _currentHealth = math.max(_currentHealth, 0);

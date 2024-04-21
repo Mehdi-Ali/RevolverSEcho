@@ -3,29 +3,27 @@ using System.Collections;
 using System.Collections.Generic;
 using UnityEngine;
 
-public class FirstAI : MonoBehaviour
+public class FirstAI : DamageableTarget
 {
-    [Header("Dependencies")]
-    public Rigidbody RigidBody;
+    // [Header("Dependencies")]
+    // public Rigidbody RigidBody;
     //[Space]
 
-
-    void OnTriggerEnter(Collider other)
+    public override void TakeDamage(float damage, Vector3 contactPoint, int id = -1, bool isEcho = false)
     {
+        base.TakeDamage(damage, contactPoint, id, isEcho);
         Dash();
-    }
-
-    void OnCollisionEnter(Collision other)
-    {
-        Dash();
+        Debug.Log("FirstAI took " + damage + " damage");
     }
 
     private void Dash(Vector3? dashPosition = null)
     {
         if (dashPosition == null)
         {
-            dashPosition = transform.position + //randoom postion
-                new Vector3(UnityEngine.Random.Range(-1f, 1f), 0, UnityEngine.Random.Range(-1f, 1f));
+            Vector3 randomVector = new Vector3(UnityEngine.Random.Range(-1f, 1f), 0,
+                                                 UnityEngine.Random.Range(-1f, 1f));
+
+            dashPosition = transform.position + randomVector;
         }
 
         this.transform.position = (Vector3)dashPosition;

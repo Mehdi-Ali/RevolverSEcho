@@ -16,6 +16,7 @@ public class Bullet : MonoBehaviour, IPool
     private PoolSystem _bulletSplashPool;
     private PoolSystem _bulletPool;
     private int _id;
+    
 
 
     void Start()
@@ -38,14 +39,19 @@ public class Bullet : MonoBehaviour, IPool
 
     public void ResetInst()
     {
-        rigidB.velocity = Vector3.zero;
-        rigidB.isKinematic = true;
+        if (rigidB.isKinematic == false)
+        {
+            rigidB.velocity = Vector3.zero;
+            rigidB.isKinematic = true;
+        }
         trail.SetActive(false);
-
     }
 
     void OnCollisionEnter(Collision collision)
     {
+        if (this.gameObject.activeSelf == true)
+            return;
+
         var contactPoint = collision.GetContact(0).point;
 
         if (collision.gameObject.TryGetComponent<DamageableTarget>(out DamageableTarget target))
@@ -69,8 +75,6 @@ public class Bullet : MonoBehaviour, IPool
         {
             case SplashType.Default:
                 break;
-            case SplashType.NoSplash:
-                return;
             case SplashType.Metal:
                 break;
             case SplashType.Wood:
@@ -79,9 +83,11 @@ public class Bullet : MonoBehaviour, IPool
                 break;
             case SplashType.OrganicEnemy:
                 break;
+            case SplashType.NoSplash:
+                return;
         }
         // todo I need to make the splash parent to the object: (modify the GET to accept Transforms parents)
-        var splash = _bulletSplashPool.Get(splashPosition, transform.rotation);
+        GameObject splash = _bulletSplashPool.Get(splashPosition, transform.rotation);
         _bulletSplashPool.Return(splash, 7.5f);
     }
 }
