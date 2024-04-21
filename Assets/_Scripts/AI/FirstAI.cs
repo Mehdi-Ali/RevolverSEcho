@@ -13,7 +13,6 @@ public class FirstAI : DamageableTarget
     {
         base.TakeDamage(damage, contactPoint, id, isEcho);
         Dash();
-        Debug.Log("FirstAI took " + damage + " damage");
     }
 
     private void Dash(Vector3? dashPosition = null)

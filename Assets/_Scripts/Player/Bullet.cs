@@ -39,17 +39,18 @@ public class Bullet : MonoBehaviour, IPool
 
     public void ResetInst()
     {
+        trail.SetActive(false);
+
         if (rigidB.isKinematic == false)
         {
             rigidB.velocity = Vector3.zero;
             rigidB.isKinematic = true;
         }
-        trail.SetActive(false);
     }
 
     void OnCollisionEnter(Collision collision)
     {
-        if (this.gameObject.activeSelf == true)
+        if (this.gameObject.activeSelf == false)
             return;
 
         var contactPoint = collision.GetContact(0).point;

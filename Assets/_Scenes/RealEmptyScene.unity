@@ -2953,6 +2953,10 @@ PrefabInstance:
       propertyPath: m_LocalEulerAnglesHint.z
       value: 0
       objectReference: {fileID: 0}
+    - target: {fileID: 6232252142191739279, guid: 974c823744d735b4397cd21853e711f4, type: 3}
+      propertyPath: m_Parameters.widthMultiplier
+      value: 2.5
+      objectReference: {fileID: 0}
     - target: {fileID: 6460793831857594938, guid: 974c823744d735b4397cd21853e711f4, type: 3}
       propertyPath: m_Name
       value: FirstAI
