@@ -1282,7 +1282,7 @@ MonoBehaviour:
   m_EditorClassIdentifier: 
   IPoolPrefab: {fileID: 3480854519157085306, guid: eb9e84d5c902b354f8034a3258e016f7, type: 3}
   normalSize: 5
-  DynamicParent: 1
+  DynamicParent: 0
 --- !u!1001 &767232078
 PrefabInstance:
   m_ObjectHideFlags: 0

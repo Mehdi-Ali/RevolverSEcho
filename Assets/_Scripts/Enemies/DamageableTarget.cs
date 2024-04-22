@@ -65,13 +65,13 @@ public class DamageableTarget : MonoBehaviour, IPool
         else
             textInfoAsQuaternion = new Quaternion(damage, 0f, 0f, 0f);
 
-        var damagePopup = _PopupPool.Get(transform.TransformPoint(contactPoint), textInfoAsQuaternion);
+        var damagePopup = _PopupPool.Get(contactPoint, textInfoAsQuaternion);
     }
 
     private void StartEchoVFX(float damage, Vector3 contactPoint)
     {
         // todo randomize rotation?
-        var vfxInstance = _VFXPool.Get(transform.TransformPoint(contactPoint), transform.rotation);
+        var vfxInstance = _VFXPool.Get(contactPoint, transform.rotation);
         vfxInstance.transform.localScale = math.min((damage / 20f), 1f) * Vector3.one;
         _VFXPool.Return(vfxInstance, 2f);
     }

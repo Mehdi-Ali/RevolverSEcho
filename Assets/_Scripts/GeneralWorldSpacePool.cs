@@ -22,7 +22,7 @@ public class GeneralWorldSpacePool : MonoBehaviour, IPool
     public void Initialize(int _, Vector3 position, Quaternion rotation)
     {
         if (_position)
-            transform .position = position;
+            transform.position = position;
         if (_rotation)
             transform.rotation = rotation;
 
