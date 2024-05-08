@@ -59,18 +59,17 @@ public class Bullet : MonoBehaviour, IPool
         if (collision.gameObject.TryGetComponent<DamageableTarget>(out DamageableTarget target))
         {
             target.TakeDamage(_bulletDamage, contactPoint, _id);
-            EventSystem.Events.TriggerOnBulletHit(_id, target, contactPoint);
-            EnableSplash(contactPoint, hitObject, target.SplashType);
-
+            Transform contactPointTransform = SpawnSplash(contactPoint, hitObject, target.SplashType);
+            EventSystem.Events.TriggerOnBulletHit(_id, target, contactPointTransform);
         }
         else
-            EnableSplash(contactPoint, hitObject);
+            SpawnSplash(contactPoint, hitObject);
 
         _bulletPool.Return(gameObject);
     }
 
 
-    private void EnableSplash(Vector3 splashPosition, Transform hitObject, SplashType splashTyp = SplashType.Default)
+    private Transform SpawnSplash(Vector3 splashPosition, Transform hitObject, SplashType splashTyp = SplashType.Default)
     {
         switch (splashTyp)
         {
@@ -85,10 +84,11 @@ public class Bullet : MonoBehaviour, IPool
             case SplashType.OrganicEnemy:
                 break;
             case SplashType.NoSplash:
-                return;
+                return null;
         }
 
         GameObject splash = _bulletSplashPool.Get(splashPosition, transform.rotation, hitObject);
         _bulletSplashPool.Return(splash, 7.5f);
+        return splash.transform;
     }
 }

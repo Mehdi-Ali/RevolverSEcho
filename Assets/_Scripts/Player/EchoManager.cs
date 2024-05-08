@@ -35,9 +35,9 @@ public class EchoManager : MonoBehaviour
         EventSystem.Events.TriggerOnEchoManagerStart(ControllerName);
     }
 
-    private void SaveHitBulletData(DamageableTarget target, Vector3 contactPoint, int bulletID)
+    private void SaveHitBulletData(DamageableTarget target, Transform contactPointTransform, int bulletID)
     {
-        BulletData bulletData = new(bulletID, target, contactPoint);
+        BulletData bulletData = new(bulletID, target, contactPointTransform);
         _landedBullets.Add(bulletData);
         StartCoroutine(RemoveBullet(bulletData, 2f));
 
@@ -81,8 +81,10 @@ public class EchoManager : MonoBehaviour
         if (!bullet.Target)
             return;
 
-        bullet.Target.TakeDamage(damage, bullet.ContactPoint, bullet.ID, true);
-        bullet.Target.ApplyForce(damage * _echoForceFactor, bullet.ContactPoint);
+        // Vector3 explosionPoint = bullet.Target.transform.TransformPoint(bullet.ContactPoint);
+        Vector3 explosionPoint = bullet.ContactPointTransform.position;
+        bullet.Target.TakeDamage(damage, explosionPoint, bullet.ID, true);
+        bullet.Target.ApplyForce(damage * _echoForceFactor, explosionPoint);
     }
 
     private void ChargeEcho(float score)
@@ -130,12 +132,12 @@ public struct BulletData
 {
     public int ID;
     public DamageableTarget Target;
-    public Vector3 ContactPoint;
+    public Transform ContactPointTransform;
 
-    public BulletData(int bulletID, DamageableTarget bulletTarget, Vector3 bulletContactPoint)
+    public BulletData(int bulletID, DamageableTarget bulletTarget, Transform contactPointTransform)
     {
         ID = bulletID;
         Target = bulletTarget;
-        ContactPoint = bulletContactPoint;
+        ContactPointTransform = contactPointTransform;
     }
 }

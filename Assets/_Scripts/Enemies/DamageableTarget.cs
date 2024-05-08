@@ -71,7 +71,7 @@ public class DamageableTarget : MonoBehaviour, IPool
     private void StartEchoVFX(float damage, Vector3 contactPoint)
     {
         // todo randomize rotation?
-        var vfxInstance = _VFXPool.Get(contactPoint, transform.rotation);
+        var vfxInstance = _VFXPool.Get(contactPoint, transform.rotation, this.transform);
         vfxInstance.transform.localScale = math.min((damage / 20f), 1f) * Vector3.one;
         _VFXPool.Return(vfxInstance, 2f);
     }
