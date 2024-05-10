@@ -11,6 +11,7 @@ GameObject:
   - component: {fileID: 6383063253110538784}
   - component: {fileID: 8599840661348767505}
   - component: {fileID: 8165828401822794850}
+  - component: {fileID: 4591999281286704701}
   - component: {fileID: 3433226948213178114}
   - component: {fileID: 3215710429623534749}
   m_Layer: 0
@@ -68,6 +69,19 @@ MonoBehaviour:
   m_EditorClassIdentifier: 
   _undamagedTransform: {fileID: 332456596354319678}
   _damagedTransform: {fileID: 663443445274197985}
+--- !u!114 &4591999281286704701
+MonoBehaviour:
+  m_ObjectHideFlags: 0
+  m_CorrespondingSourceObject: {fileID: 0}
+  m_PrefabInstance: {fileID: 0}
+  m_PrefabAsset: {fileID: 0}
+  m_GameObject: {fileID: 3480854519157085306}
+  m_Enabled: 1
+  m_EditorHideFlags: 0
+  m_Script: {fileID: 11500000, guid: c2eb44733244f5442bba356333eaff8c, type: 3}
+  m_Name: 
+  m_EditorClassIdentifier: 
+  _loop: 1
 --- !u!136 &3433226948213178114
 CapsuleCollider:
   m_ObjectHideFlags: 0
@@ -185,14 +199,14 @@ PrefabInstance:
     - target: {fileID: -7511558181221131132, guid: 952a85fea892cac469a3b2f82009e2b2, type: 3}
       propertyPath: m_Materials.Array.data[0]
       value: 
-      objectReference: {fileID: 2100000, guid: 5b237ec07c8e21645a49c3cd88c30b18, type: 2}
+      objectReference: {fileID: 2100000, guid: bb057f3f9c6945743a1a8090c4f28d92, type: 2}
     - target: {fileID: 919132149155446097, guid: 952a85fea892cac469a3b2f82009e2b2, type: 3}
       propertyPath: m_Name
       value: DamagedCanfbx
       objectReference: {fileID: 0}
     - target: {fileID: 919132149155446097, guid: 952a85fea892cac469a3b2f82009e2b2, type: 3}
       propertyPath: m_IsActive
-      value: 1
+      value: 0
       objectReference: {fileID: 0}
     m_RemovedComponents: []
     m_RemovedGameObjects: []
@@ -276,7 +290,7 @@ PrefabInstance:
     - target: {fileID: -7511558181221131132, guid: 310402b8751d96645a4abb9356925767, type: 3}
       propertyPath: m_Materials.Array.data[0]
       value: 
-      objectReference: {fileID: 2100000, guid: 5b237ec07c8e21645a49c3cd88c30b18, type: 2}
+      objectReference: {fileID: 2100000, guid: bb057f3f9c6945743a1a8090c4f28d92, type: 2}
     - target: {fileID: 919132149155446097, guid: 310402b8751d96645a4abb9356925767, type: 3}
       propertyPath: m_Name
       value: Can
