@@ -65,7 +65,7 @@ public class Bullet : MonoBehaviour, IPool
         else
             SpawnSplash(contactPoint, hitObject);
 
-        _bulletPool.Return(gameObject);
+        _bulletPool.ReturnTomPool(gameObject);
     }
 
 
@@ -87,8 +87,8 @@ public class Bullet : MonoBehaviour, IPool
                 return null;
         }
 
-        GameObject splash = _bulletSplashPool.Get(splashPosition, transform.rotation, hitObject);
-        _bulletSplashPool.Return(splash, 7.5f);
+        GameObject splash = _bulletSplashPool.SpawnFromPool(splashPosition, transform.rotation, hitObject);
+        _bulletSplashPool.ReturnTomPool(splash, 7.5f);
         return splash.transform;
     }
 }

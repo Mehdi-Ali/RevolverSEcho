@@ -26,7 +26,7 @@ public class DamagePopup : MonoBehaviour, IPool
         if (_mainCamera == null)
             _mainCamera = Camera.main;
 
-        _PopupPool.Return(this.gameObject, _damagePopupLifeTimeInSec);
+        _PopupPool.ReturnTomPool(this.gameObject, _damagePopupLifeTimeInSec);
 
         SetTransform(position);
         SetText(textInfoAsQuaternion);

@@ -13,7 +13,7 @@ public class PoolManager : MonoBehaviour
     public PoolInstance EchoDamageVFX;
     public PoolInstance TargetCan;
     public PoolInstance TargetDrone;
-    public PoolInstance DamageableTarget;
+    public PoolInstance Target;
 
     private void Awake()
     {

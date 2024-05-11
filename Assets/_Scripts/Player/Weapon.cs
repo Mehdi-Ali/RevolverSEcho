@@ -59,13 +59,13 @@ public class Weapon : MonoBehaviour
         nextFireTime = Time.time + _fireRate;
 
 
-        var bullet = _bulletPool.Get(_bulletSpawn.position, _bulletSpawn.rotation ,out int id);
+        var bullet = _bulletPool.SpawnFromPool(_bulletSpawn.position, _bulletSpawn.rotation ,out int id);
         EventSystem.Events.TriggerOnShoot(transform.parent.name, id);
 
         _muzzleFlashVFX.Play(true);
         audioSource.PlayOneShot(_shootSound);
         _controller.SendHapticImpulse(_hapticAmplitude, _hapticDuration);
-        _bulletPool.Return(bullet, 5.0f);
+        _bulletPool.ReturnTomPool(bullet, 5.0f);
     }
 
     private void EndShooting(InputAction.CallbackContext context)

@@ -1,19 +1,44 @@
+using System.Collections;
+using System.Collections.Generic;
 using Unity.Mathematics;
 using UnityEngine;
 using UnityEngine.Experimental.Rendering.RenderGraphModule;
 
 public class DamageableTarget : MonoBehaviour, IPool
 {
-    [SerializeField] private float _MaxHealth = 100f;
-    [SerializeField] private DeformableTarget _deformableTarget;
-    [SerializeField] private BaseEnemy _baseEnemy;
-    public SplashType SplashType;
+    [Header("Enemy")]
+    [SerializeField]
+    private float _MaxHealth = 100f;
     private float _currentHealth;
+    [SerializeField]
+    private DeformableTarget _deformableTarget;
+    [SerializeField]
+    private BaseEnemy _baseEnemy;
+    public bool isInvulnerable;
+    [Space(16)]
+
+    [Header("Span")]
+    [SerializeField]
+    private bool SpanOnSpawn;
+    [SerializeField]
+    private float _dissolveRate = 0.0125f;
+    [SerializeField]
+    private float _refreshRate = 0.025f;
+
+    private List<Material> _materials;
+    private MeshRenderer[] meshRenderers;
+    [Space(16)]
+
+
+    [Header("Splash")]
+    public SplashType SplashType;
+    [Space(16)]
+
+
+
     private Rigidbody _rigidbody;
     private PoolInstance _PopupPool;
     private PoolInstance _VFXPool;
-
-    public bool isInvulnerable;
 
 
     void Start()
@@ -65,15 +90,15 @@ public class DamageableTarget : MonoBehaviour, IPool
         else
             textInfoAsQuaternion = new Quaternion(damage, 0f, 0f, 0f);
 
-        var damagePopup = _PopupPool.Get(contactPoint, textInfoAsQuaternion);
+        var damagePopup = _PopupPool.SpawnFromPool(contactPoint, textInfoAsQuaternion);
     }
 
     private void StartEchoVFX(float damage, Vector3 contactPoint)
     {
         // todo randomize rotation?
-        var vfxInstance = _VFXPool.Get(contactPoint, transform.rotation, this.transform);
+        var vfxInstance = _VFXPool.SpawnFromPool(contactPoint, transform.rotation, this.transform);
         vfxInstance.transform.localScale = math.min((damage / 20f), 1f) * Vector3.one;
-        _VFXPool.Return(vfxInstance, 2f);
+        _VFXPool.ReturnTomPool(vfxInstance, 2f);
     }
 
     public void ApplyForce(float magnitude, Vector3? contactPoint = null)
@@ -98,14 +123,48 @@ public class DamageableTarget : MonoBehaviour, IPool
 
     public void Die()
     {
-        PoolManager.PoolInst.DamageableTarget.Return(gameObject);
+        PoolManager.PoolInst.Target.ReturnTomPool(gameObject);
     }
 
     public void Initialize(int id, Vector3 position, Quaternion rotation)
     {
         transform.position = position;
         _currentHealth = _MaxHealth;
-        _deformableTarget.ResetTarget();
+
+        if (_deformableTarget != null)
+            _deformableTarget.ResetTarget();
+
+        if (SpanOnSpawn)
+            StartCoroutine(SpawnVFX());
+    }
+
+    IEnumerator SpawnVFX()
+    {
+        if (_materials == null)
+            GetChildrenMaterials();
+
+        float randomOffset = UnityEngine.Random.Range(0, 10);
+        foreach (var material in _materials)
+            material.SetVector("_RandomOffset", new Vector2(randomOffset, randomOffset));
+
+        float time = 1;
+        while (time > 0)
+        {
+            time -= _dissolveRate;
+            foreach (var material in _materials)
+                material.SetFloat("_DissolveAmount", time);
+
+            yield return new WaitForSeconds(_refreshRate);
+        }
+    }
+
+    private void GetChildrenMaterials()
+    {
+        meshRenderers = GetComponentsInChildren<MeshRenderer>(true);
+        _materials = new List<Material>();
+
+        foreach (var meshRenderer in meshRenderers)
+            _materials.AddRange(meshRenderer.materials);
     }
 
     public void ResetInst() {}

@@ -99,7 +99,7 @@ public class ARManager : MonoBehaviour
 
                 plane.transform.GetPositionAndRotation(out var position, out var Rotation);
                 position.y += yOffset;
-                poolSystem.Get(position, Rotation);
+                poolSystem.SpawnFromPool(position, Rotation);
 
             }
 

@@ -11,7 +11,6 @@ GameObject:
   - component: {fileID: 6383063253110538784}
   - component: {fileID: 8599840661348767505}
   - component: {fileID: 8165828401822794850}
-  - component: {fileID: 4591999281286704701}
   - component: {fileID: 3433226948213178114}
   - component: {fileID: 3215710429623534749}
   m_Layer: 0
@@ -53,8 +52,11 @@ MonoBehaviour:
   _MaxHealth: 31
   _deformableTarget: {fileID: 8165828401822794850}
   _baseEnemy: {fileID: 0}
-  SplashType: 0
   isInvulnerable: 0
+  SpanOnSpawn: 1
+  _dissolveRate: 0.0125
+  _refreshRate: 0.025
+  SplashType: 0
 --- !u!114 &8165828401822794850
 MonoBehaviour:
   m_ObjectHideFlags: 0
@@ -69,19 +71,6 @@ MonoBehaviour:
   m_EditorClassIdentifier: 
   _undamagedTransform: {fileID: 332456596354319678}
   _damagedTransform: {fileID: 663443445274197985}
---- !u!114 &4591999281286704701
-MonoBehaviour:
-  m_ObjectHideFlags: 0
-  m_CorrespondingSourceObject: {fileID: 0}
-  m_PrefabInstance: {fileID: 0}
-  m_PrefabAsset: {fileID: 0}
-  m_GameObject: {fileID: 3480854519157085306}
-  m_Enabled: 1
-  m_EditorHideFlags: 0
-  m_Script: {fileID: 11500000, guid: c2eb44733244f5442bba356333eaff8c, type: 3}
-  m_Name: 
-  m_EditorClassIdentifier: 
-  _loop: 1
 --- !u!136 &3433226948213178114
 CapsuleCollider:
   m_ObjectHideFlags: 0

@@ -103,7 +103,7 @@ Material:
     - _DisolveAmount: 0
     - _DisolveLineWidth: 0.04
     - _DisolveScale: 20
-    - _DissolveAmount: 0
+    - _DissolveAmount: 1
     - _DstBlend: 0
     - _DstBlendAlpha: 0
     - _EnvironmentReflections: 1
@@ -130,6 +130,7 @@ Material:
     - _ZWrite: 1
     m_Colors:
     - _BaseColor: {r: 0.52078146, g: 0.5761413, b: 0.7830189, a: 1}
+    - _BaseEmission: {r: 0, g: 0, b: 0, a: 0}
     - _Color: {r: 0.52078146, g: 0.5761413, b: 0.7830188, a: 1}
     - _DisolveColor: {r: 0.05660367, g: 1.291685, b: 4, a: 0}
     - _EmissionColor: {r: 0.23455065, g: 0.2917707, b: 0.57758063, a: 1}

@@ -28,12 +28,19 @@ public class PoolInstance : MonoBehaviour
         }
     }
 
-    public GameObject Get(Vector3 position, Quaternion rotation, Transform parent = null)
+    public GameObject SpawnFromPool(Vector3 position, Quaternion rotation, Transform parent = null)
     {
-        return Get(position, rotation, out _, parent);
+        return SpawnFromPool(position, rotation, out _, parent);
+    }
+    public GameObject SpawnFromPool(Transform spawnPointTransform, Transform parent = null)
+    {
+        if (spawnPointTransform == null)
+            return null;
+
+        return SpawnFromPool(spawnPointTransform.position, spawnPointTransform.rotation, out _, parent);
     }
 
-    public GameObject Get(Vector3 position, Quaternion rotation , out int id, Transform parent = null)
+    public GameObject SpawnFromPool(Vector3 position, Quaternion rotation , out int id, Transform parent = null)
     {
         GameObject instance;
         if (pool.Count > 0)
@@ -55,7 +62,7 @@ public class PoolInstance : MonoBehaviour
     }
 
 
-    public void Return(GameObject instance, float delay = 0f)
+    public void ReturnTomPool(GameObject instance, float delay = 0f)
     {
         StartCoroutine(DelayedReturn(instance, delay));
     }

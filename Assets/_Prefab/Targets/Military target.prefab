@@ -15,7 +15,6 @@ GameObject:
   - component: {fileID: 7322962975978772525}
   - component: {fileID: 6091634783753321485}
   - component: {fileID: -5067569386514286926}
-  - component: {fileID: 2903916133507332410}
   m_Layer: 0
   m_Name: Military target
   m_TagString: Untagged
@@ -53,8 +52,11 @@ MonoBehaviour:
   _MaxHealth: 500
   _deformableTarget: {fileID: 0}
   _baseEnemy: {fileID: 0}
-  SplashType: 0
   isInvulnerable: 0
+  SpanOnSpawn: 1
+  _dissolveRate: 0.0125
+  _refreshRate: 0.025
+  SplashType: 0
 --- !u!33 &33848685573292062
 MeshFilter:
   m_ObjectHideFlags: 0
@@ -173,18 +175,3 @@ MonoBehaviour:
   m_IgnoreFromBuild: 1
   m_ApplyToChildren: 1
   m_AffectedAgents: f2652fae
---- !u!114 &2903916133507332410
-MonoBehaviour:
-  m_ObjectHideFlags: 0
-  m_CorrespondingSourceObject: {fileID: 0}
-  m_PrefabInstance: {fileID: 0}
-  m_PrefabAsset: {fileID: 0}
-  m_GameObject: {fileID: 1501084758933746}
-  m_Enabled: 1
-  m_EditorHideFlags: 0
-  m_Script: {fileID: 11500000, guid: c2eb44733244f5442bba356333eaff8c, type: 3}
-  m_Name: 
-  m_EditorClassIdentifier: 
-  _loop: 1
-  _dissolveRate: 0.0125
-  _refreshRate: 0.025
