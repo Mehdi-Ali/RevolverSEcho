@@ -43,7 +43,7 @@ public class PoolInstance : MonoBehaviour
     public GameObject SpawnFromPool(Vector3 position, Quaternion rotation , out int id, Transform parent = null)
     {
         GameObject instance;
-        if (pool.Count > 0)
+        if (pool != null && pool.Count > 0)
         {
             instance = pool.Dequeue();
             instance.SetActive(true);
