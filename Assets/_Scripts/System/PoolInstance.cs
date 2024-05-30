@@ -27,20 +27,28 @@ public class PoolInstance : MonoBehaviour
             pool.Enqueue(instance);
         }
     }
-
-    public GameObject SpawnFromPool(Vector3 position, Quaternion rotation, Transform parent = null)
-    {
-        return SpawnFromPool(position, rotation, out _, parent);
-    }
     public GameObject SpawnFromPool(Transform spawnPointTransform, Transform parent = null)
     {
         if (spawnPointTransform == null)
             return null;
 
-        return SpawnFromPool(spawnPointTransform.position, spawnPointTransform.rotation, out _, parent);
+        return SpawnFromPool(spawnPointTransform.position, spawnPointTransform.rotation, spawnPointTransform.localScale, out _, parent);
     }
-
-    public GameObject SpawnFromPool(Vector3 position, Quaternion rotation , out int id, Transform parent = null)
+    public GameObject SpawnFromPool(Vector3 position, Quaternion rotation, Transform parent = null)
+    {
+        Vector3 scale = Vector3.zero;
+        return SpawnFromPool(position, rotation, scale, out _, parent);
+    }
+    public GameObject SpawnFromPool(Vector3 position, Quaternion rotation, out int id, Transform parent = null)
+    {
+        Vector3 scale = Vector3.zero;
+        return SpawnFromPool(position, rotation, scale, out id, parent);
+    }
+    public GameObject SpawnFromPool(Vector3 position, Quaternion rotation, Vector3 scale, Transform parent = null)
+    {
+        return SpawnFromPool(position, rotation, scale, out _, parent);
+    }
+    public GameObject SpawnFromPool(Vector3 position, Quaternion rotation, Vector3 scale, out int id, Transform parent = null)
     {
         GameObject instance;
         if (pool != null && pool.Count > 0)
@@ -53,7 +61,7 @@ public class PoolInstance : MonoBehaviour
 
         id = NextID;
         if (instance.TryGetComponent<IPool>(out var iPool))
-            iPool.Initialize(id, position, rotation);
+            iPool.Initialize(id, position, rotation, scale);
 
         if (parent != null && DynamicParent)
             instance.transform.SetParent(parent);
@@ -84,6 +92,6 @@ public class PoolInstance : MonoBehaviour
 
 public interface IPool
 {
-    public void Initialize(int id, Vector3 position, Quaternion rotation);
+    public void Initialize(int id, Vector3 position, Quaternion rotation, Vector3 scale, float delay = 0f);
     public void ResetInst();
 }

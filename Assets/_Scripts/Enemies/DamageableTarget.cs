@@ -126,7 +126,7 @@ public class DamageableTarget : MonoBehaviour, IPool
         PoolManager.PoolInst.Target.ReturnTomPool(gameObject);
     }
 
-    public void Initialize(int id, Vector3 position, Quaternion rotation)
+    public void Initialize(int id, Vector3 position, Quaternion rotation, Vector3 scale, float delay = 0f)
     {
         transform.position = position;
         _currentHealth = _MaxHealth;

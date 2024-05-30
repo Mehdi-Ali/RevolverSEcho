@@ -5,7 +5,7 @@ using EasyButtons;
 using Unity.XR.CoreUtils;
 using UnityEngine;
 
-public class SequencerSpawner : MonoBehaviour
+public class SequenceSpawner : MonoBehaviour
 {
     public bool autostart;
 
@@ -31,12 +31,12 @@ public class SequencerSpawner : MonoBehaviour
     }
 
     [Button]
-    public void SpawnEntity(int entityIndex, int start = -1, int end = -1)
+    public void SpawnEntity(int elementIndex, int start = -1, int end = -1)
     {
         int? nullableStart = (start == -1) ? null : start;
         int? nullableEnd = (end == -1) ? null : end;
 
-        StartCoroutine(SpawnEntityElements(SpawningEntities[entityIndex], nullableStart, nullableEnd));
+        StartCoroutine(SpawnEntityElements(SpawningEntities[elementIndex], nullableStart, nullableEnd));
     }
 
     private IEnumerator SpawnEntityElements(SpawningEntity spawningEntity, int? nullableStart = null, int? nullableEnd = null)
@@ -67,6 +67,8 @@ public class SequencerSpawner : MonoBehaviour
         PoolInstance pool = spawningEntity.PoolInstance;
         if (pool != null)
             pool.SpawnFromPool(spawningEntity.SpawningPoints[spawningEntity.currentIndex++]);
+
+        // if we finsih with a element we should go to the next one 
 
     }
 

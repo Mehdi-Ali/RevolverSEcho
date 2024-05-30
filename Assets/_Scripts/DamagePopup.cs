@@ -18,7 +18,7 @@ public class DamagePopup : MonoBehaviour, IPool
     private PoolInstance _PopupPool;
 
 
-    public void Initialize(int id, Vector3 position, Quaternion textInfoAsQuaternion)
+    public void Initialize(int id, Vector3 position, Quaternion textInfoAsQuaternion, Vector3 scale, float delay = 0f)
     {
         if (_PopupPool == null)
             _PopupPool = PoolManager.PoolInst.DamagePopup;

@@ -28,7 +28,7 @@ public class Bullet : MonoBehaviour, IPool
         _bulletSplashPool = PoolManager.PoolInst.BulletSplash;
     }
 
-    public void Initialize(int id, Vector3 position, Quaternion rotation)
+    public void Initialize(int id, Vector3 position, Quaternion rotation, Vector3 scale, float delay = 0f)
     {
         _id = id;
         transform.position = position;

@@ -8,6 +8,7 @@ public class GeneralWorldSpacePool : MonoBehaviour, IPool
     [Header("ParametersToSet")]
     [SerializeField] private bool _position;
     [SerializeField] private bool _rotation;
+    [SerializeField] private bool _scale;
     [Space]
     [SerializeField] private ParticleSystem _particleSystem;
     [SerializeField] private AudioClip _audioClip;
@@ -19,12 +20,14 @@ public class GeneralWorldSpacePool : MonoBehaviour, IPool
     }
 
 
-    public void Initialize(int _, Vector3 position, Quaternion rotation)
+    public void Initialize(int _, Vector3 position, Quaternion rotation, Vector3 scale, float delay = 0f)
     {
         if (_position)
             transform.position = position;
         if (_rotation)
             transform.rotation = rotation;
+        if (_scale)
+            transform.localScale = scale;
 
         if (_audioClip != null)
             _audioSource.PlayOneShot(_audioClip);
