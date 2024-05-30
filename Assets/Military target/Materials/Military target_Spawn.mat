@@ -100,7 +100,7 @@ Material:
     - _Cutoff: 0.5
     - _DetailAlbedoMapScale: 1
     - _DetailNormalMapScale: 1
-    - _DisolveLineWidth: 0.04
+    - _DisolveLineWidth: 0.01
     - _DisolveScale: 20
     - _DissolveAmount: 0.304
     - _DstBlend: 0
@@ -128,7 +128,8 @@ Material:
     - _WorkflowMode: 1
     - _ZWrite: 1
     m_Colors:
-    - _BaseColor: {r: 1, g: 1, b: 1, a: 1}
+    - _BaseColor: {r: 0.12259701, g: 0.1246798, b: 0.2735849, a: 1}
+    - _BaseEmission: {r: 0.055535786, g: 0.055535786, b: 0.3018868, a: 1}
     - _Color: {r: 1, g: 1, b: 1, a: 1}
     - _DisolveColor: {r: 0.05660367, g: 1.291685, b: 4, a: 0}
     - _EmissionColor: {r: 0.03125, g: 0.03125, b: 0.03125, a: 1}

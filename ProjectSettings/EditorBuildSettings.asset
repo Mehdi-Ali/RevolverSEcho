@@ -17,9 +17,12 @@ EditorBuildSettings:
   - enabled: 0
     path: Assets/ClockTower.unity
     guid: 3496c46c6e6c0124f9e0198c11ec74fd
-  - enabled: 1
+  - enabled: 0
     path: Assets/_Scenes/RealEmptyScene.unity
     guid: b7ff58861b5308f4688c079bee924dea
+  - enabled: 1
+    path: Assets/_Scenes/Episode 00 UAA.unity
+    guid: 359ff65a3754cf840be890e875d85b94
   m_configObjects:
     Unity.XR.Oculus.Settings: {fileID: 11400000, guid: bfa1182bd221b4ca89619141f66f1260, type: 2}
     Unity.XR.WindowsMR.Settings: {fileID: 11400000, guid: dc5a169419fa04987b057f65238cf3ba, type: 2}
