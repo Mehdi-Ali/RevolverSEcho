@@ -14,7 +14,6 @@ GameObject:
   - component: {fileID: 23415105773652922}
   - component: {fileID: 7322962975978772525}
   - component: {fileID: 6091634783753321485}
-  - component: {fileID: 340560471801623922}
   m_Layer: 0
   m_Name: Military target
   m_TagString: Untagged
@@ -156,18 +155,3 @@ Rigidbody:
   m_Interpolate: 1
   m_Constraints: 0
   m_CollisionDetection: 2
---- !u!114 &340560471801623922
-MonoBehaviour:
-  m_ObjectHideFlags: 0
-  m_CorrespondingSourceObject: {fileID: 0}
-  m_PrefabInstance: {fileID: 0}
-  m_PrefabAsset: {fileID: 0}
-  m_GameObject: {fileID: 1501084758933746}
-  m_Enabled: 1
-  m_EditorHideFlags: 0
-  m_Script: {fileID: 11500000, guid: c2eb44733244f5442bba356333eaff8c, type: 3}
-  m_Name: 
-  m_EditorClassIdentifier: 
-  _loop: 0
-  _dissolveRate: 0.0125
-  _refreshRate: 0.025

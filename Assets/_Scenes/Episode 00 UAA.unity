@@ -181,7 +181,7 @@ GameObject:
   - component: {fileID: 81285623}
   - component: {fileID: 81285622}
   m_Layer: 2
-  m_Name: SequenceSpawner
+  m_Name: '[Sequence Spawner]'
   m_TagString: Untagged
   m_Icon: {fileID: 0}
   m_NavMeshLayer: 0
@@ -199,7 +199,7 @@ MonoBehaviour:
   m_Script: {fileID: 11500000, guid: 873f0c58b80e6a842bea32465b7b22e4, type: 3}
   m_Name: 
   m_EditorClassIdentifier: 
-  autostart: 1
+  autostart: 0
   SpawningEntities:
   - PoolInstance: {fileID: 1512647809}
     SpawningPoints:
@@ -210,10 +210,10 @@ MonoBehaviour:
   - PoolInstance: {fileID: 368204625}
     SpawningPoints:
     - {fileID: 6490760004751209068}
-    - {fileID: 754841633}
-    - {fileID: 235999208}
     - {fileID: 1795297057}
+    - {fileID: 754841633}
     - {fileID: 1643745166}
+    - {fileID: 235999208}
     - {fileID: 2085339310}
     currentIndex: 0
   - PoolInstance: {fileID: 37483557}
@@ -961,10 +961,10 @@ Transform:
   m_ConstrainProportionsScale: 0
   m_Children:
   - {fileID: 6490760004751209068}
-  - {fileID: 754841633}
-  - {fileID: 235999208}
   - {fileID: 1795297057}
+  - {fileID: 754841633}
   - {fileID: 1643745166}
+  - {fileID: 235999208}
   - {fileID: 2085339310}
   m_Father: {fileID: 1165360150}
   m_LocalEulerAnglesHint: {x: 0, y: 0, z: 0}
@@ -3025,6 +3025,18 @@ PrefabInstance:
       propertyPath: m_Enabled
       value: 0
       objectReference: {fileID: 0}
+    - target: {fileID: 3221844317263979640, guid: 7727d53c333980c4fb66e84e68896a81, type: 3}
+      propertyPath: m_BackGroundColor.a
+      value: 1
+      objectReference: {fileID: 0}
+    - target: {fileID: 3221844317263979640, guid: 7727d53c333980c4fb66e84e68896a81, type: 3}
+      propertyPath: m_BackGroundColor.b
+      value: 0
+      objectReference: {fileID: 0}
+    - target: {fileID: 3221844317263979640, guid: 7727d53c333980c4fb66e84e68896a81, type: 3}
+      propertyPath: m_BackGroundColor.g
+      value: 0
+      objectReference: {fileID: 0}
     - target: {fileID: 3239760560441177987, guid: 7727d53c333980c4fb66e84e68896a81, type: 3}
       propertyPath: m_Enabled
       value: 0
@@ -3882,7 +3894,7 @@ Transform:
   m_GameObject: {fileID: 2547100771297464224}
   serializedVersion: 2
   m_LocalRotation: {x: -0, y: -0, z: -0, w: 1}
-  m_LocalPosition: {x: 3, y: 0, z: 2}
+  m_LocalPosition: {x: 1.5, y: 0, z: 6}
   m_LocalScale: {x: 1, y: 1, z: 1}
   m_ConstrainProportionsScale: 0
   m_Children:
@@ -4006,7 +4018,7 @@ Transform:
   m_GameObject: {fileID: 2907708229034524252}
   serializedVersion: 2
   m_LocalRotation: {x: -0, y: -0, z: -0, w: 1}
-  m_LocalPosition: {x: 1.5, y: 0, z: 1}
+  m_LocalPosition: {x: 0, y: 0, z: 5}
   m_LocalScale: {x: 1, y: 1, z: 1}
   m_ConstrainProportionsScale: 0
   m_Children:
@@ -4889,7 +4901,7 @@ Transform:
   m_GameObject: {fileID: 3971605617243909258}
   serializedVersion: 2
   m_LocalRotation: {x: 0, y: 0, z: 0, w: 1}
-  m_LocalPosition: {x: -1.5, y: 0, z: 4}
+  m_LocalPosition: {x: 0, y: 0, z: 0}
   m_LocalScale: {x: 1, y: 1, z: 1}
   m_ConstrainProportionsScale: 0
   m_Children:
@@ -6519,8 +6531,8 @@ Transform:
   m_PrefabAsset: {fileID: 0}
   m_GameObject: {fileID: 6991067204470155009}
   serializedVersion: 2
-  m_LocalRotation: {x: 0, y: 0, z: 0, w: 1}
-  m_LocalPosition: {x: 0, y: 0, z: 0}
+  m_LocalRotation: {x: -0, y: -0, z: -0, w: 1}
+  m_LocalPosition: {x: -1.5, y: 0, z: 4}
   m_LocalScale: {x: 1, y: 1, z: 1}
   m_ConstrainProportionsScale: 0
   m_Children:
