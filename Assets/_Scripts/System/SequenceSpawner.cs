@@ -1,13 +1,12 @@
-using System.Threading;
 using System.Collections;
-using System.Collections.Generic;
+using System;
 using EasyButtons;
-using Unity.XR.CoreUtils;
 using UnityEngine;
 
 public class SequenceSpawner : MonoBehaviour
 {
     public bool autostart;
+    public float startDelay = 3f;
 
     public SpawningEntity[] SpawningEntities;
 
@@ -16,10 +15,15 @@ public class SequenceSpawner : MonoBehaviour
     void Start()
     {
         if (autostart)
-            StartCoroutine(SpawnCoroutine());
+            Invoke(nameof(Spawn), startDelay);
     }
 
     [Button]
+    private void Spawn()
+    {
+        StartCoroutine(SpawnCoroutine());
+    }
+    
     private IEnumerator SpawnCoroutine()
     {
         for (int i = 0; i < SpawningEntities.Length; i++)

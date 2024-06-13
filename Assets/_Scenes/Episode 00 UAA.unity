@@ -199,7 +199,8 @@ MonoBehaviour:
   m_Script: {fileID: 11500000, guid: 873f0c58b80e6a842bea32465b7b22e4, type: 3}
   m_Name: 
   m_EditorClassIdentifier: 
-  autostart: 0
+  autostart: 1
+  startDelay: 3
   SpawningEntities:
   - PoolInstance: {fileID: 1512647809}
     SpawningPoints:
@@ -2378,7 +2379,7 @@ GameObject:
   m_Icon: {fileID: 0}
   m_NavMeshLayer: 0
   m_StaticEditorFlags: 0
-  m_IsActive: 1
+  m_IsActive: 0
 --- !u!4 &1932320114
 Transform:
   m_ObjectHideFlags: 0
