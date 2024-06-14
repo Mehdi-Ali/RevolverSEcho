@@ -29,7 +29,7 @@ public class UniversalMessage : MonoBehaviour
 
     public void SendText(string text)
     {
-        _text.text += "\n /n" + text;
+        _text.text += "\n " + text;
         // add a times to deletes the text or make it transparent ?
     }
 }

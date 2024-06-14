@@ -11,7 +11,6 @@ public class SequenceSpawner : MonoBehaviour
     public SpawningEntity[] SpawningEntities;
 
 
-
     void Start()
     {
         if (autostart)
@@ -59,7 +58,18 @@ public class SequenceSpawner : MonoBehaviour
         for (int j = start++; j < end; j++)
         {
             Transform spawningPoint = spawningPoints[j];
-            spawningEntity.PoolInstance.SpawnFromPool(spawningPoint);
+
+            var msg = $"Spawning Point: {spawningPoint.name}: {spawningPoint.position}";
+            Debug.Log(msg);
+            UniversalMessage.Message.SendText(msg);
+            
+            var obj = spawningEntity.PoolInstance.SpawnFromPool(spawningPoint);
+
+            msg = $"Obj spawned at: {obj.transform.position}";
+            Debug.Log(msg);
+            UniversalMessage.Message.SendText(msg);
+            
+            
             yield return new WaitForSeconds(1);
         }
     }
