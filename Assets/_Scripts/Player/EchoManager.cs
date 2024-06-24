@@ -78,7 +78,7 @@ public class EchoManager : MonoBehaviour
         var damage = score * _echoDamage;
         ChargeEcho(score);
 
-        if (!bullet.Target)
+        if (bullet.Target == null || bullet.ContactPointTransform == null)
             return;
 
         // Vector3 explosionPoint = bullet.Target.transform.TransformPoint(bullet.ContactPoint);

@@ -596,7 +596,7 @@ MonoBehaviour:
   m_Name: 
   m_EditorClassIdentifier: 
   IPoolPrefab: {fileID: 3480854519157085306, guid: eb9e84d5c902b354f8034a3258e016f7, type: 3}
-  normalSize: 5
+  normalSize: 10
   DynamicParent: 0
 --- !u!4 &653120863
 Transform:

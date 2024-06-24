@@ -1,8 +1,10 @@
+using System;
 using System.Collections;
 using System.Collections.Generic;
 using Unity.Mathematics;
 using UnityEngine;
 using UnityEngine.Experimental.Rendering.RenderGraphModule;
+using UnityEngine.LowLevel;
 
 public class DamageableTarget : MonoBehaviour, IPool
 {
@@ -128,7 +130,12 @@ public class DamageableTarget : MonoBehaviour, IPool
 
     public void Initialize(int id, Vector3 position, Quaternion rotation, Vector3 scale, float delay = 0f)
     {
+        
+        // transform.SetPositionAndRotation(position, rotation);
         transform.position = position;
+        // transform.rotation = rotation;
+        transform.localScale = scale;
+        
         _currentHealth = _MaxHealth;
 
         if (_deformableTarget != null)
