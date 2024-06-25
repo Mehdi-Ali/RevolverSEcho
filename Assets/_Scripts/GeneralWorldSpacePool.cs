@@ -1,14 +1,15 @@
 using System.Collections;
 using System.Collections.Generic;
 using UnityEngine;
+using UnityEngine.Serialization;
 
 [RequireComponent(typeof(AudioSource))]
 public class GeneralWorldSpacePool : MonoBehaviour, IPool
 {
-    [Header("ParametersToSet")]
-    [SerializeField] private bool _position;
-    [SerializeField] private bool _rotation;
-    [SerializeField] private bool _scale;
+    [Header("ParametersToSetOnSpawn")]
+    [SerializeField] private bool _setPosition = true;
+    [SerializeField] private bool _setRotation = true;
+    [SerializeField] private bool _setScale = false;
     [Space]
     [SerializeField] private ParticleSystem _particleSystem;
     [SerializeField] private AudioClip _audioClip;
@@ -22,11 +23,11 @@ public class GeneralWorldSpacePool : MonoBehaviour, IPool
 
     public void Initialize(int _, Vector3 position, Quaternion rotation, Vector3 scale, float delay = 0f)
     {
-        if (_position)
+        if (_setPosition)
             transform.position = position;
-        if (_rotation)
+        if (_setRotation)
             transform.rotation = rotation;
-        if (_scale)
+        if (_setScale)
             transform.localScale = scale;
 
         if (_audioClip != null)

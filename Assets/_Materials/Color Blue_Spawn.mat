@@ -103,7 +103,7 @@ Material:
     - _DisolveAmount: 0
     - _DisolveLineWidth: 0.04
     - _DisolveScale: 20
-    - _DissolveAmount: 1
+    - _DissolveAmount: 0
     - _DstBlend: 0
     - _DstBlendAlpha: 0
     - _EnvironmentReflections: 1

@@ -18,6 +18,11 @@ public class DamageableTarget : MonoBehaviour, IPool
     private BaseEnemy _baseEnemy;
     public bool isInvulnerable;
     [Space(16)]
+    
+    [Header("ParametersToSetOnSpawn")]
+    [SerializeField] private bool _setPosition = true;
+    [SerializeField] private bool _setRotation = false;
+    [SerializeField] private bool _setScale = false;
 
     [Header("Span")]
     [SerializeField]
@@ -130,11 +135,12 @@ public class DamageableTarget : MonoBehaviour, IPool
 
     public void Initialize(int id, Vector3 position, Quaternion rotation, Vector3 scale, float delay = 0f)
     {
-        
-        // transform.SetPositionAndRotation(position, rotation);
-        transform.position = position;
-        // transform.rotation = rotation;
-        transform.localScale = scale;
+        if (_setPosition)
+            transform.position = position;
+        if (_setRotation)
+            transform.rotation = rotation;
+        if (_setScale)
+            transform.localScale = scale;
         
         _currentHealth = _MaxHealth;
 
