@@ -698,7 +698,7 @@ MonoBehaviour:
   m_EditorClassIdentifier: 
   autostart: 1
   startDelay: 1
-  spawningDelay: 0.5
+  spawningDelay: 0.4
   SpawningEntities:
   - PoolInstance: {fileID: 1512647809}
     SpawningPoints:
@@ -1301,7 +1301,7 @@ MonoBehaviour:
   m_EditorClassIdentifier: 
   autostart: 1
   startDelay: 10
-  spawningDelay: 0.5
+  spawningDelay: 0.4
   SpawningEntities:
   - PoolInstance: {fileID: 1679658476}
     SpawningPoints:

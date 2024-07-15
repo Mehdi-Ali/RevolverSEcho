@@ -47,6 +47,9 @@ public class DamageableTarget : MonoBehaviour, IPool
     private PoolInstance _PopupPool;
     private PoolInstance _VFXPool;
 
+    public PoolInstance poolInstance { get; set; }
+    GameObject IPool.gameObject => this.gameObject;
+
 
     void Start()
     {
@@ -104,8 +107,8 @@ public class DamageableTarget : MonoBehaviour, IPool
     {
         // todo randomize rotation?
         var vfxInstance = _VFXPool.SpawnFromPool(contactPoint, transform.rotation, this.transform);
-        vfxInstance.transform.localScale = math.min((damage / 20f), 1f) * Vector3.one;
-        _VFXPool.ReturnTomPool(vfxInstance, 2f);
+        vfxInstance.gameObject.transform.localScale = math.min((damage / 20f), 1f) * Vector3.one;
+        _VFXPool.ReturnToPool(vfxInstance, 2f);
     }
 
     public void ApplyForce(float magnitude, Vector3? contactPoint = null)
@@ -130,7 +133,7 @@ public class DamageableTarget : MonoBehaviour, IPool
 
     public void Die()
     {
-        PoolManager.PoolInst.Target.ReturnTomPool(gameObject);
+        PoolManager.PoolInst.Target.ReturnToPool(this);
     }
 
     public void Initialize(int id, Vector3 position, Quaternion rotation, Vector3 scale, float delay = 0f)

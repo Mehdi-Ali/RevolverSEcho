@@ -15,18 +15,17 @@ public class DamagePopup : MonoBehaviour, IPool
     [SerializeField] private Vector3 _textRandomOffset;
     private Camera _mainCamera;
     private RectTransform rectTransform;
-    private PoolInstance _PopupPool;
+
+    public PoolInstance poolInstance { get; set; }
+    GameObject IPool.gameObject => this.gameObject;
 
 
     public void Initialize(int id, Vector3 position, Quaternion textInfoAsQuaternion, Vector3 scale, float delay = 0f)
-    {
-        if (_PopupPool == null)
-            _PopupPool = PoolManager.PoolInst.DamagePopup;
-        
+    {      
         if (_mainCamera == null)
             _mainCamera = Camera.main;
 
-        _PopupPool.ReturnTomPool(this.gameObject, _damagePopupLifeTimeInSec);
+        poolInstance.ReturnToPool(this, _damagePopupLifeTimeInSec);
 
         SetTransform(position);
         SetText(textInfoAsQuaternion);

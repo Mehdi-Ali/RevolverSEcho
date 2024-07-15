@@ -15,6 +15,9 @@ public class GeneralWorldSpacePool : MonoBehaviour, IPool
     [SerializeField] private AudioClip _audioClip;
     private AudioSource _audioSource;
 
+    public PoolInstance poolInstance { get; set; }
+    GameObject IPool.gameObject => this.gameObject;
+
     void Awake()
     {
         _audioSource = GetComponent<AudioSource>();
@@ -36,5 +39,5 @@ public class GeneralWorldSpacePool : MonoBehaviour, IPool
             _particleSystem?.Play(true);
     }
 
-    public void ResetInst() {}
+    public void ResetInst() { }
 }

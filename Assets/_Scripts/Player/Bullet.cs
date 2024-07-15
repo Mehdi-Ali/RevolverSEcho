@@ -21,6 +21,8 @@ public class Bullet : MonoBehaviour, IPool
     // Pool Settings
     [SerializeField] private bool _dynamicParent = true;
     public bool DynamicParent { get => _dynamicParent; set => _dynamicParent = value; }
+    public PoolInstance poolInstance { get; set; }
+    GameObject IPool.gameObject => this.gameObject;
 
     void Start()
     {
@@ -65,7 +67,7 @@ public class Bullet : MonoBehaviour, IPool
         else
             SpawnSplash(contactPoint, hitObject);
 
-        _bulletPool.ReturnTomPool(gameObject);
+        _bulletPool.ReturnToPool(this);
     }
 
 
@@ -87,8 +89,8 @@ public class Bullet : MonoBehaviour, IPool
                 return null;
         }
 
-        GameObject splash = _bulletSplashPool.SpawnFromPool(splashPosition, transform.rotation, hitObject);
-        _bulletSplashPool.ReturnTomPool(splash, 7.5f);
-        return splash.transform;
+        IPool splash = _bulletSplashPool.SpawnFromPool(splashPosition, transform.rotation, hitObject);
+        _bulletSplashPool.ReturnToPool(splash, 7.5f);
+        return splash.gameObject.transform;
     }
 }

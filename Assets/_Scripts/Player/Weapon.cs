@@ -65,7 +65,7 @@ public class Weapon : MonoBehaviour
         _muzzleFlashVFX.Play(true);
         audioSource.PlayOneShot(_shootSound);
         _controller.SendHapticImpulse(_hapticAmplitude, _hapticDuration);
-        _bulletPool.ReturnTomPool(bullet, 5.0f);
+        _bulletPool.ReturnToPool(bullet, 5.0f);
     }
 
     private void EndShooting(InputAction.CallbackContext context)
