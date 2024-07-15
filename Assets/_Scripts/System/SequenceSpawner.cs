@@ -15,50 +15,79 @@ public class SequenceSpawner : MonoBehaviour
     
     public bool autostart;
     public float startDelay = 3f;
+    public float spawningDelay = 0.1f;
 
     public SpawningEntity[] SpawningEntities;
 
+    private int currentEntityIndex = 0;
+    private int currentPointIndex = 0;
 
     void Start()
     {
         if (autostart)
             Invoke(nameof(SpawnAll), startDelay);
     }
-    //
-    // private void Spawn()
-    // {
-    //     StartCoroutine(SpawnAll());
-    // }
-    
+
+
     [Button]
     private void SpawnAll()
     {
-        foreach (var spawningEntity in SpawningEntities)
-        {
-            PoolInstance pool = spawningEntity.PoolInstance;
-            if (pool == null)
-                continue;
-        
-            Transform[] spawningPoints = spawningEntity.SpawningPoints;
-            if (spawningPoints == null || spawningPoints.Length == 0)
-                continue;
-    
-            foreach (var spawnTrans in spawningEntity.SpawningPoints)
-            {
-                pool.SpawnFromPool(spawnTrans);
-                spawningEntity.currentIndex++;
-                // add a one sec delay
-            }
-        }
+        currentEntityIndex = 0;
+        currentPointIndex = 0;
+        SpawnNext();
     }
-    
-    
+
+    private void SpawnNext()
+    {
+        if (currentEntityIndex >= SpawningEntities.Length)
+        {
+            Debug.Log("Spawning completed");
+            return;
+        }
+
+        var spawningEntity = SpawningEntities[currentEntityIndex];
+        PoolInstance pool = spawningEntity.PoolInstance;
+
+        if (pool == null || spawningEntity.SpawningPoints == null || spawningEntity.SpawningPoints.Length == 0)
+        {
+            currentEntityIndex++;
+            currentPointIndex = 0;
+            SpawnNext();
+            return;
+        }
+
+        if (currentPointIndex >= spawningEntity.SpawningPoints.Length)
+        {
+            currentEntityIndex++;
+            currentPointIndex = 0;
+            SpawnNext();
+            return;
+        }
+
+        Transform spawnTrans = spawningEntity.SpawningPoints[currentPointIndex];
+
+        if (spawnTrans != null)
+        {
+            GameObject spawnedObject = pool.SpawnFromPool(spawnTrans);
+            if (spawnedObject != null)
+            {
+                spawnedObject.transform.position = spawnTrans.position;
+                spawnedObject.transform.rotation = spawnTrans.rotation;
+            }
+            spawningEntity.currentIndex++;
+        }
+
+        currentPointIndex++;
+
+        Invoke(nameof(SpawnNext), spawningDelay);
+    }
+
     // [Button]
     // private void Spawn()
     // {
     //     StartCoroutine(SpawnCoroutine());
     // }
-    
+
     // private IEnumerator SpawnCoroutine()
     // {
     //     for (int i = 0; i < SpawningEntities.Length; i++)
